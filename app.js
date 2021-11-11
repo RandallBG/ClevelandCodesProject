@@ -1,1 +1,1 @@
-console.log("This is going to suck")
+console.log("hello world! How are you today?")
