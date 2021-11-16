@@ -1,0 +1,15 @@
+<h1>This is the contacts.html template</h1>
+<h2>contacts</h2>
+
+<table>
+    {{for contact in contacts:}}
+    <tr>
+        <td>Hello</td>
+        <td>{{ = A(contact.name, _href = URL('contacts', args = contact.id))}}</td>
+        <td>{{ = A('edit', _href = URL('contact_edit', args = contact.id))}}</td>
+    </tr>
+    {{pass}}
+    <tr>
+        <td>{{ = A('add contact', _href = URL('contact_create'))}}</td>
+    </tr>
+</table>
