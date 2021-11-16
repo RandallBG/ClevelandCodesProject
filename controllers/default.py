@@ -9,13 +9,13 @@ from gluon.tools import Crud
 crud = Crud(db)
 
 # ---- example index page ----
-# def index():
-#     response.flash = T("Hello World")
-#     return dict(message=T('Welcome to web2py!'))
-
 def index():
-    response.view="index.html"
-    return locals()
+    response.flash = T("Hello World")
+    return dict(message=T('Welcome to web2py!'))
+
+# def index():
+#     response.view="index.html"
+#     return locals()
 
 def companies():
     companies = db(db.company).select(orderby = db.company.name)

@@ -14,7 +14,7 @@
     <h2>{{=message}}</h2>
     <p class="lead">{{=T('How did you get here?')}}</p>
     <ol style="word-wrap:break-word;">
-      <h1>Hello friends!!!</h1>
+      <h1>Hello world</h1>
       <li>{{=T('You are successfully running web2py')}}</li>
   
       <li>{{=XML(T('You visited the url %s', A(request.env.path_info,_href=request.env.path_info)))}}</li>
@@ -44,6 +44,7 @@
     {{elif 'content' in globals():}}
     {{=content}}
     {{else:}}
+
     {{=BEAUTIFY(response._vars)}}
     {{pass}}
   </div>
