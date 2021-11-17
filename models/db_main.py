@@ -11,7 +11,14 @@ db.define_table('contacts',
     Field('cell_phone'),
     Field('location_id', notNull = True),
     Field('email', notNull = True),
-    Field('contact_type_id', notNull = True)
+    Field('contact_type_id', notNull = True),
+    format='%(name)s'
+)
+
+db.define_table('lead_source',
+    Field('lead_source_id', notnull=True),
+    Field('description', notnull=True),
+    format='%(name)s'
 )
 
 
