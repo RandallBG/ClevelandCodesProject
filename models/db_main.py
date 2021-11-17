@@ -11,7 +11,8 @@ db.define_table('contacts',
     Field('cell_phone'),
     Field('location_id', notNull = True),
     Field('email', notNull = True),
-    Field('contact_type_id', notNull = True)
+    Field('contact_type_id', notNull = True),
+    format='%(name)s'
 )
 
 
