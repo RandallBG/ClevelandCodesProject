@@ -15,5 +15,11 @@ db.define_table('contacts',
     format='%(name)s'
 )
 
+db.define_table('lead_source',
+                Field('lead_source_id', notnull=True),
+                Field('description', notnull=True),
+                format='%(name)s'
+)
+
 
    
