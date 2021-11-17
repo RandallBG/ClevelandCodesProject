@@ -11,7 +11,11 @@ crud = Crud(db)
 # ---- example index page ----
 def index():
     response.flash = T("Hello World")
+<<<<<<< HEAD
     return dict(message=T('Welcome to LIMCO Technologies!'))
+=======
+    return dict(message=T('Welcome to Limco Technologies!'))
+>>>>>>> bbd8fdd0193c242fb8d4f35786cf27463179e83a
 
 # def index():
 #     response.view="index.html"
