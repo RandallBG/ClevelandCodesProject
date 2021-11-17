@@ -308,22 +308,10 @@ success!
 success!
 success!
 <<<<<<< HEAD
-success!
-success!
+<<<<<<< Updated upstream
 =======
-<<<<<<< HEAD
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
 =======
->>>>>>> ec896a45b23b3e0745d28e93d96a2a288414ef04
-success!
->>>>>>> bbd8fdd0193c242fb8d4f35786cf27463179e83a
+>>>>>>> c2d5a9dd9248a4a62cfe8349fcc75aefbff18cf1
 success!
 success!
 success!
@@ -332,6 +320,33 @@ success!
 success!
 success!
 success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+timestamp: 2021-11-16T19:52:54.867143
+CREATE TABLE "lead_source"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "lead_source_id" CHAR(512) NOT NULL,
+    "description" CHAR(512) NOT NULL
+);
 success!
 success!
 success!
