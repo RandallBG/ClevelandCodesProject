@@ -26,6 +26,7 @@ def companies():
 
 def contacts():
     contacts = db(db.contacts).select(orderby = db.contacts.name)
+    
     #response.view="contacts.html"
     return locals()
 
@@ -53,7 +54,8 @@ def company_edit():
 @auth.requires_login()
 def contact_create():
     # db.contacts.company.default = request.args(0)
-    form = crud.create(db.contacts, next = 'contacts')
+    # form = crud.create(db.contacts, next = 'contacts')
+    form = SQLFORM.grid(db.contacts)
     return locals()
 
 @auth.requires_login()
