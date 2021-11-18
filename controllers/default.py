@@ -5,8 +5,7 @@
 # -------------------------------------------------------------------------
 
 
-from gluon.tools import Crud
-crud = Crud(db)
+
 
 # ---- example index page ----
 def index():
@@ -38,17 +37,39 @@ def contacts():
 
 @auth.requires_login()
 def company_create():
-    form = crud.create(db.company, next = 'companies')
-    return locals()
+    form = SQLFORM(db.company)
+    if form.process().accepted:
+        response.flash = 'Company created'
+        redirect(URL('companies'))
+    elif form.errors:
+        response.flash = 'Form has errors'
+    else:
+        response.flash = 'Please fill the form'
+        return locals()
 
 @auth.requires_login()
-# def contact_create():
-#     form = crud.create(db.contacts, next='people')
+def contact_create():
+    contact_create = SQLFORM(db.contact, user_signature=True)
+    if contact_create.process().accepted:
+        response.flash = 'Contact Created'
+        redirect(URL('contacts'))
+    elif contact_create.errors:
+        response.flash = 'Contact not created'
+    return locals()
+    
+    
+
 
 @auth.requires_login()
 def company_edit():
     company = db.company(request.args(0)) or redirect(URL('companies'))
-    form = crud.update(db.company, company, next='companies')
+    form  = SQLFORM(db.company, company, deletable=True, showid=False)
+    if form.process().accepted:
+        response.flash = 'Company Edited'
+        redirect(URL('companies'))
+    elif form.errors:
+        response.flash = 'Company not edited'
+   
     return locals()
 
 @auth.requires_login()
@@ -61,8 +82,14 @@ def contact_create():
 @auth.requires_login()
 def contact_edit():
     contact = db.contacts(request.args(0)) or redirect(URL('contacts'))
-    form = crud.update(db.contacts, contact, next = 'contacts')
+    form = SQLFORM(db.contacts, contact, deletable=True)
+    if form.process().accepted:
+        response.flash = 'Contact Edited'
+        redirect(URL('contacts'))
+    elif form.errors:
+        response.flash = 'Contact not edited'
     return locals()
+
 
 def user():
     return dict(form = auth())
