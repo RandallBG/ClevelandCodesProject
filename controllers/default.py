@@ -20,7 +20,7 @@ def index():
 #     return locals()
 
 def companies():
-    companies = db(db.company).select(orderby = db.company.name)
+    companies = db(db.companies).select(orderby = db.companies.company_name)
     #response.view="companies.html"
     return locals()
 
@@ -31,6 +31,8 @@ def contacts():
     return locals()
 
 
+
+
 # def contacts():
 #     company = db.company(request.args(0)) or redirect(URL('companies'))
 #     contacts = db(db.contact.company == company.id).select(orderby = db.contact.name)
@@ -38,7 +40,7 @@ def contacts():
 
 @auth.requires_login()
 def company_create():
-    form = crud.create(db.company, next = 'companies')
+    form = crud.create(db.companies, next = 'companies')
     return locals()
 
 @auth.requires_login()

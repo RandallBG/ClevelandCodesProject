@@ -4,7 +4,7 @@
 <table>
    {{for company in companies:}}
    <tr>
-      <td>{{ = A(company.name, _href = URL('contacts', args = company.id))}}</td>
+      <td>{{ = A(company.company_name, _href = URL('contacts', args = company.id))}}</td>
       <td>{{ = A('edit', _href = URL('company_edit', args = company.id))}}</td>
    </tr>
    {{pass}}
