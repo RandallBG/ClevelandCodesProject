@@ -1,15 +1,41 @@
-<h1>This is the contacts.html template</h1>
-<h2>contacts</h2>
+{{extend 'layout.html'}}
+<div class="tableWrapper">
+    <table class="defaultTable ">
+        <caption>
+            Contacts
+            {{ = A('add contact',_class="addContact", _href = URL('contact_create'))}}</td>
+        </caption>
 
-<table>
-    {{for contact in contacts:}}
-    <tr>
-        <td>Hello</td>
-        <td>{{ = A(contact.name, _href = URL('contacts', args = contact.id))}}</td>
-        <td>{{ = A('edit', _href = URL('contact_edit', args = contact.id))}}</td>
-    </tr>
-    {{pass}}
-    <tr>
-        <td>{{ = A('add contact', _href = URL('contact_create'))}}</td>
-    </tr>
-</table>
+        <head>
+            <th>id</th>
+            <th>name</th>
+            <th>email</th>
+            <th>home address</th>
+            <th>home city</th>
+            <th>state</th>
+            <th>home zip</th>
+            <th>company id</th>
+            <th>title</th>
+            <th>office phone</th>
+            <th>cell phone</th>
+            <th>contact type</th>
+        </head>
+        {{for contact in contacts:}}
+        <tr>
+            <td>{{= P(contact.contacts.id, _class='dbItem')}}</td>
+            <td>{{= P(contact.contacts.name, _class='dbItem')}}</td>
+            <td>{{= P(contact.contacts.email, _class='dbItem')}}</td>
+            <td>{{= P(contact.contacts.home_address, _class='dbItem')}}</td>
+            <td>{{= P(contact.contacts.home_city, _class='dbItem')}}</td>
+            <td>{{= P(contact.states.state_name, _class='dbItem')}}</td>
+            <td>{{= P(contact.contacts.home_zip, _class='dbItem')}}</td>
+            <td>{{= P(contact.contacts.company_id, _class='dbItem')}}</td>
+            <td>{{= P(contact.contacts.title, _class='dbItem')}}</td>
+            <td>{{= P(contact.contacts.office_phone, _class='dbItem')}}</td>
+            <td>{{= P(contact.contacts.cell_phone, _class='dbItem')}}</td>
+            <td>{{= P(contact.contacts.contact_type_id, _class='dbItem')}}</td>
+        </tr>
+        {{pass}}
+    </table>
+</div>
+{{ = A('add contact', _href = URL('contact_create'))}}</td>

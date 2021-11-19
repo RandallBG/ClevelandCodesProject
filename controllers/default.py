@@ -10,8 +10,6 @@ crud = Crud(db)
 
 # ---- example index page ----
 def index():
-    response.flash = T("Hello World")
-
     return dict(message=T('Welcome to LIMCO Technologies!'))
 
 
@@ -21,13 +19,10 @@ def index():
 
 def companies():
     companies = db(db.companies).select(orderby = db.companies.company_name)
-    #response.view="companies.html"
     return locals()
 
 def contacts():
-    contacts = db(db.contacts).select(orderby = db.contacts.name)
-    
-    #response.view="contacts.html"
+    contacts = db(db.states.id == db.contacts.states).select(orderby = db.contacts.name)
     return locals()
 
 
@@ -44,10 +39,6 @@ def company_create():
     return locals()
 
 @auth.requires_login()
-# def contact_create():
-#     form = crud.create(db.contacts, next='people')
-
-@auth.requires_login()
 def company_edit():
     company = db.company(request.args(0)) or redirect(URL('companies'))
     form = crud.update(db.company, company, next='companies')
@@ -55,8 +46,6 @@ def company_edit():
 
 @auth.requires_login()
 def contact_create():
-    # db.contacts.company.default = request.args(0)
-    # form = crud.create(db.contacts, next = 'contacts')
     form = SQLFORM.grid(db.contacts)
     return locals()
 
