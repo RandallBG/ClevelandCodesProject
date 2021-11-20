@@ -21,23 +21,20 @@ def contacts():
     return locals()
 
 def sic():
-    sic = db(db.sic).select()
-    #response.view="sic.html"
+    sics = db(db.sic).select()
     return locals()
 
 def locations():
-    locations = db(db.locations).select()
-    #response.view="locations.html"
+    locations = db(db.states.id == db.locations.states).select()
     return locals()
 
 def activities():
-    activities = db(db.activity).select(orderby = db.activity.name)
-    #response.view="activities.html"
+    activities = db(db.contacts.id == db.activities.contact_id).select()
     return locals()
 
-def companies_to_locations():
-    companies = db(db.company).join(db.locations).select(db.company.ALL, db.locations.ALL, orderby = db.company.name)
-    #response.view="companies_to_locations.html"
+def companylocations():
+    companyLocations = db((db.locations.id == db.companies_to_locations.location_id) & (db.companies.id == db.companies_to_locations.company_id) & (db.states.id == db.locations.states)).select()
+    #companies = db(db.company).join(db.locations).select(db.company.ALL, db.locations.ALL, orderby = db.company.name)
     return locals()
 
 
