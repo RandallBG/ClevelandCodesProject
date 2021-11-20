@@ -1,5 +1,4 @@
 db.define_table('states',
-                Field('state_id', requires=IS_NOT_EMPTY()),
                 Field('state_name', requires=IS_NOT_EMPTY()),
                 )
                 
