@@ -29,11 +29,11 @@
             <td>{{= P(contact.contacts.home_city, _class='dbItem')}}</td>
             <td>{{= P(contact.states.state_name, _class='dbItem')}}</td>
             <td>{{= P(contact.contacts.home_zip, _class='dbItem')}}</td>
-            <td>{{= P(contact.contacts.company_id, _class='dbItem')}}</td>
+            <td>{{= P(contact.companies.company_name, _class='dbItem')}}</td>
             <td>{{= P(contact.contacts.title, _class='dbItem')}}</td>
             <td>{{= P(contact.contacts.office_phone, _class='dbItem')}}</td>
             <td>{{= P(contact.contacts.cell_phone, _class='dbItem')}}</td>
-            <td>{{= P(contact.contacts.contact_type_id, _class='dbItem')}}</td>
+            <td>{{= P(contact.contact_type.description, _class='dbItem')}}</td>
         </tr>
         {{pass}}
     </table>

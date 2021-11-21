@@ -17,7 +17,9 @@ def companies():
     return locals()
 
 def contacts():
-    contacts = db(db.states.id == db.contacts.states).select(orderby = db.contacts.name)
+    contacts = db((db.states.id == db.contacts.states) & (db.companies.id == db.contacts.company_id) & (db.contact_type.id == db.contacts.contact_type_id)).select(orderby = db.contacts.name)
+    # contacts = SQLFORM.grid(db.contacts)
+    
     return locals()
 
 def sic():
@@ -55,7 +57,7 @@ def company_create():
 
 @auth.requires_login()
 def contact_create():
-    contact_create = SQLFORM(db.contact) 
+    contact_create = SQLFORM(db.contacts) 
     if contact_create.process().accepted:
         response.flash = 'Contact Created'
         redirect(URL('contacts'))
