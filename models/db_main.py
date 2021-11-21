@@ -1,5 +1,4 @@
 db.define_table('states',
-                Field('state_id', requires=IS_NOT_EMPTY()),
                 Field('state_name', requires=IS_NOT_EMPTY()),
                 )
                 
@@ -10,7 +9,6 @@ db.define_table('sic',
                  )
 
 db.define_table('companies',
-                # Field('company_id', requires=IS_NOT_EMPTY()),
                 Field('company_name', requires=IS_NOT_EMPTY()),
                 Field('sic_desc', 'reference sic', requires=IS_IN_DB(db, 'sic.id', '%(description)s' ))
                 )
