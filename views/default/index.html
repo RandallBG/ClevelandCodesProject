@@ -5,7 +5,7 @@
   style="background-color: rgb(241, 242, 248); color:white; padding:30px;word-wrap:break-word;">
   <div class="container center">
     <h1 class="display-5">/{{=request.application}}/{{=request.controller}}/{{=request.function}}</h1>
-    .numbers image {width:65%;
+    .numbersimage {width:65%;
       border-style:solid;
       border-color:rgb(125, 150, 130);
       float:center;
@@ -15,7 +15,7 @@
 </div>
 </style>
 {{end}}
-
+<margin =200px></margin>
 <div class="row">
   <div class="col-md-12">
     {{if 'message' in globals():}}
@@ -23,8 +23,8 @@
       <ol style="word-wrap:break-word;">
       <h1>LIMCO Technologies</h1>
       <h2>SoftWare Developers<h2></h2>
-      <div class="Numbers image" >
-      <img src = "images/numbers.png""numbers" width="300"></div>
+      <div class="numbersimage" >
+      <img src = "images/numbersimage.png""numbersimage" width="300"></div>
       <div class="jumbotron jumbotron-fluid" style="padding:30px;word-wrap:break-word;">
       <div class="container center">
         <a class="btn btn-primary" href="{{=URL('admin','default','index')}}">
