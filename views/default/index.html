@@ -2,9 +2,15 @@
 
 {{block header}}
 <div class="jumbotron jumbotron-fluid background"
-  style="background-color: rgb(63, 77, 155); color:white; padding:30px;word-wrap:break-word;">
+  style="background-color: rgb(241, 242, 248); color:white; padding:30px;word-wrap:break-word;">
   <div class="container center">
     <h1 class="display-5">/{{=request.application}}/{{=request.controller}}/{{=request.function}}</h1>
+    .Numbers image {width:65%;
+      border-style:solid;
+      border-color:rgb(125, 150, 130);
+      float:center;
+      margin-right:20px;}	
+      
   </div>
 </div>
 {{end}}
@@ -16,6 +22,9 @@
     <p class="lead">{{=T('How did you get here?')}}</p>
     <ol style="word-wrap:break-word;">
       <h1>Limco Technologies</h1>
+      <h2>SoftWare Developers<h2></h2>
+      <div class="Numbers image" >
+      <img src + "images/numbers.png""Numbers" width="300"></div>div>
       <li>{{=T('You are successfully running web2py')}}</li>
 
       <li>{{=XML(T('You visited the url %s', A(request.env.path_info,_href=request.env.path_info)))}}</li>
