@@ -25,13 +25,13 @@
       <h2>SoftWare Developers<h2></h2>
       <div class="Numbers image" >
       <img src + "images/numbers.png""Numbers" width="300"></div>
-      //<li>{{=T('You are successfully running web2py')}}</li>
+      <li>{{=T('You are successfully running web2py')}}</li>
 
-      //<li>{{=XML(T('You visited the url %s', A(request.env.path_info,_href=request.env.path_info)))}}</li>
-      //<li>{{=XML(T('Which called the function %s located in the file %s',
-        //(A(request.function+'()',_href='#'),
-        //A('web2py/applications/%(application)s/controllers/%(controller)s.py' % request,
-        //_href=URL('admin','default','peek', args=(request.application,'controllers',request.controller+'.py'))))))}}
+      <li>{{=XML(T('You visited the url %s', A(request.env.path_info,_href=request.env.path_info)))}}</li>
+      <li>{{=XML(T('Which called the function %s located in the file %s',
+        (A(request.function+'()',_href='#'),
+        A('web2py/applications/%(application)s/controllers/%(controller)s.py' % request,
+        _href=URL('admin','default','peek', args=(request.application,'controllers',request.controller+'.py'))))))}}
       </li>
       <li>{{=XML(T('The output of the file is a dictionary that was rendered by the view %s',
         A('web2py/applications/%(application)s/views/%(controller)s/index.html' % request,
