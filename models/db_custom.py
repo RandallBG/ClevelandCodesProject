@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-db.define_table('company', Field('name', notnull = True, unique = True), format = '%(name)s')
+# db.define_table('company', Field('name', notnull = True, unique = True), format = '%(name)s')
 # db.define_table(
 #    'contact',
 #    Field('name', notnull = True),

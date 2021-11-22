@@ -2,3 +2,58 @@ body{
     padding:0;
     margin:0;
 }
+
+/* ------------------------ views for displaying tables ------------------ */
+.tableWrapper{
+    width:100%;
+    height:100vh;
+}
+
+.defaultTable{
+    width:100%;
+    background-color:#171717;
+    margin:0 auto 0 auto;
+    color:white;
+    overflow-x:hidden;
+}
+.defaultTable caption{
+    caption-side: top;
+    font-weight: 600;
+    font-size: 2rem;
+    text-align: center;
+    background-color:#171717;
+    color:white;
+}
+
+.defaultTable tr:nth-child(even){
+    background-color:#141414;
+}
+
+.defaultTable tr:hover{
+    background-color:#121212;
+}
+
+.defaultTable th, .defaultTable td{
+    padding: 10px 0 10px 5px;
+}
+
+.addTableData{
+    float:right;
+    background-color:blue;
+    border-radius: 25px;
+}
+
+.numbersimage {
+        width: 65%;
+        border-style: solid;
+        border-color: rgb(125, 150, 130);
+        float: center;
+        margin-right: 20px;
+}
+/* --------------  index.html page -----------------------*/
+.mainHero{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

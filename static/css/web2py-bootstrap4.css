@@ -1,5 +1,5 @@
 label, th {
-    font-weigth: bold;
+    font-weight: bold;
     white-space: nowrap;
 }
 div.w2p_flash {
@@ -32,7 +32,8 @@ div.w2p_flash.alert:hover {
     filter: alpha(opacity=25);
 }
 .main-container {
-    margin-top: 20px;
+    /* margin-top: 20px; */
+    /* background-color:#171717; */
 }
 
 div.error {

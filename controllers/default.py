@@ -5,62 +5,181 @@
 # -------------------------------------------------------------------------
 
 
-from gluon.tools import Crud
-crud = Crud(db)
+
 
 # ---- example index page ----
 def index():
-    response.flash = T("Hello World")
-
     return dict(message=T('Welcome to LIMCO Technologies!'))
 
-
-# def index():
-#     response.view="index.html"
-#     return locals()
-
 def companies():
-    companies = db(db.company).select(orderby = db.company.name)
-    #response.view="companies.html"
+    companies = db(db.companies).select(orderby = db.companies.company_name)
     return locals()
 
 def contacts():
-    contacts = db(db.contacts).select(orderby = db.contacts.name)
-    #response.view="contacts.html"
+    contacts = db((db.states.id == db.contacts.states) & (db.companies.id == db.contacts.company_id) & (db.contact_type.id == db.contacts.contact_type_id)).select(orderby = db.contacts.name)
+    # contacts = SQLFORM.grid(db.contacts)
+    
+    return locals()
+
+def sic():
+    sics = db(db.sic).select()
+    return locals()
+
+def locations():
+    locations = db(db.states.id == db.locations.states).select()
+    return locals()
+
+def activities():
+    activities = db(db.contacts.id == db.activities.contact_id).select()
+    return locals()
+
+def companylocations():
+    companyLocations = db((db.locations.id == db.companies_to_locations.location_id) & (db.companies.id == db.companies_to_locations.company_id) & (db.states.id == db.locations.states)).select()
     return locals()
 
 
-# def contacts():
-#     company = db.company(request.args(0)) or redirect(URL('companies'))
-#     contacts = db(db.contact.company == company.id).select(orderby = db.contact.name)
-#     return locals()
+
+#-----------------------------------------------------
 
 @auth.requires_login()
 def company_create():
-    form = crud.create(db.company, next = 'companies')
-    return locals()
-
-@auth.requires_login()
-# def contact_create():
-#     form = crud.create(db.contacts, next='people')
-
-@auth.requires_login()
-def company_edit():
-    company = db.company(request.args(0)) or redirect(URL('companies'))
-    form = crud.update(db.company, company, next='companies')
-    return locals()
+    form = SQLFORM(db.company)
+    if form.process().accepted:
+        response.flash = 'Company created'
+        redirect(URL('companies'))
+    elif form.errors:
+        response.flash = 'Form has errors'
+    else:
+        response.flash = 'Please fill the form'
+        return locals()
 
 @auth.requires_login()
 def contact_create():
-    # db.contacts.company.default = request.args(0)
-    form = crud.create(db.contacts, next = 'contacts')
+    contact_create = SQLFORM(db.contacts) 
+    if contact_create.process().accepted:
+        response.flash = 'Contact Created'
+        redirect(URL('contacts'))
+    elif contact_create.errors:
+        response.flash = 'Contact not created'
     return locals()
+
+@auth.requires_login()
+def sic_create():
+    form = SQLFORM(db.sic)
+    if form.process().accepted:
+        response.flash = 'SIC created'
+        redirect(URL('sic'))
+    elif form.errors:
+        response.flash = 'Form has errors'
+    else:
+        response.flash = 'Please fill the form'
+        return locals()
+
+@auth.requires_login()
+def location_create():
+    form = SQLFORM(db.locations)
+    if form.process().accepted:
+        response.flash = 'Location created'
+        redirect(URL('locations'))
+    elif form.errors:
+        response.flash = 'Form has errors'
+    else:
+        response.flash = 'Please fill the form'
+        return locals()
+
+@auth.requires_login()
+def activities_create():
+    form = SQLFORM(db.activity)
+    if form.process().accepted:
+        response.flash = 'Activity created'
+        redirect(URL('activities'))
+    elif form.errors:
+        response.flash = 'Form has errors'
+    else:
+        response.flash = 'Please fill the form'
+        return locals()
+
+@auth.requires_login()
+def companies_to_locations_create():
+    form = SQLFORM(db.companies_to_locations)
+    if form.process().accepted:
+        response.flash = 'Company to Location created'
+        redirect(URL('companies_to_locations'))
+    elif form.errors:
+        response.flash = 'Company to Location not created'
+    return locals()
+
+    return locals()
+    
+@auth.requires_login()
+def company_edit():
+    company = db.company(request.args(0)) or redirect(URL('companies'))
+    form  = SQLFORM(db.company, company, deletable=True, showid=False)
+    if form.process().accepted:
+        response.flash = 'Company Edited'
+        redirect(URL('companies'))
+    elif form.errors:
+        response.flash = 'Company not edited'
+   
+    return locals()
+
 
 @auth.requires_login()
 def contact_edit():
     contact = db.contacts(request.args(0)) or redirect(URL('contacts'))
-    form = crud.update(db.contacts, contact, next = 'contacts')
+    form = SQLFORM(db.contacts, contact, deletable=True)
+    if form.process().accepted:
+        response.flash = 'Contact Edited'
+        redirect(URL('contacts'))
+    elif form.errors:
+        response.flash = 'Contact not edited'
     return locals()
+
+@auth.requires_login()
+def sic_edit():
+    sic = db.sic(request.args(0)) or redirect(URL('sic'))
+    form = SQLFORM(db.sic, sic, deletable=True)
+    if form.process().accepted:
+        response.flash = 'SIC Edited'
+        redirect(URL('sic'))
+    elif form.errors:
+        response.flash = 'SIC not edited'
+    return locals()
+
+@auth.requires_login()
+def locations_edit():
+    location = db.locations(request.args(0)) or redirect(URL('locations'))
+    form = SQLFORM(db.locations, location, deletable=True)
+    if form.process().accepted:
+        response.flash = 'Location Edited'
+        redirect(URL('locations'))
+    elif form.errors:
+        response.flash = 'Location not edited'
+    return locals()
+
+@auth.requires_login()
+def activities_edit():
+    activity = db.activity(request.args(0)) or redirect(URL('activities'))
+    form = SQLFORM(db.activity, activity, deletable=True)
+    if form.process().accepted:
+        response.flash = 'Activity Edited'
+        redirect(URL('activities'))
+    elif form.errors:
+        response.flash = 'Activity not edited'
+    return locals()
+
+@auth.requires_login()
+def companies_to_locations_edit():
+    company_to_location = db.companies_to_locations(request.args(0)) or redirect(URL('companies_to_locations'))
+    form = SQLFORM(db.companies_to_locations, company_to_location, deletable=True)
+    if form.process().accepted:
+        response.flash = 'Company to Location Edited'
+        redirect(URL('companies_to_locations'))
+    elif form.errors:
+        response.flash = 'Company to Location not edited'
+    return locals()
+
+
 
 def user():
     return dict(form = auth())
