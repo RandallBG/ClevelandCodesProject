@@ -36,7 +36,6 @@ def activities():
 
 def companylocations():
     companyLocations = db((db.locations.id == db.companies_to_locations.location_id) & (db.companies.id == db.companies_to_locations.company_id) & (db.states.id == db.locations.states)).select()
-    #companies = db(db.company).join(db.locations).select(db.company.ALL, db.locations.ALL, orderby = db.company.name)
     return locals()
 
 

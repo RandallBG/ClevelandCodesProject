@@ -41,3 +41,18 @@ body{
     background-color:blue;
     border-radius: 25px;
 }
+
+.numbersimage {
+        width: 65%;
+        border-style: solid;
+        border-color: rgb(125, 150, 130);
+        float: center;
+        margin-right: 20px;
+}
+
+.mainHero{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
