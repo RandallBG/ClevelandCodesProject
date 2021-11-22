@@ -9,7 +9,6 @@
 
 # ---- example index page ----
 def index():
-    response.flash = T("Hello World")
     return dict(message=T('Welcome to LIMCO Technologies!'))
 
 def companies():
@@ -17,7 +16,9 @@ def companies():
     return locals()
 
 def contacts():
-    contacts = db(db.states.id == db.contacts.states).select(orderby = db.contacts.name)
+    contacts = db((db.states.id == db.contacts.states) & (db.companies.id == db.contacts.company_id) & (db.contact_type.id == db.contacts.contact_type_id)).select(orderby = db.contacts.name)
+    # contacts = SQLFORM.grid(db.contacts)
+    
     return locals()
 
 def sic():
@@ -34,7 +35,6 @@ def activities():
 
 def companylocations():
     companyLocations = db((db.locations.id == db.companies_to_locations.location_id) & (db.companies.id == db.companies_to_locations.company_id) & (db.states.id == db.locations.states)).select()
-    #companies = db(db.company).join(db.locations).select(db.company.ALL, db.locations.ALL, orderby = db.company.name)
     return locals()
 
 
@@ -55,7 +55,7 @@ def company_create():
 
 @auth.requires_login()
 def contact_create():
-    contact_create = SQLFORM(db.contact) 
+    contact_create = SQLFORM(db.contacts) 
     if contact_create.process().accepted:
         response.flash = 'Contact Created'
         redirect(URL('contacts'))
