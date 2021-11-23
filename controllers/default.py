@@ -5,41 +5,45 @@
 # -------------------------------------------------------------------------
 
 
-
-
 # ---- example index page ----
 def index():
     return dict(message=T('Welcome to LIMCO Technologies!'))
 
+
 def companies():
-    companies = db(db.companies).select(orderby = db.companies.company_name)
+    companies = db(db.companies).select(orderby=db.companies.company_name)
     return locals()
 
+
 def contacts():
-    contacts = db((db.states.id == db.contacts.states) & (db.companies.id == db.contacts.company_id) & (db.contact_type.id == db.contacts.contact_type_id)).select(orderby = db.contacts.name)
-    # contacts = SQLFORM.grid(db.contacts)
-    
+    # contacts = db((db.states.id == db.contacts.states) & (db.companies.id == db.contacts.company_id) & (db.#contact_type.id == db.contacts.contact_type_id)).select(orderby = db.contacts.name)
+    contacts = SQLFORM.grid(db.contacts)
+
     return locals()
+
 
 def sic():
     sics = db(db.sic).select()
     return locals()
 
+
 def locations():
     locations = db(db.states.id == db.locations.states).select()
     return locals()
+
 
 def activities():
     activities = db(db.contacts.id == db.activities.contact_id).select()
     return locals()
 
+
 def companylocations():
-    companyLocations = db((db.locations.id == db.companies_to_locations.location_id) & (db.companies.id == db.companies_to_locations.company_id) & (db.states.id == db.locations.states)).select()
+    companyLocations = db((db.locations.id == db.companies_to_locations.location_id) & (
+        db.companies.id == db.companies_to_locations.company_id) & (db.states.id == db.locations.states)).select()
     return locals()
 
 
-
-#-----------------------------------------------------
+# -----------------------------------------------------
 
 @auth.requires_login()
 def company_create():
@@ -53,15 +57,17 @@ def company_create():
         response.flash = 'Please fill the form'
         return locals()
 
+
 @auth.requires_login()
 def contact_create():
-    contact_create = SQLFORM(db.contacts) 
+    contact_create = SQLFORM(db.contacts)
     if contact_create.process().accepted:
         response.flash = 'Contact Created'
         redirect(URL('contacts'))
     elif contact_create.errors:
         response.flash = 'Contact not created'
     return locals()
+
 
 @auth.requires_login()
 def sic_create():
@@ -75,6 +81,7 @@ def sic_create():
         response.flash = 'Please fill the form'
         return locals()
 
+
 @auth.requires_login()
 def location_create():
     form = SQLFORM(db.locations)
@@ -86,6 +93,7 @@ def location_create():
     else:
         response.flash = 'Please fill the form'
         return locals()
+
 
 @auth.requires_login()
 def activities_create():
@@ -99,6 +107,7 @@ def activities_create():
         response.flash = 'Please fill the form'
         return locals()
 
+
 @auth.requires_login()
 def companies_to_locations_create():
     form = SQLFORM(db.companies_to_locations)
@@ -110,17 +119,18 @@ def companies_to_locations_create():
     return locals()
 
     return locals()
-    
+
+
 @auth.requires_login()
 def company_edit():
     company = db.company(request.args(0)) or redirect(URL('companies'))
-    form  = SQLFORM(db.company, company, deletable=True, showid=False)
+    form = SQLFORM(db.company, company, deletable=True, showid=False)
     if form.process().accepted:
         response.flash = 'Company Edited'
         redirect(URL('companies'))
     elif form.errors:
         response.flash = 'Company not edited'
-   
+
     return locals()
 
 
@@ -135,6 +145,7 @@ def contact_edit():
         response.flash = 'Contact not edited'
     return locals()
 
+
 @auth.requires_login()
 def sic_edit():
     sic = db.sic(request.args(0)) or redirect(URL('sic'))
@@ -145,6 +156,7 @@ def sic_edit():
     elif form.errors:
         response.flash = 'SIC not edited'
     return locals()
+
 
 @auth.requires_login()
 def locations_edit():
@@ -157,6 +169,7 @@ def locations_edit():
         response.flash = 'Location not edited'
     return locals()
 
+
 @auth.requires_login()
 def activities_edit():
     activity = db.activity(request.args(0)) or redirect(URL('activities'))
@@ -168,10 +181,13 @@ def activities_edit():
         response.flash = 'Activity not edited'
     return locals()
 
+
 @auth.requires_login()
 def companies_to_locations_edit():
-    company_to_location = db.companies_to_locations(request.args(0)) or redirect(URL('companies_to_locations'))
-    form = SQLFORM(db.companies_to_locations, company_to_location, deletable=True)
+    company_to_location = db.companies_to_locations(
+        request.args(0)) or redirect(URL('companies_to_locations'))
+    form = SQLFORM(db.companies_to_locations,
+                   company_to_location, deletable=True)
     if form.process().accepted:
         response.flash = 'Company to Location Edited'
         redirect(URL('companies_to_locations'))
@@ -180,31 +196,42 @@ def companies_to_locations_edit():
     return locals()
 
 
-
 def user():
-    return dict(form = auth())
+    return dict(form=auth())
 
 # ---- API (example) -----
+
+
 @auth.requires_login()
 def api_get_user_email():
-    if not request.env.request_method == 'GET': raise HTTP(403)
-    return response.json({'status':'success', 'email':auth.user.email})
+    if not request.env.request_method == 'GET':
+        raise HTTP(403)
+    return response.json({'status': 'success', 'email': auth.user.email})
 
 # ---- Smart Grid (example) -----
-@auth.requires_membership('admin') # can only be accessed by members of admin groupd
+
+
+# can only be accessed by members of admin groupd
+@auth.requires_membership('admin')
 def grid():
-    response.view = 'generic.html' # use a generic view
+    response.view = 'generic.html'  # use a generic view
     tablename = request.args(0)
-    if not tablename in db.tables: raise HTTP(403)
-    grid = SQLFORM.smartgrid(db[tablename], args=[tablename], deletable=False, editable=False)
+    if not tablename in db.tables:
+        raise HTTP(403)
+    grid = SQLFORM.smartgrid(db[tablename], args=[
+                             tablename], deletable=False, editable=False)
     return dict(grid=grid)
 
 # ---- Embedded wiki (example) ----
+
+
 def wiki():
-    auth.wikimenu() # add the wiki to the menu
-    return auth.wiki() 
+    auth.wikimenu()  # add the wiki to the menu
+    return auth.wiki()
 
 # ---- Action for login/register/etc (required for auth) -----
+
+
 def user():
     """
     exposes:
@@ -224,6 +251,8 @@ def user():
     return dict(form=auth())
 
 # ---- action to server uploaded static content (required) ---
+
+
 @cache.action()
 def download():
     """
