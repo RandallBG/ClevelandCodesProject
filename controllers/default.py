@@ -16,9 +16,8 @@ def companies():
     return locals()
 
 def contacts():
-    contacts = db((db.states.id == db.contacts.states) & (db.companies.id == db.contacts.company_id) & (db.contact_type.id == db.contacts.contact_type_id)).select(orderby = db.contacts.name)
-    # contacts = SQLFORM.grid(db.contacts)
-    
+    #contacts = db((db.states.id == db.contacts.states) & (db.companies.id == db.contacts.company_id) & (db.contact_type.id == db.contacts.contact_type_id)).select(orderby = db.contacts.name)
+    contacts = SQLFORM.grid(db.contacts)
     return locals()
 
 def sic():
