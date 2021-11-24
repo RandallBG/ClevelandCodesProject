@@ -37,7 +37,9 @@ def companylocations():
     return locals()
 
 
-
+def crm_start():
+    response.view="default/crm_start.html"
+    return locals()
 #-----------------------------------------------------
 
 @auth.requires_login()
