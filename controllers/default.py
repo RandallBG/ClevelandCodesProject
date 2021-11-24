@@ -9,6 +9,7 @@
 
 # ---- example index page ----
 def index():
+    response.view="default/index.html"
     return dict(message=T('Welcome to LIMCO Technologies!'))
 
 def companies():
