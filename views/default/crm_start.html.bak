@@ -14,14 +14,14 @@
 	   background-repeat: no-repeat;
        background-attachment: fixed;  
        background-size: cover;}
-	h2, h4{color:white;}
+	h2, h4{color:white; margin:0,0,0,25}
    </style>
    <title>LIMCO Technologies - CRM Tool Demo</title>
 
 </head>
 <body>
    <h2>Customer Relationship Management Tool</h2>
-<div class="container">
+<div class="container-fluid">
 
 <h4>Please select item to review</h4>
                                           
