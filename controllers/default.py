@@ -43,7 +43,7 @@ def companylocations():
 
 @auth.requires_login()
 def company_create():
-    form = SQLFORM(db.company)
+    form = SQLFORM(db.companies)
     if form.process().accepted:
         response.flash = 'Company created'
         redirect(URL('companies'))
@@ -107,8 +107,6 @@ def companies_to_locations_create():
         redirect(URL('companies_to_locations'))
     elif form.errors:
         response.flash = 'Company to Location not created'
-    return locals()
-
     return locals()
     
 @auth.requires_login()
