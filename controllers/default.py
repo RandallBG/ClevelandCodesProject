@@ -12,29 +12,28 @@ def index():
     return dict(message=T('Welcome to LIMCO Technologies!'))
 
 def companies():
-    companies = db(db.companies).select(orderby = db.companies.company_name)
+    companies = SQLFORM.grid(db.companies)
     return locals()
 
 def contacts():
-    contacts = db((db.states.id == db.contacts.states) & (db.companies.id == db.contacts.company_id) & (db.contact_type.id == db.contacts.contact_type_id)).select(orderby = db.contacts.name)
-    # contacts = SQLFORM.grid(db.contacts)
+    contacts = SQLFORM.grid(db.contacts)
     
     return locals()
 
 def sic():
-    sics = db(db.sic).select()
+    sics = SQLFORM.grid(db.sic)
     return locals()
 
 def locations():
-    locations = db(db.states.id == db.locations.states).select()
+    locations = SQLFORM.grid(db.locations)
     return locals()
 
 def activities():
-    activities = db(db.contacts.id == db.activities.contact_id).select()
+    activities = SQLFORM.grid(db.activities)
     return locals()
 
 def companylocations():
-    companyLocations = db((db.locations.id == db.companies_to_locations.location_id) & (db.companies.id == db.companies_to_locations.company_id) & (db.states.id == db.locations.states)).select()
+    companyLocations = SQLFORM.grid(db.companies_to_locations)
     return locals()
 
 
