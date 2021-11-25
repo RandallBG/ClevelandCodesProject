@@ -1,6 +1,6 @@
 db.define_table('states',
                 Field('state_name', requires=IS_NOT_EMPTY()),
-                )
+                format='%(state_name)s')
                 
 db.define_table('sic',
                  Field('sic_id', type='integer' ,unique=True, requires=IS_NOT_EMPTY()),
@@ -10,8 +10,8 @@ db.define_table('sic',
 
 db.define_table('companies',
                 Field('company_name', requires=IS_NOT_EMPTY()),
-                Field('sic_desc', 'reference sic', requires=IS_IN_DB(db, 'sic.id', '%(description)s' ))
-                )
+                Field('sic_desc', 'reference sic', requires=IS_IN_DB(db, 'sic.id', '%(description)s' )),
+                format='%(company_name)s')
 
 db.define_table('locations',
                 Field('address', requires=IS_NOT_EMPTY()),
