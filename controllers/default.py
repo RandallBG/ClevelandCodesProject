@@ -11,7 +11,7 @@
 def index():
     return dict(message=T('Welcome to LIMCO Technologies!'))
 def crm_start():
-    response.view="crm_start.html"
+    response.view="default/crm_start.html"
     return locals()
 
 def companies():
