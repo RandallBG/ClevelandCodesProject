@@ -1,43 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-   <meta charset="utf-8"/>
-   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-   		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous
-		  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous
+		  <link rel=" stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-   <style>
+  <style>
     body {
-	   background-image:url("/ClevelandCodesProject/static/images/crmback.jpg");
-	   background-repeat: no-repeat;
-       background-attachment: fixed;  
-       background-size: cover;}
-	h2{color:white; margin:(0,0,0,25);}
-    h4{color:white;}                                                                          
-   </style>
-   <title>LIMCO Technologies - CRM Tool Demo</title>
+      background-image: url("/ClevelandCodesProject/static/images/crmback.jpg");
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-size: cover;
+      color: white;
+    }
 
+    .main-heading {
+      margin: 1rem 0 0 0;
+    }
+
+    .main-links {
+      text-align: right;
+    }
+
+    .btn-custom {
+      width: 100%;
+    }
+
+    .dropdown-container {
+      display: inline-block;
+    }
+
+    .dropdown-menu {
+      width: 100%;
+      padding: 0;
+
+
+    }
+
+    .dropdown-item {
+      width: 100% !important;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .dropdown-item:hover {
+      background-color: #0069d9;
+    }
+  </style>
+  <title>LIMCO Technologies - CRM Tool Demo</title>
 </head>
-<body>
-   <h2>Customer Relationship Management Tool</h2>
-<div class="container-fluid">
 
-<h4>Please select item to review</h4>
-                                          
-<div class="dropdown">
-    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-      Demo
-    </button>
-    <div class="dropdown-menu">
-      <a class="dropdown-item" href="./contact_create">Contacts</a>
-      <a class="dropdown-item" href="./location_create">Locations</a>
-      <a class="dropdown-item" href="./activities_create">Activities</a>
-      <a class="dropdown-item" href="./contact_create">Reports</a>
+<body>
+
+
+  <div class='text-center main-heading'>
+    <h1>Limco Technologies</h1>
+    <h2>Customer Relationship Management Tool</h2>
+  </div>
+
+  <div class="container-fluid main-links">
+    <div class="dropdown-container">
+      <h4>Please select item to review</h4>
+
+      <div class="dropdown">
+        <button type="button" class="btn btn-custom btn-lg btn-primary dropdown-toggle" data-toggle="dropdown">
+          Demo
+        </button>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="./contact_create">Contacts</a>
+          <a class="dropdown-item" href="./location_create">Locations</a>
+          <a class="dropdown-item" href="./activities_create">Activities</a>
+          <a class="dropdown-item" href="./contact_create">Reports</a>
+        </div>
+      </div>
     </div>
   </div>
-</div>
 
 
 
