@@ -10,6 +10,9 @@
 # ---- example index page ----
 def index():
     return dict(message=T('Welcome to LIMCO Technologies!'))
+def crm_start():
+    response.view="crm_start.html"
+    return locals()
 
 def companies():
     companies = SQLFORM.grid(db.companies)
