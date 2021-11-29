@@ -3,10 +3,10 @@ db.define_table('states',
                 format='%(state_name)s')
                 
 db.define_table('sic',
-                 Field('sic_id', type='integer' ,unique=True, requires=IS_NOT_EMPTY()),
-                 Field('description', requires=IS_NOT_EMPTY()),
-                 format='%(description)s'
-                 )
+                Field('sic_id', type='integer' ,unique=True, requires=IS_NOT_EMPTY()),
+                Field('description', requires=IS_NOT_EMPTY()),
+                format='%(description)s'
+                )
 
 db.define_table('companies',
                 Field('company_name', requires=IS_NOT_EMPTY()),
