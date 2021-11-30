@@ -3,10 +3,10 @@ db.define_table('states',
                 format='%(state_name)s')
                 
 db.define_table('sic',
-                 Field('sic_id', type='integer' ,unique=True, requires=IS_NOT_EMPTY()),
-                 Field('description', requires=IS_NOT_EMPTY()),
-                 format='%(description)s'
-                 )
+                Field('sic_id', type='integer' ,unique=True, requires=IS_NOT_EMPTY()),
+                Field('description', requires=IS_NOT_EMPTY()),
+                format='%(description)s'
+                )
 
 db.define_table('companies',
                 Field('company_name', requires=IS_NOT_EMPTY()),
@@ -61,4 +61,13 @@ db.define_table('activities',
                 Field('notes'),
                 Field('in_contact', 'reference contacts', requires=IS_IN_DB(db, 'contacts.id', '%(name)s'))
                 )
-   
+
+db.define_table('orders',
+                Field('order_date', 'datetime', requires=IS_NOT_EMPTY()),
+                Field('order_number', requires=IS_NOT_EMPTY()),
+                Field('order_type', requires=IS_NOT_EMPTY()),
+                Field('order_status', requires=IS_NOT_EMPTY()),
+                Field('order_amount', requires=IS_NOT_EMPTY()),
+                Field('order_notes', requires=IS_NOT_EMPTY()),
+                Field('order_contact_id', 'reference contacts', requires=IS_IN_DB(db, 'contacts.id', '%(name)s'))
+)
