@@ -42,6 +42,10 @@ def companylocations():
     companyLocations = SQLFORM.grid(db.companies_to_locations)
     return locals()
 
+def orders():
+    orders = SQLFORM.grid(db.orders)
+    return locals()
+
 
 
 #-----------------------------------------------------
