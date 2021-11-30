@@ -63,14 +63,26 @@ def company_create():
         return locals()
 
 @auth.requires_login()
+# def contact_create():
+#     contact_create = SQLFORM(db.contacts) 
+#     if contact_create.process().accepted:
+#         response.flash = 'Contact Created'
+#         redirect(URL('contacts'))
+#     elif contact_create.errors:
+#         response.flash = 'Contact not created'
+#     return locals()
+
+    
 def contact_create():
-    contact_create = SQLFORM(db.contacts) 
-    if contact_create.process().accepted:
-        response.flash = 'Contact Created'
-        redirect(URL('contacts'))
-    elif contact_create.errors:
-        response.flash = 'Contact not created'
-    return locals()
+    form = SQLFORM(db.contacts)
+    if form.process(session=None, formname='test').accepted:
+        response.flash = 'form accepted'
+    elif form.errors:
+        response.flash = 'form has errors'
+    else:
+        response.flash = 'please fill the form'
+    # Note: no form instance is passed to the view
+    return dict()
 
 @auth.requires_login()
 def sic_create():
