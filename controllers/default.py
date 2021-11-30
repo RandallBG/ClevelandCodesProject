@@ -13,6 +13,9 @@ def index():
 def crm_start():
     response.view="default/crm_start.html"
     return locals()
+def reports():
+    response.view="default/reports.html"
+    return locals()
 
 def companies():
     companies = SQLFORM.grid(db.companies)
