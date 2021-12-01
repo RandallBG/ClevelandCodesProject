@@ -2,23 +2,22 @@
 
 <div class='main-form-wrapper'>
     <h2>
-        Custom Form Example
+        Create new contact
     </h2>
-
-    <form class="create-form" action="#" enctype="multipart/form-data" name="test" method="post">
+    <form class="create-form" action="#" enctype="multipart/form-data" method="POST">
         <table class='contact-table'>
             <tr>
                 <td>
                     Name:
                 </td>
                 <td>
-                    <input type='text' class='form-control' name='name'>
+                    <input type='text' class='form-control form-control-changes' name='name'>
                 </td>
                 <td>
                     Email:
                 </td>
                 <td>
-                    <input type='text' class='form-control' name='email'>
+                    <input type='text' class='form-control form-control-changes' name='email'>
                 </td>
             </tr>
             <tr>
@@ -26,13 +25,13 @@
                     Office Phone:
                 </td>
                 <td>
-                    <input type='text' class='form-control' name='office_phone'>
+                    <input type='text' class='form-control form-control-changes' name='office_phone'>
                 </td>
                 <td>
                     Cell Phone:
                 </td>
                 <td>
-                    <input type='text' class='form-control' name='cell_phone'>
+                    <input type='text' class='form-control form-control-changes' name='cell_phone'>
                 </td>
             </tr>
             <tr>
@@ -40,27 +39,34 @@
                     Home Address:
                 </td>
                 <td>
-                    <input type='text' class='form-control' name='home_address'>
+                    <input type='text' class='form-control form-control-changes' name='home_address'>
                 </td>
                 <td>
                     Home City:
                 </td>
                 <td>
-                    <input type='text' class='form-control' name='home_city'>
+                    <input type='text' class='form-control form-control-changes' name='home_city'>
                 </td>
             </tr>
             <tr>
                 <td>
                     State:
+
                 </td>
                 <td>
-                    <input type='text' class='form-control' name='states'>
+                    <select name="states" class="form-control form-control-changes">
+                        {{for row in states:}}
+                        {{=OPTION(row.state_name, _value=row.id)}}
+                        {{pass}}
+                        <option class="option-link" onclick='addState()'>Add State
+                        </option>
+                    </select>
                 </td>
                 <td>
                     Zip Code:
                 </td>
                 <td>
-                    <input type='text' class='form-control' name='home_zip'>
+                    <input type='text' class='form-control form-control-changes ' name='home_zip'>
                 </td>
             </tr>
             <tr>
@@ -68,13 +74,19 @@
                     Company:
                 </td>
                 <td>
-                    <input type='text' class='form-control' name='company_id'>
+                    <select name="company_id" class="form-control form-control-changes">
+                        {{for row in companies:}}
+                        {{=OPTION(row.company_name, _value=row.id)}}
+                        {{pass}}
+                        <option class="option-link" onclick='addCompany()'>Add Company
+                        </option>
+                    </select>
                 </td>
                 <td>
                     Title:
                 </td>
                 <td>
-                    <input type='text' class='form-control' name='title'>
+                    <input type='text' class='form-control form-control-changes' name='title'>
                 </td>
             </tr>
             <tr>
@@ -82,11 +94,30 @@
                     contact type:
                 </td>
                 <td>
-                    <input type='text' class='form-control' name='contact_type_id'>
+                    <select name="contact_type_id" class="form-control form-control-changes">
+                        {{for row in contactType:}}
+                        {{=OPTION(row.description, _value=row.id)}}
+                        {{pass}}
+                        <option class="option-link" onclick='addContactType()'>Add Contact Type
+                        </option>
+                    </select>
                 </td>
                 <td>
             </tr>
         </table>
-        <input type="submit" class="btn btn-primary" />
+        <input type="submit" value="Add" class="btn btn-primary" />
+        <input type="hidden" name="_formname" value="test" />
     </form>
 </div>
+
+<script>
+    function addState() {
+        window.location.href = "{{=URL('state_create')}}";
+    }
+    function addCompany() {
+        window.location.href = "{{=URL('company_create')}}";
+    }
+    function addContactType(){
+        window.location.href = "{{=URL('contact_type_create')}}";
+    }
+</script>
