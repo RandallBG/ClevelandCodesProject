@@ -21,6 +21,11 @@ def lists():
 def our_team():
     response.view="default/our_team.html"
     return locals()
+
+def products():
+    response.view="default/products.html"
+    return locals()
+
 def reports():
     response.view="default/reports.html"
     return locals()
