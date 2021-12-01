@@ -20,39 +20,55 @@
     }
 
     .main-heading {
-      margin: 1rem 0 0 0;
+      margin: 0 0 0 0;
+      background-color: #23272b;
     }
 
     .main-links {
-      text-align: right;
-    }
-
-    .btn-custom {
-      width: 100%;
-    }
-
-    .dropdown-container {
-      display: inline-block;
-    }
-
-    .dropdown-menu {
-      width: 100%;
-      padding: 0;
-
-
-    }
-
-    .dropdown-item {
-      width: 100% !important;
       text-align: center;
-      font-weight: bold;
+      margin-top: 150px;
     }
 
-    .dropdown-item:hover {
-      background-color: #0069d9;
+    .main-buttons {
+      padding-top: .5rem;
+      padding-bottom: .5rem;
+      width: 100%;
+      border-color: white;
+      color: white;
+      margin: 3px;
+
+    }
+
+    .btn-wrapper {
+      display: inline;
+      margin: 0;
+      padding: 0;
+    }
+
+    .btn-outine-secondary {
+      width: 100%;
+    }
+
+    .center {
+      margin: 0;
+      position: absolute;
+      top: 60%;
+      left: 85%;
+      -ms-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+    }
+
+    @media screen and (max-width: 600px) {
+      .center {
+        margin: 0;
+        position: static;
+        -ms-transform: translate(0%, 0%);
+        transform: translate(0%, 0%);
+      }
+
     }
   </style>
-  <title>LIMCO Technologies - CRM Tool Demo</title>
+  <title>LIMCO Technologies - Lists</title>
 </head>
 
 <body>
@@ -83,26 +99,22 @@
 
   <div class='text-center main-heading'>
     <h1>Limco Technologies</h1>
-    <h2>Customer Relationship Management Tool</h2>
+    <h2>Dropdown Lists</h2>
   </div>
 
-  <div class="container-fluid main-links">
-    <div class="dropdown-container">
-      <h4>Please select item to review</h4>
 
-      <div class="dropdown">
-        <button type="button" class="btn btn-custom btn-lg btn-primary dropdown-toggle" data-toggle="dropdown">
-          Demo
-        </button>
-        <div class="dropdown-menu">
-          <a class="dropdown-item" href="./contact_create">Contacts</a>
-          <a class="dropdown-item" href="./location_create">Locations</a>
-          <a class="dropdown-item" href="./activities_create">Activities</a>
-          <a class="dropdown-item" href="./lists">Lists</a>
-          <a class="dropdown-item" href="./reports">Reports</a>
-        </div>
+  <div class="container-fluid main-links">
+    <div class="center">
+      <div class="btn-wrapper">
+        <h4>Please select Report</h4>
+        <a href="state_create" button type="button" class="main-buttons btn btn-dark btn-lg">States</a>
+        <a href="sic_create" button type="button" class="main-buttons btn btn-dark btn-lg">SIC</a>
+        <a href="contact_type_create" button type="button" class="main-buttons btn btn-dark btn-lg">Contact Type</a>
+        <a href="company_create" button type="button" class="main-buttons btn btn-dark btn-lg">Company Names</a>  
+
       </div>
     </div>
+  </div>
   </div>
 
 

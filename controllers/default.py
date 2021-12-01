@@ -13,6 +13,14 @@ def index():
 def crm_start():
     response.view="default/crm_start.html"
     return locals()
+
+def lists():
+    response.view="default/lists.html"
+    return locals()
+    
+def our_team():
+    response.view="default/our_team.html"
+    return locals()
 def reports():
     response.view="default/reports.html"
     return locals()
