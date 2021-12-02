@@ -1,0 +1,27 @@
+{{extend 'layout.html'}}
+<div class='main-form-wrapper'>
+    <h2>
+        Create new company
+    </h2>
+
+    <form class="create-form" action="#" enctype="multipart/form-data" method="post">
+        <label class="m-2">Company Name:</label>
+        <input class="form-control form-control-changes m-2" type='text' name='company_name'>
+        <label class="m-2">Company Sic Id:</label>
+        <select class="form-control form-control-changes m-2" name="sic_desc">
+            {{for row in sics:}}
+            {{=OPTION(row.description, _value=row.id)}}
+            {{pass}}
+            <option class="option-link" onclick='addSic()'>Add Sic
+            </option>
+        </select>
+        <input type='submit' value="Add" class="btn btn-primary">
+        <input type="hidden" name="_formname" value="companyCreate" />
+    </form>
+</div>
+
+<script>
+    function addSic() {
+        window.location.href = '{{=URL("sic_create")}}';
+    }
+</script>
