@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{=URL('static', 'css/style.css')}}">
+    <title>Limco Dashboard</title>
+</head>
+
+<body>
+    <div class="dash-hero">
+        <h1>Limco Dashboard</h1>
+    </div>
+
+    <div class="main-content">
+        <div class="dash-nav">
+            <ul>
+                <li><a href="{{=URL('default', 'contacts')}}">Contacts</a></li>
+                <li><a href="{{=URL('default', 'companies')}}">Companies</a></li>
+                <li><a href="{{=URL('default', 'activities')}}">Activities</a></li>
+                <li><a href="{{=URL('default', 'orders')}}">Orders</a></li>
+            </ul>
+        </div>
+
+        <div class="activity-bar">
+            <div id="upcoming-activities">
+                <h2>Upcoming Activites</h2>
+                {{for activity in activities:}}
+                <div class="activities-card">
+                    {{for activityT in activityType:}}
+                    {{if activityT.id == activity.activity_type_id:}}
+                    <div>
+                        {{=H1(activityT.description, _class='card-title')}}
+                        {{=H3(activity.activity_date, _class='card-date')}}
+                    </div>
+                    {{=P(activity.notes, _class='card-notes')}}
+                    {{pass}}
+                    {{pass}}
+                </div>
+                {{pass}}
+            </div>
+        </div>
+    </div>
+</body>
+
+<script>
+    let upcomingActivities = document.getElementsByClassName('activities-card');
+
+</script>
+
+</html>
