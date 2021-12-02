@@ -39,6 +39,10 @@ def companylocations():
     companyLocations = SQLFORM.grid(db.companies_to_locations)
     return locals()
 
+def orders():
+    orders = SQLFORM.grid(db.orders)
+    return locals()
+
 
 
 #-----------------------------------------------------
@@ -110,6 +114,16 @@ def companies_to_locations_create():
     elif form.errors:
         response.flash = 'Company to Location not created'
     return locals()
+
+@auth.requires_login()
+def orders_create():
+    form = SQLFORM(db.orders)
+    if form.process().accepted:
+        response.flash = 'Order created'
+        redirect(URL('orders'))
+    elif form.errors:
+        response.flash = 'Order not created'
+    return locals()
     
 @auth.requires_login()
 def company_edit():
@@ -177,6 +191,17 @@ def companies_to_locations_edit():
         redirect(URL('companies_to_locations'))
     elif form.errors:
         response.flash = 'Company to Location not edited'
+    return locals()
+
+@auth.requires_login()
+def orders_edit():
+    order = db.orders(request.args(0)) or redirect(URL('orders'))
+    form = SQLFORM(db.orders, order, deletable=True)
+    if form.process().accepted:
+        response.flash = 'Order Edited'
+        redirect(URL('orders'))
+    elif form.errors:
+        response.flash = 'Order not edited'
     return locals()
 
 
