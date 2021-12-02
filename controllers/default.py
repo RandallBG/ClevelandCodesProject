@@ -3,27 +3,34 @@
 # This is a sample controller
 # this file is released under public domain and you can use without limitations
 # -------------------------------------------------------------------------
-
+import datetime
 
 
 
 # ---- example index page ----
 def index():
     return dict(message=T('Welcome to LIMCO Technologies!'))
+
 def crm_start():
     response.view="default/crm_start.html"
     return locals()
 
-def lists():
-    response.view="default/lists.html"
-    return locals()
-    
 def our_team():
     response.view="default/our_team.html"
     return locals()
 
 def products():
     response.view="default/products.html"
+    return locals()
+    
+def scheduled_events():
+    events = SQLFORM.grid(db.activities.activity_date >= datetime.date.today())
+    return locals()
+
+def dashboard():
+    activities = db(db.activities.activity_date >= datetime.date.today()).select(orderby= db.activities.activity_date)
+    activityType= db(db.activity_type).select()
+    response.view="default/dashboard.html"
     return locals()
 
 def reports():
@@ -36,7 +43,6 @@ def companies():
 
 def contacts():
     contacts = SQLFORM.grid(db.contacts)
-    
     return locals()
 
 def sic():
@@ -65,24 +71,31 @@ def orders():
 
 @auth.requires_login()
 def company_create():
+    sics = db(db.sic).select(orderby=db.sic.sic_id)
     form = SQLFORM(db.companies)
-    if form.process().accepted:
+    if form.process(session=None, formname="companyCreate").accepted:
         response.flash = 'Company created'
         redirect(URL('companies'))
     elif form.errors:
-        response.flash = 'Form has errors'
+        response.flash = form.errors    
     else:
         response.flash = 'Please fill the form'
-        return locals()
+    return locals()
 
 @auth.requires_login()
 def contact_create():
-    contact_create = SQLFORM(db.contacts) 
-    if contact_create.process().accepted:
-        response.flash = 'Contact Created'
+    states = db(db.states).select(orderby=db.states.state_name)
+    companies = db(db.companies).select(orderby=db.companies.company_name)
+    contactType = db(db.contact_type).select(orderby=db.contact_type.description)
+    form = SQLFORM(db.contacts)
+    if form.process(session=None, formname='test').accepted:
+        response.flash = 'form accepted'
         redirect(URL('contacts'))
-    elif contact_create.errors:
-        response.flash = 'Contact not created'
+    elif form.errors:
+        response.flash = form.errors
+    else:
+        response.flash = 'please fill the form'
+    # Note: no form instance is passed to the view
     return locals()
 
 @auth.requires_login()
@@ -95,7 +108,7 @@ def sic_create():
         response.flash = 'Form has errors'
     else:
         response.flash = 'Please fill the form'
-        return locals()
+    return locals()
 
 @auth.requires_login()
 def location_create():
@@ -107,7 +120,7 @@ def location_create():
         response.flash = 'Form has errors'
     else:
         response.flash = 'Please fill the form'
-        return locals()
+    return locals()
 
 @auth.requires_login()
 def activities_create():
@@ -119,7 +132,7 @@ def activities_create():
         response.flash = 'Form has errors'
     else:
         response.flash = 'Please fill the form'
-        return locals()
+    return locals()
 
 @auth.requires_login()
 def companies_to_locations_create():
@@ -130,7 +143,20 @@ def companies_to_locations_create():
     elif form.errors:
         response.flash = 'Company to Location not created'
     return locals()
-    
+
+@auth.requires_login()
+def contact_type_create():
+    form = SQLFORM(db.contact_type)
+    if form.process(session=None, formname="contactTypeCreate").accepted:
+        response.flash = 'Contact Type created'
+        redirect(URL('contact_type'))
+    elif form.errors:
+        response.flash = form.errors    
+    else:
+        response.flash = 'Please fill the form'
+    return locals()
+
+
 @auth.requires_login()
 def company_edit():
     company = db.company(request.args(0)) or redirect(URL('companies'))
@@ -142,6 +168,7 @@ def company_edit():
         response.flash = 'Company not edited'
    
     return locals()
+
 
 
 @auth.requires_login()
