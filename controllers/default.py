@@ -3,7 +3,7 @@
 # This is a sample controller
 # this file is released under public domain and you can use without limitations
 # -------------------------------------------------------------------------
-
+import datetime
 
 
 
@@ -13,9 +13,12 @@ def index():
 def crm_start():
     response.view="default/crm_start.html"
     return locals()
+def scheduled_events():
+    events = SQLFORM.grid(db.activities.activity_date >= datetime.date.today())
+    return locals()
 
 def dashboard():
-    activities = db(db.activities).select(orderby= db.activities.activity_date)
+    activities = db(db.activities.activity_date >= datetime.date.today()).select(orderby= db.activities.activity_date)
     activityType= db(db.activity_type).select()
     response.view="default/dashboard.html"
     return locals()
@@ -30,7 +33,6 @@ def companies():
 
 def contacts():
     contacts = SQLFORM.grid(db.contacts)
-    
     return locals()
 
 def sic():
@@ -135,11 +137,11 @@ def companies_to_locations_create():
 @auth.requires_login()
 def contact_type_create():
     form = SQLFORM(db.contact_type)
-    if form.process().accepted:
+    if form.process(session=None, formname="contactTypeCreate").accepted:
         response.flash = 'Contact Type created'
         redirect(URL('contact_type'))
     elif form.errors:
-        response.flash = 'Contact Type not created'
+        response.flash = form.errors    
     else:
         response.flash = 'Please fill the form'
     return locals()

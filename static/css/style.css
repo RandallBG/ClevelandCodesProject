@@ -58,10 +58,13 @@ body {
 
 .activity-bar {
   width: 100%;
+  overflow: hidden;
 }
 .upcoming-activities {
   display: inline-block;
   text-align: center;
+  overflow: hidden;
+  
 }
 .activities-card {
   display: inline-block;
