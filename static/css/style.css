@@ -57,26 +57,53 @@ body {
 }
 
 .activity-bar {
+  display: inline-block;
   width: 100%;
-  overflow: hidden;
+  overflow-x: scroll;
+  /* the height is set using in-line javascript on the dasbhoard
+  page itself. Probably not the best implimentation but time is
+  of the essence */
 }
-.upcoming-activities {
-  display: inline-block;
-  text-align: center;
-  overflow: hidden;
-  
+
+.second-activity-container {
+  position: relative;
+  width: 100%;
+  background-color: blue;
 }
+
 .activities-card {
-  display: inline-block;
+  position: absolute;
+  top: 0;
+  display: block;
   width: 25%;
-  margin: 1rem;
+  margin: 0 1rem 0 1rem;
   background-color: #171717;
   color: white;
   padding: 1rem;
+  float: left;
 }
+
 .side-bar p {
   padding: 0;
   margin: 0;
+}
+
+#activity-modal {
+  position: absolute;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: none;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 100;
+}
+.large-activity-card {
+  width: 50vw;
+  background-color: white;
 }
 
 /* ----------------------create form------------- */

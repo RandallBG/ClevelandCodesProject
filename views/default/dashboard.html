@@ -24,9 +24,9 @@
             </ul>
         </div>
 
-        <div class="activity-bar">
-            <div id="upcoming-activities">
-                <h2>Upcoming Activites</h2>
+        <h2>Upcoming Activities</h2>
+        <div id="activity-bar" class="activity-bar">
+            <div class="second-activity-container">
                 {{for activity in activities:}}
                 <div class="activities-card">
                     {{for activityT in activityType:}}
@@ -43,10 +43,35 @@
             </div>
         </div>
     </div>
-</body>
 
+    <div id="activity-modal">
+        <div class="large-activity-card">
+            <p>hello</p>
+        </div>
+    </div>
+</body>
 <script>
     let upcomingActivities = document.getElementsByClassName('activities-card');
+    console.log(upcomingActivities);
+
+    document.getElementById('activity-bar').style.height = upcomingActivities[0].offsetHeight + 20 + "px";
+
+    //loop through all upcomming activities and set their position in the div
+    //also set their onclick event to open the activity in a modal
+    let activityPosition = 0;
+    for (let i = 0; i < upcomingActivities.length; i++) {
+        upcomingActivities[i].style.left = activityPosition + 'px';
+        activityPosition += upcomingActivities[i].offsetWidth + 10;
+    }
+
+    for (i = 0; i < upcomingActivities.length; i++) {
+        upcomingActivities[i].onclick = function () {
+            let activityModal = document.getElementById('activity-modal');
+            activityModal.style.display = 'flex';
+        }
+    }
+
+    
 
 </script>
 

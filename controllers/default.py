@@ -28,7 +28,8 @@ def scheduled_events():
     return locals()
 
 def dashboard():
-    activities = db(db.activities.activity_date >= datetime.date.today()).select(orderby= db.activities.activity_date)
+    # activities = db(db.activities.activity_date >= datetime.date.today()).select(orderby= db.activities.activity_date)
+    activities = db(db.activities).select()
     activityType= db(db.activity_type).select()
     response.view="default/dashboard.html"
     return locals()
