@@ -19,6 +19,10 @@ def our_team():
     response.view="default/our_team.html"
     return locals()
 
+def about():
+    response.view="default/about.html"
+    return locals()
+
 def products():
     response.view="default/products.html"
     return locals()
