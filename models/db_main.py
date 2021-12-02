@@ -58,7 +58,8 @@ db.define_table('contacts',
                 Field('cell_phone'),
                 Field('email', requires=IS_NOT_EMPTY()),
                 Field('contact_type_id', 'reference contact_type',
-                      requires=IS_IN_DB(db, 'contact_type.id', '%(description)s'))
+                      requires=IS_IN_DB(db, 'contact_type.id', '%(description)s')),
+                Field('speical_notes', requires=IS_NOT_EMPTY()),
                 )
 
 
