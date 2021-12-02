@@ -10,9 +10,19 @@ import datetime
 # ---- example index page ----
 def index():
     return dict(message=T('Welcome to LIMCO Technologies!'))
+
 def crm_start():
     response.view="default/crm_start.html"
     return locals()
+
+def our_team():
+    response.view="default/our_team.html"
+    return locals()
+
+def products():
+    response.view="default/products.html"
+    return locals()
+    
 def scheduled_events():
     events = SQLFORM.grid(db.activities.activity_date >= datetime.date.today())
     return locals()
