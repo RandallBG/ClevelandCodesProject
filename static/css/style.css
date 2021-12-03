@@ -98,6 +98,9 @@ body {
   padding: 1rem;
   float: left;
 }
+.activities-card:hover {
+  scale: 1.05;
+}
 
 .side-bar p {
   padding: 0;
@@ -113,15 +116,19 @@ body {
   left: 0;
   width: 100vw;
   height: 100vh;
-  display: none;
   background-color: rgba(0, 0, 0, 0.7);
   z-index: 100;
 }
+
 .large-activity-card {
   width: 50vw;
   background-color: white;
+  padding: 2rem;
 }
 
+.activity-id {
+  display: none;
+}
 .dash-main-buttons {
   display: grid;
   grid-template-columns: 1fr 1fr;

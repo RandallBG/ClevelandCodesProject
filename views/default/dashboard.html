@@ -15,16 +15,30 @@
     </div>
     <div class="dash-nav">
         <ul>
-            <li><a href="{{=URL('default', 'contacts')}}">Contacts</a></li>
-            <li><a href="{{=URL('default', 'companies')}}">Companies</a></li>
-            <li><a href="{{=URL('default', 'activities')}}">Activities</a></li>
-            <li><a href="{{=URL('default', 'orders')}}">Orders</a></li>
+            <a href="{{=URL('default', 'contacts')}}">
+                <li>Contacts</li>
+            </a>
+            <a href="{{=URL('default', 'companies')}}">
+                <li>Companies</li>
+            </a>
+            <a href="{{=URL('default', 'activities')}}">
+                <li>Activities</li>
+            </a>
+            <a href="{{=URL('default', 'orders')}}">
+                <li>Orders</li>
+            </a>
             <div id="dropdown" class="dropdown">
-                <li>Create</li>
+                <li>Create &#8711;</li>
                 <div id="dropdown-links" class="dropdown-links">
-                    <li><a href="{{=URL('default', 'contact_create')}}">Contact</a></li>
-                    <li><a href="{{=URL('default', 'company_create')}}">Company</a></li>
-                    <li><a href="{{=URL('default', 'create_activity')}}">Activity</a></li>
+                    <a href="{{=URL('default', 'contact_create')}}">
+                        <li>Contact</li>
+                    </a>
+                    <a href="{{=URL('default', 'company_create')}}">
+                        <li>Company</li>
+                    </a>
+                    <a href="{{=URL('default', 'create_activity')}}">
+                        <li>Activity</li>
+                    </a>
                 </div>
             </div>
         </ul>
@@ -37,11 +51,14 @@
                 <div class="second-activity-container">
                     <!-- loop through the upcoming activities and create an activity card for each of them -->
                     {{for activity in activities:}}
-                    <div class="activities-card">
+
+
+                    <div class="activities-card" data-index="{{=(activity.id-1)}}">
                         <!-- loop through the activity type table to find the correct activity type for this activity -->
                         {{for activityT in activityType:}}
                         {{if activityT.id == activity.activity_type_id:}}
                         <div>
+                            {{=P(activity.id, _class="activity-id")}}
                             {{=H1(activityT.description, _class='card-title')}}
                             {{=H3(activity.activity_date, _class='card-date')}}
                         </div>
@@ -55,10 +72,10 @@
         </div>
         <div id="activity-modal">
             <div class="large-activity-card">
-                <h1 id="modal-title">Title</h1>
-                <h2 id="modal-contact">ContactId</h2>
-                <h2 id="modal-date">Date</h2>
-                <h2 id="modal-account-manager">Account Manager</h2>
+                <h1><span id="modal-title">Title</span></h1>
+                <h2><span id="modal-contact">ContactId</span></h2>
+                <h2><span id="modal-date">Date</span></h2>
+                <h2><span id="modal-account-manager">Account Manager</span></h2>
                 <p id="modal-notes">notes: Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo, ullam dolorum
                     molestiae
                     pariatur distinctio voluptatem veritatis reiciendis nulla dignissimos. Molestiae?</p>
@@ -103,19 +120,19 @@
     let upcomingActivities = document.getElementsByClassName('activities-card');
     let clickedActivity; // this will store the activity that was clicked on
     let activityModal = document.getElementById('activity-modal');
+
+
     console.log(upcomingActivities);
 
     document.getElementById('activity-bar').style.height = upcomingActivities[0].offsetHeight + 20 + "px";
 
     //loop through all upcomming activities and set their position in the div
     //also set their onclick event to open the activity in a modal
-    let activityPosition = 0;
+
 
     for (i = 0; i < upcomingActivities.length; i++) {
-        upcomingActivities[i].onclick = function () {
-            let activityId = i - 1;
-            console.log(activityId);
-            modalSetUp(activityId);
+        upcomingActivities[i].onclick = function (e) {
+            modalSetUp(e.currentTarget.dataset.index);
             activityModal.style.display = 'flex';
         }
     }
@@ -137,14 +154,20 @@
     }
 
 
+    // set up the modal with the correct information
     function modalSetUp(activityIndex) {
-        console.log(activityIndex);
+
+        //find the activity type and display it to the page
         for (let i = 0; i < activityTypeJson.length; i++) {
             if (activityTypeJson[i].id == upcomingActivitiesJson[activityIndex].activity_type_id) {
                 document.getElementById('modal-title').innerHTML = activityTypeJson[i].description;
                 break;
             }
         }
+
+        //find the date and display it to the page
+        document.getElementById('modal-date').innerHTML = upcomingActivitiesJson[activityIndex].activity_date;
+
         for (let i = 0; i < contactsJson.length; i++) {
             if (contactsJson[i].id == upcomingActivitiesJson[activityIndex].contact_id) {
                 document.getElementById('modal-contact').innerHTML = contactsJson[i].name;
@@ -157,9 +180,15 @@
                 break;
             }
         }
+
+        //find the notes and display them
+        document.getElementById('modal-notes').innerHTML = upcomingActivitiesJson[activityIndex].notes;
     }
 
+    //set up the carousel for the upcoming activities
     function activityCarouselSetUp() {
+        //offset will be added to for every upcoming activity
+        let activityPosition = 0;
         for (let i = 0; i < upcomingActivities.length; i++) {
             upcomingActivities[i].style.left = activityPosition + 'px';
             activityPosition += upcomingActivities[i].offsetWidth + 10;
