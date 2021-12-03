@@ -11,7 +11,10 @@ body {
   align-items: center;
 }
 /* --------------------Dashboard ---------------------------- */
-
+.main-wrapper {
+  /* display: grid;
+  grid-template-columns: 1fr 2fr; */
+}
 .dash-hero {
   background-image: url("../images/greenHero.jpg");
   height: 20vh;
@@ -42,18 +45,31 @@ body {
   display: inline-block;
   padding: 1rem;
   font-size: 1.25rem;
+  color: white;
+  width: 5em;
 }
 .dash-nav ul li:hover {
   background-color: blue;
 }
 
 .dash-nav a {
-  color: white;
   text-decoration: none;
+  color: white;
 }
 .dash-nav a:active {
   text-decoration: none;
   color: white;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+.dropdown-links {
+  position: absolute;
+  display: none;
+  z-index: 200;
+  background-color: #343a40;
 }
 
 .activity-bar {
@@ -74,8 +90,8 @@ body {
 .activities-card {
   position: absolute;
   top: 0;
-  display: block;
   width: 25%;
+  display: block;
   margin: 0 1rem 0 1rem;
   background-color: #171717;
   color: white;
@@ -106,6 +122,38 @@ body {
   background-color: white;
 }
 
+.dash-main-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 75%;
+  margin: 0 auto;
+  gap: 1rem;
+}
+
+.dash-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  background-color: #171717;
+  color: white;
+}
+
+.unstyled-link {
+  text-decoration: none;
+  color: white;
+}
+
+.unstyled-link:active {
+  text-decoration: none;
+  color: white;
+}
+
+.dash-button::after {
+  content: "";
+  display: block;
+  padding-bottom: 50%;
+}
 /* ----------------------create form------------- */
 .main-form-wrapper {
   margin: 0 auto;

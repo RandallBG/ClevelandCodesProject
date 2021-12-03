@@ -13,45 +13,96 @@
     <div class="dash-hero">
         <h1>Limco Dashboard</h1>
     </div>
+    <div class="dash-nav">
+        <ul>
+            <li><a href="{{=URL('default', 'contacts')}}">Contacts</a></li>
+            <li><a href="{{=URL('default', 'companies')}}">Companies</a></li>
+            <li><a href="{{=URL('default', 'activities')}}">Activities</a></li>
+            <li><a href="{{=URL('default', 'orders')}}">Orders</a></li>
+            <div id="dropdown" class="dropdown">
+                <li>Create</li>
+                <div id="dropdown-links" class="dropdown-links">
+                    <li><a href="{{=URL('default', 'contact_create')}}">Contact</a></li>
+                    <li><a href="{{=URL('default', 'company_create')}}">Company</a></li>
+                    <li><a href="{{=URL('default', 'create_activity')}}">Activity</a></li>
+                </div>
+            </div>
+        </ul>
+    </div>
+    <div class="main-wrapper">
 
-    <div class="main-content">
-        <div class="dash-nav">
-            <ul>
-                <li><a href="{{=URL('default', 'contacts')}}">Contacts</a></li>
-                <li><a href="{{=URL('default', 'companies')}}">Companies</a></li>
-                <li><a href="{{=URL('default', 'activities')}}">Activities</a></li>
-                <li><a href="{{=URL('default', 'orders')}}">Orders</a></li>
-            </ul>
-        </div>
-
-        <h2>Upcoming Activities</h2>
-        <div id="activity-bar" class="activity-bar">
-            <div class="second-activity-container">
-                {{for activity in activities:}}
-                <div class="activities-card">
-                    {{for activityT in activityType:}}
-                    {{if activityT.id == activity.activity_type_id:}}
-                    <div>
-                        {{=H1(activityT.description, _class='card-title')}}
-                        {{=H3(activity.activity_date, _class='card-date')}}
+        <div>
+            <h2>Upcoming Activities</h2>
+            <div id="activity-bar" class="activity-bar">
+                <div class="second-activity-container">
+                    <!-- loop through the upcoming activities and create an activity card for each of them -->
+                    {{for activity in activities:}}
+                    <div class="activities-card">
+                        <!-- loop through the activity type table to find the correct activity type for this activity -->
+                        {{for activityT in activityType:}}
+                        {{if activityT.id == activity.activity_type_id:}}
+                        <div>
+                            {{=H1(activityT.description, _class='card-title')}}
+                            {{=H3(activity.activity_date, _class='card-date')}}
+                        </div>
+                        {{=P(activity.notes, _class='card-notes')}}
+                        {{pass}}
+                        {{pass}}
                     </div>
-                    {{=P(activity.notes, _class='card-notes')}}
-                    {{pass}}
                     {{pass}}
                 </div>
-                {{pass}}
             </div>
         </div>
-    </div>
+        <div id="activity-modal">
+            <div class="large-activity-card">
+                <h1 id="modal-title">Title</h1>
+                <h2 id="modal-contact">ContactId</h2>
+                <h2 id="modal-date">Date</h2>
+                <h2 id="modal-account-manager">Account Manager</h2>
+                <p id="modal-notes">notes: Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo, ullam dolorum
+                    molestiae
+                    pariatur distinctio voluptatem veritatis reiciendis nulla dignissimos. Molestiae?</p>
+            </div>
+        </div>
 
-    <div id="activity-modal">
-        <div class="large-activity-card">
-            <p>hello</p>
+        <div class="dash-main-buttons">
+            <a class="unstyled-link" target="_blank" href="{{=URL('default', 'contacts')}}">
+                <div class="dash-button">
+                    <h2>Contacts</h2>
+                </div>
+            </a>
+            <a class="unstyled-link" href="{{=URL('default', 'companies')}}">
+                <div class="dash-button">
+                    <h2>Companies</h2>
+                </div>
+            </a>
+            <a class="unstyled-link" href="{{=URL('default', 'activities')}}">
+                <div class="dash-button">
+                    <h2>Activities</h2>
+                </div>
+            </a>
+            <a class="unstyled-link" href="{{=URL('default', 'orders')}}">
+                <div class="dash-button">
+                    <h2>Orders</h2>
+                </div>
+            </a>
         </div>
     </div>
 </body>
 <script>
+
+    window.onload = function () {
+        activityCarouselSetUp()
+    }
+
+    //store the tables in javascript variables
+    let upcomingActivitiesJson = {{=XML(jsonActivities)}};
+    let activityTypeJson = {{=XML(jsonActivityType)}};
+    let contactsJson = {{=XML(jsonContacts)}};
+
     let upcomingActivities = document.getElementsByClassName('activities-card');
+    let clickedActivity; // this will store the activity that was clicked on
+    let activityModal = document.getElementById('activity-modal');
     console.log(upcomingActivities);
 
     document.getElementById('activity-bar').style.height = upcomingActivities[0].offsetHeight + 20 + "px";
@@ -59,19 +110,61 @@
     //loop through all upcomming activities and set their position in the div
     //also set their onclick event to open the activity in a modal
     let activityPosition = 0;
-    for (let i = 0; i < upcomingActivities.length; i++) {
-        upcomingActivities[i].style.left = activityPosition + 'px';
-        activityPosition += upcomingActivities[i].offsetWidth + 10;
-    }
 
     for (i = 0; i < upcomingActivities.length; i++) {
         upcomingActivities[i].onclick = function () {
-            let activityModal = document.getElementById('activity-modal');
+            let activityId = i - 1;
+            console.log(activityId);
+            modalSetUp(activityId);
             activityModal.style.display = 'flex';
         }
     }
 
-    
+    //close the modal
+    activityModal.onclick = function (e) {
+        if (e.target == activityModal) {
+            activityModal.style.display = 'none';
+        }
+    }
+
+    //create dropdown functionality
+    let dropdown = document.getElementById('dropdown');
+    dropdown.onmouseenter = function () {
+        document.getElementById('dropdown-links').style.display = 'block';
+    }
+    dropdown.onmouseleave = function () {
+        document.getElementById('dropdown-links').style.display = 'none';
+    }
+
+
+    function modalSetUp(activityIndex) {
+        console.log(activityIndex);
+        for (let i = 0; i < activityTypeJson.length; i++) {
+            if (activityTypeJson[i].id == upcomingActivitiesJson[activityIndex].activity_type_id) {
+                document.getElementById('modal-title').innerHTML = activityTypeJson[i].description;
+                break;
+            }
+        }
+        for (let i = 0; i < contactsJson.length; i++) {
+            if (contactsJson[i].id == upcomingActivitiesJson[activityIndex].contact_id) {
+                document.getElementById('modal-contact').innerHTML = contactsJson[i].name;
+                break;
+            }
+        }
+        for (let i = 0; i < contactsJson.length; i++) {
+            if (contactsJson[i].id == upcomingActivitiesJson[activityIndex].in_contact) {
+                document.getElementById('modal-account-manager').innerHTML = contactsJson[i].name;
+                break;
+            }
+        }
+    }
+
+    function activityCarouselSetUp() {
+        for (let i = 0; i < upcomingActivities.length; i++) {
+            upcomingActivities[i].style.left = activityPosition + 'px';
+            activityPosition += upcomingActivities[i].offsetWidth + 10;
+        }
+    }
 
 </script>
 
