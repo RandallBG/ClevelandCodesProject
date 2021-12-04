@@ -109,9 +109,9 @@
     {{=response.toolbar() if response.show_toolbar else ''}}
   </div>
 
-  {{block footer}}
+  {{#block footer}}
   <!-- this is default footer -->
-  <footer class="footer container-fluid">
+  <!-- <footer class="footer container-fluid">
     <div class="row">
       <div class="col-md-12">
         <div class="copyright pull-left">{{=T('Copyright')}} &#169; {{=request.now.year}}</div>
@@ -121,8 +121,8 @@
         </div>
       </div>
     </div>
-  </footer>
-  {{end}}
+  </footer> -->
+  {{#end}}
   <!-- The javascript =============================== -->
   <script src="{{=URL('static','js/bootstrap.bundle.min.js')}}"></script>
   <script src="{{=URL('static','js/web2py-bootstrap4.js')}}"></script>
