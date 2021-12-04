@@ -41,7 +41,6 @@ db.define_table('activity_type',
 
 db.define_table('contact_type',
                 Field('description', requires=IS_NOT_EMPTY()),
-
                 )
 
 db.define_table('contacts',
