@@ -216,7 +216,25 @@ body {
   background-color: rgba(0, 0, 0, 0.7);
 }
 
+#webcam-modal-inner {
+  background-color: #171717;
+  padding: 3rem;
+  border-radius: 15px;
+}
 #video-wrapper {
-  height: auto;
-  background-color: white;
+  position: relative;
+  border: 1px solid black;
+  width: 640px;
+  height: 480px;
+}
+#webcam-button-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2rem;
+}
+#canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
 }

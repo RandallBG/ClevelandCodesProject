@@ -87,12 +87,13 @@
                 </td>
                 <td>
                     <div id="openWebcam" class="btn btn-primary">Take Image</div>
+                    <input type="hidden" name="picture" id="imageUpload">
                 </td>
                 <td>
                     Upload Image:
                 </td>
                 <td>
-                    <input type='file' name='picture'>
+                    <input id="uploadedImage" type='file' name='picture'>
                 </td>
             </tr>
             <tr>
@@ -109,14 +110,22 @@
 
     </form>
     <div id="webcam-modal">
-        <div id="video-wrapper">
-            <video id="video" playsinline autoplay></video>
-            <canvas id="canvas" width="640" height="480"></canvas>
-            <div id="takeSnapShot" class="btn btn-primary">Take Photo</div>
+        <div id="webcam-modal-inner">
+            <div id="video-wrapper">
+                <video id="video" playsinline autoplay></video>
+                <canvas id="canvas" width="640" height="480"></canvas>
+            </div>
+            <div id='webcam-button-wrapper'>
+                <div id="takeSnapShot" class="btn btn-primary">Take Photo</div>
+                <div id="retakeSnapShot" class="btn btn-danger">Retake</div>
+                <div id="uploadSnapShot" class="btn btn-success">Upload</div>
+            </div>
         </div>
+
     </div>
 
     <script>
+        //set up events for the page
         document.getElementById('openWebcam').addEventListener('click', function () {
             //set modal to have display
             displayWebcamModal();
@@ -134,19 +143,34 @@
             takeSnapShot();
         });
 
+        document.getElementById('retakeSnapShot').addEventListener('click', function () {
+            document.getElementById('canvas').getContext('2d').clearRect(0, 0, 640, 480);
+        });
+
+        document.getElementById('uploadSnapShot').addEventListener('click', function () {
+            uploadSnapShot();
+        });
+
+        //set up the webcam modal
         function displayWebcamModal() {
             document.getElementById('webcam-modal').style.display = 'flex';
         }
 
         function hideWebcamModal() {
             document.getElementById('webcam-modal').style.display = 'none';
+            //stop the webcam
+            stream.getTracks().forEach(function (track) {
+                track.stop();
+            });
 
         }
 
+        //set up the webcam
         async function initWebcam() {
             const video = document.getElementById('video');
             try {
-                const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+                const stream = await navigator.mediaDevices.getUserMedia({ video: { width: 640, height: 480 } });
+                window.stream = stream; // make stream available to console
                 video.srcObject = stream;
             }
             catch (e) {
@@ -161,6 +185,30 @@
             context.drawImage(video, 0, 0, 640, 480);
         }
 
+        //upload currently taken image to the server
+        function uploadSnapShot() {
+            try {
+                const canvas = document.getElementById('canvas');
+                const image = canvas.toDataURL('image/png');
+                //set the image to the hidden input
+                document.getElementById('imageUpload').value = image;
+                hideWebcamModal();
+                //change the name of the file input so its no longer used and change the take image button to 
+                //green to indicate that the image has been uploaded
+                document.getElementById('uploadedImage').setAttribute('name', 'notUsed');
+                document.getElementById('openWebcam').innerHTML = 'Replace Image';
+                document.getElementById('openWebcam').classList.remove('btn-primary');
+                document.getElementById('openWebcam').classList.add('btn-success');
+                //disable the upload image input as it is no longer needed
+                document.getElementById('uploadedImage').setAttribute('disabled', 'disabled');
+            }
+            catch (e) {
+                console.log(e);
+
+            }
+            document.getElementById('imageUpload').value = document.getElementById('canvas').toDataURL();
+
+        }
 
 
     </script>
