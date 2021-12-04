@@ -1,18 +1,18 @@
 {{extend 'layout.html'}}
 <div class='main-form-wrapper'>
     <h2>
-        Create new company
+        New Company
     </h2>
 
     <form class="create-form" action="#" enctype="multipart/form-data" method="post">
         <label class="m-2">Company Name:</label>
         <input class="form-control form-control-changes m-2" type='text' name='company_name'>
-        <label class="m-2">Company Sic Id:</label>
+        <label class="m-2">Company SIC Id:</label>
         <select class="form-control form-control-changes m-2" name="sic_desc">
             {{for row in sics:}}
             {{=OPTION(row.description, _value=row.id)}}
             {{pass}}
-            <option class="option-link" onclick='addSic()'>Add Sic
+            <option class="option-link" onclick='addSic()'>Add SIC
             </option>
         </select>
         <input type='submit' value="Add" class="btn btn-primary">

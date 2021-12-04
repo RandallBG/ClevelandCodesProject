@@ -26,7 +26,19 @@ def about():
 def products():
     response.view="default/products.html"
     return locals()
+
+def specs1():
+    response.view="default/specs1.html"
+    return locals()    
+
+def specs2():
+    response.view="default/specs2.html"
+    return locals()        
     
+def specs3():
+    response.view="default/specs3.html"
+    return locals()    
+
 def scheduled_events():
     events = SQLFORM.grid(db.activities.activity_date >= datetime.date.today())
     return locals()
