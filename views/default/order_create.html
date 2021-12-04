@@ -1,0 +1,91 @@
+{{extend 'layout.html'}}
+
+<div class='main-form-wrapper'>
+    <h2>
+        New Order
+    </h2>
+    <form class="create-form" action="#" enctype="multipart/form-data" method="POST">
+        <table class='contact-table'>
+            <tr>
+                <td>
+                    Customer:
+                </td>
+                <td>
+                    <select name="customer" class="form-control form-control-changes">
+                        {{for row in customers:}}
+                        {{=OPTION(row.name, _value=row.id)}}
+                        {{pass}}
+                        <option class="option-link" onclick='addContact()'>Add Customer
+                        </option>
+                    </select>
+                </td>
+                <td>
+                    Order Item:
+                </td>
+                <td>
+                    <input type='text' class='form-control form-control-changes' name='order_item'>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Order type:
+                </td>
+                <td>
+                    <input type='text' class='form-control form-control-changes' name='order_type'>
+                </td>
+                <td>
+                    Price:
+                </td>
+                <td>
+                    <input type='text' class='form-control form-control-changes' name='order_amount'>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Order date:
+                </td>
+                <td>
+                    <input type='text' class='form-control form-control-changes' name='order_date'>
+                </td>
+                <td>
+                    Notes:
+                </td>
+                <td>
+                    <textarea class='form-control form-control-changes' name='order_notes'>
+                    </textarea>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Account Manager:
+                </td>
+                <td>
+                    <select name="account_manager" class="form-control form-control-changes">
+                        {{for row in employees:}}
+                        {{=OPTION(row.employee_name, _value=row.id)}}
+                        {{pass}}
+                        <option class="option-link" onclick='addEmployee()'>Add Employee
+                        </option>
+                    </select>
+                </td>
+                <td>
+                    Zip Code:
+                </td>
+                <td>
+                    <input type='text' class='form-control form-control-changes ' name='home_zip'>
+                </td>
+            </tr>
+        </table>
+        <input type="submit" value="Add" class="btn btn-primary" />
+        <input type="hidden" name="_formname" value="createOrder" />
+    </form>
+</div>
+
+<script>
+    function addContact() {
+        window.location.href = "{{=URL('contact_create')}}";
+    }
+    function addEmployee() {
+        window.location.href = "{{=URL('employee_create')}}";
+    }
+</script>

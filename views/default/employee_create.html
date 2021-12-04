@@ -1,0 +1,214 @@
+{{extend 'layout.html'}}
+<div class='main-form-wrapper'>
+    <h2>
+        Create new Employee
+    </h2>
+    <form class="create-form" action="#" enctype="multipart/form-data" method="POST">
+        <table class='contact-table'>
+            <tr>
+                <td>
+                    Name:
+                </td>
+                <td>
+                    <input type='text' class='form-control form-control-changes' name='employee_name'>
+                </td>
+                <td>
+                    Title:
+                </td>
+                <td>
+                    <input type='text' class='form-control form-control-changes' name='employee_title'>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Phone number:
+                </td>
+                <td>
+                    <input type='text' class='form-control form-control-changes' name='employee_phone'>
+                </td>
+                <td>
+                    Email:
+                </td>
+                <td>
+                    <input type='text' class='form-control form-control-changes' name='employee_email'>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Home Address:
+                </td>
+                <td>
+                    <input type='text' class='form-control form-control-changes' name='employee_address'>
+                </td>
+                <td>
+                    City:
+                </td>
+                <td>
+                    <input type='text' class='form-control form-control-changes' name='employee_city'>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    State:
+                </td>
+                <td>
+                    <select name="employee_state" class="form-control form-control-changes">
+                        {{for row in states:}}
+                        {{=OPTION(row.state_name, _value=row.id)}}
+                        {{pass}}
+                        <option class="option-link" onclick='addState()'>Add State
+                        </option>
+                    </select>
+                </td>
+                <td>
+                    Zip Code:
+                </td>
+                <td>
+                    <input type='text' class='form-control form-control-changes ' name='employee_zip'>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Salary:
+                </td>
+                <td>
+                    <input type='text' class='form-control form-control-changes ' name='employee_salary'>
+                </td>
+                <td>
+                    Hire Date:
+                </td>
+                <td>
+                    <input type='date' class='form-control form-control-changes' name='employee_hire_date'>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Take Image:
+                </td>
+                <td>
+                    <div id="openWebcam" class="btn btn-primary">Take Image</div>
+                    <input type="hidden" name="picture" id="imageUpload">
+                </td>
+                <td>
+                    Upload Image:
+                </td>
+                <td>
+                    <input id="uploadedImage" type='file' name='picture'>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Notes:
+                </td>
+                <td colspan="3">
+                    <textarea class='form-control form-control-changes' name='employee_notes'></textarea>
+                </td>
+            </tr>
+        </table>
+        <input type="submit" value="Add" class="btn btn-primary" />
+        <input type="hidden" name="_formname" value="employeeCreate" />
+
+    </form>
+    <div id="webcam-modal">
+        <div id="webcam-modal-inner">
+            <div id="video-wrapper">
+                <video id="video" playsinline autoplay></video>
+                <canvas id="canvas" width="640" height="480"></canvas>
+            </div>
+            <div id='webcam-button-wrapper'>
+                <div id="takeSnapShot" class="btn btn-primary">Take Photo</div>
+                <div id="retakeSnapShot" class="btn btn-danger">Retake</div>
+                <div id="uploadSnapShot" class="btn btn-success">Upload</div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        //set up events for the page
+        document.getElementById('openWebcam').addEventListener('click', function () {
+            //set modal to have display
+            displayWebcamModal();
+            //initialize the request for the webcam
+            initWebcam();
+        });
+
+        document.getElementById('webcam-modal').addEventListener('click', function (e) {
+            if (e.target.id === 'webcam-modal') {
+                hideWebcamModal();
+            }
+        });
+
+        document.getElementById('takeSnapShot').addEventListener('click', function () {
+            takeSnapShot();
+        });
+
+        document.getElementById('retakeSnapShot').addEventListener('click', function () {
+            document.getElementById('canvas').getContext('2d').clearRect(0, 0, 640, 480);
+        });
+
+        document.getElementById('uploadSnapShot').addEventListener('click', function () {
+            uploadSnapShot();
+        });
+
+        //set up the webcam modal
+        function displayWebcamModal() {
+            document.getElementById('webcam-modal').style.display = 'flex';
+        }
+
+        function hideWebcamModal() {
+            document.getElementById('webcam-modal').style.display = 'none';
+            //stop the webcam
+            stream.getTracks().forEach(function (track) {
+                track.stop();
+            });
+
+        }
+
+        //set up the webcam
+        async function initWebcam() {
+            const video = document.getElementById('video');
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ video: { width: 640, height: 480 } });
+                window.stream = stream; // make stream available to console
+                video.srcObject = stream;
+            }
+            catch (e) {
+                console.log("Could not access webcam", e);
+            }
+        }
+
+        function takeSnapShot() {
+            const canvas = document.getElementById('canvas');
+            const context = canvas.getContext('2d');
+            const video = document.getElementById('video');
+            context.drawImage(video, 0, 0, 640, 480);
+        }
+
+        //upload currently taken image to the server
+        function uploadSnapShot() {
+            try {
+                const canvas = document.getElementById('canvas');
+                const image = canvas.toDataURL('image/png');
+                //set the image to the hidden input
+                document.getElementById('imageUpload').value = image;
+                hideWebcamModal();
+                //change the name of the file input so its no longer used and change the take image button to 
+                //green to indicate that the image has been uploaded
+                document.getElementById('uploadedImage').setAttribute('name', 'notUsed');
+                document.getElementById('openWebcam').innerHTML = 'Replace Image';
+                document.getElementById('openWebcam').classList.remove('btn-primary');
+                document.getElementById('openWebcam').classList.add('btn-success');
+                //disable the upload image input as it is no longer needed
+                document.getElementById('uploadedImage').setAttribute('disabled', 'disabled');
+            }
+            catch (e) {
+                console.log(e);
+
+            }
+            document.getElementById('imageUpload').value = document.getElementById('canvas').toDataURL();
+
+        }
+
+
+    </script>

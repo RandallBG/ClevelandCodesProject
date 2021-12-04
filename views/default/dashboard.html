@@ -189,9 +189,11 @@
     function activityCarouselSetUp() {
         //offset will be added to for every upcoming activity
         let activityPosition = 0;
-        for (let i = 0; i < upcomingActivities.length; i++) {
-            upcomingActivities[i].style.left = activityPosition + 'px';
-            activityPosition += upcomingActivities[i].offsetWidth + 10;
+        if (upcomingActivities.length > 0) {
+            for (let i = 0; i < upcomingActivities.length; i++) {
+                upcomingActivities[i].style.left = activityPosition + 'px';
+                activityPosition += upcomingActivities[i].offsetWidth + 10;
+            }
         }
     }
 

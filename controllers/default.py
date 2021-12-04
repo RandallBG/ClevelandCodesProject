@@ -54,6 +54,10 @@ def contacts():
     contacts = SQLFORM.grid(db.contacts)
     return locals()
 
+def employees():
+    employees = SQLFORM.grid(db.employees)
+    return locals()
+    
 def sic():
     sics = SQLFORM.grid(db.sic)
     return locals()
@@ -105,6 +109,33 @@ def contact_create():
     else:
         response.flash = 'please fill the form'
     # Note: no form instance is passed to the view
+    return locals()
+
+@auth.requires_login()
+def employee_create():
+    states = db(db.states).select(orderby=db.states.state_name)
+    form = SQLFORM(db.employees)
+    if form.process(session=None, formname="employeeCreate").accepted:
+        response.flash = 'Employee created'
+        redirect(URL('employees'))
+    elif form.errors:
+        response.flash = form.errors    
+    else:
+        response.flash = 'Please fill the form'
+    return locals()
+
+@auth.requires_login()
+def order_create():
+    employees = db(db.employees).select(orderby=db.employees.employee_name)
+    customers = db(db.contacts).select(orderby=db.contacts.name)
+    form = SQLFORM(db.orders)
+    if form.process(session=None, formname="createOrder").accepted:
+        response.flash = 'Order created'
+        redirect(URL('orders'))
+    elif form.errors:
+        response.flash = form.errors    
+    else:
+        response.flash = 'Please fill the form'
     return locals()
 
 @auth.requires_login()
