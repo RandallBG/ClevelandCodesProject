@@ -86,6 +86,11 @@ db.define_table('orders',
                       requires=IS_IN_DB(db, 'contacts.id', '%(name)s'))
                 )
 
+db.define_table('orders_to_contacts', 
+                  Field('order_id', 'reference orders', requires=IS_IN_DB(db, 'orders.id', '%(order_number)s')),
+                  Field('contact_id', 'reference contacts', requires=IS_IN_DB(db, 'contacts.id', '%(name)s'))
+)
+
 db.define_table('customer_to_orders',
                 Field('customer_id', 'reference contacts',
                       requires=IS_IN_DB(db, 'contacts.id', '%(name)s')),
