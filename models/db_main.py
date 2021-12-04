@@ -88,7 +88,7 @@ db.define_table('employees',
                 Field('employee_zip', requires=IS_NOT_EMPTY()),
                 Field('employee_notes', requires=IS_NOT_EMPTY()),
                 Field('employee_salary', requires=IS_NOT_EMPTY()),
-                Field('employee_hire_date', 'datetime', requires=IS_NOT_EMPTY()),
+                Field('employee_hire_date', 'datetime', requires= IS_DATE(format=T('%Y-%m-%d'))),
                   format="%(employee_name)s"
                 )
 

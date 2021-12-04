@@ -52,7 +52,7 @@
                     State:
                 </td>
                 <td>
-                    <select name="states" class="form-control form-control-changes">
+                    <select name="employee_state" class="form-control form-control-changes">
                         {{for row in states:}}
                         {{=OPTION(row.state_name, _value=row.id)}}
                         {{pass}}
@@ -78,7 +78,21 @@
                     Hire Date:
                 </td>
                 <td>
-                    <input type='text' class='form-control form-control-changes' name='employee_hire_date'>
+                    <input type='date' class='form-control form-control-changes' name='employee_hire_date'>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Take Image:
+                </td>
+                <td>
+                    <div id="openWebcam" class="btn btn-primary">Take Image</div>
+                </td>
+                <td>
+                    Upload Image:
+                </td>
+                <td>
+                    <input type='file' name='picture'>
                 </td>
             </tr>
             <tr>
@@ -91,6 +105,62 @@
             </tr>
         </table>
         <input type="submit" value="Add" class="btn btn-primary" />
-        <input type="hidden" name="_formname" value="test" />
+        <input type="hidden" name="_formname" value="employeeCreate" />
+
     </form>
-</div>
+    <div id="webcam-modal">
+        <div id="video-wrapper">
+            <video id="video" playsinline autoplay></video>
+            <canvas id="canvas" width="640" height="480"></canvas>
+            <div id="takeSnapShot" class="btn btn-primary">Take Photo</div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('openWebcam').addEventListener('click', function () {
+            //set modal to have display
+            displayWebcamModal();
+            //initialize the request for the webcam
+            initWebcam();
+        });
+
+        document.getElementById('webcam-modal').addEventListener('click', function (e) {
+            if (e.target.id === 'webcam-modal') {
+                hideWebcamModal();
+            }
+        });
+
+        document.getElementById('takeSnapShot').addEventListener('click', function () {
+            takeSnapShot();
+        });
+
+        function displayWebcamModal() {
+            document.getElementById('webcam-modal').style.display = 'flex';
+        }
+
+        function hideWebcamModal() {
+            document.getElementById('webcam-modal').style.display = 'none';
+
+        }
+
+        async function initWebcam() {
+            const video = document.getElementById('video');
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+                video.srcObject = stream;
+            }
+            catch (e) {
+                console.log("Could not access webcam", e);
+            }
+        }
+
+        function takeSnapShot() {
+            const canvas = document.getElementById('canvas');
+            const context = canvas.getContext('2d');
+            const video = document.getElementById('video');
+            context.drawImage(video, 0, 0, 640, 480);
+        }
+
+
+
+    </script>

@@ -54,6 +54,10 @@ def contacts():
     contacts = SQLFORM.grid(db.contacts)
     return locals()
 
+def employees():
+    employees = SQLFORM.grid(db.employees)
+    return locals()
+    
 def sic():
     sics = SQLFORM.grid(db.sic)
     return locals()
