@@ -1,0 +1,96 @@
+{{extend 'layout.html'}}
+<div class='main-form-wrapper'>
+    <h2>
+        Create new Employee
+    </h2>
+    <form class="create-form" action="#" enctype="multipart/form-data" method="POST">
+        <table class='contact-table'>
+            <tr>
+                <td>
+                    Name:
+                </td>
+                <td>
+                    <input type='text' class='form-control form-control-changes' name='employee_name'>
+                </td>
+                <td>
+                    Title:
+                </td>
+                <td>
+                    <input type='text' class='form-control form-control-changes' name='employee_title'>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Phone number:
+                </td>
+                <td>
+                    <input type='text' class='form-control form-control-changes' name='employee_phone'>
+                </td>
+                <td>
+                    Email:
+                </td>
+                <td>
+                    <input type='text' class='form-control form-control-changes' name='employee_email'>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Home Address:
+                </td>
+                <td>
+                    <input type='text' class='form-control form-control-changes' name='employee_address'>
+                </td>
+                <td>
+                    City:
+                </td>
+                <td>
+                    <input type='text' class='form-control form-control-changes' name='employee_city'>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    State:
+                </td>
+                <td>
+                    <select name="states" class="form-control form-control-changes">
+                        {{for row in states:}}
+                        {{=OPTION(row.state_name, _value=row.id)}}
+                        {{pass}}
+                        <option class="option-link" onclick='addState()'>Add State
+                        </option>
+                    </select>
+                </td>
+                <td>
+                    Zip Code:
+                </td>
+                <td>
+                    <input type='text' class='form-control form-control-changes ' name='employee_zip'>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Salary:
+                </td>
+                <td>
+                    <input type='text' class='form-control form-control-changes ' name='employee_salary'>
+                </td>
+                <td>
+                    Hire Date:
+                </td>
+                <td>
+                    <input type='text' class='form-control form-control-changes' name='employee_hire_date'>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Notes:
+                </td>
+                <td colspan="3">
+                    <textarea class='form-control form-control-changes' name='employee_notes'></textarea>
+                </td>
+            </tr>
+        </table>
+        <input type="submit" value="Add" class="btn btn-primary" />
+        <input type="hidden" name="_formname" value="test" />
+    </form>
+</div>

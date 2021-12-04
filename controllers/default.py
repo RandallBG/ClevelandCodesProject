@@ -108,6 +108,33 @@ def contact_create():
     return locals()
 
 @auth.requires_login()
+def employee_create():
+    states = db(db.states).select(orderby=db.states.state_name)
+    form = SQLFORM(db.employees)
+    if form.process(session=None, formname="employeeCreate").accepted:
+        response.flash = 'Employee created'
+        redirect(URL('employees'))
+    elif form.errors:
+        response.flash = form.errors    
+    else:
+        response.flash = 'Please fill the form'
+    return locals()
+
+@auth.requires_login()
+def order_create():
+    employees = db(db.employees).select(orderby=db.employees.employee_name)
+    customers = db(db.contacts).select(orderby=db.contacts.name)
+    form = SQLFORM(db.orders)
+    if form.process(session=None, formname="createOrder").accepted:
+        response.flash = 'Order created'
+        redirect(URL('orders'))
+    elif form.errors:
+        response.flash = form.errors    
+    else:
+        response.flash = 'Please fill the form'
+    return locals()
+
+@auth.requires_login()
 def sic_create():
     form = SQLFORM(db.sic)
     if form.process().accepted:
