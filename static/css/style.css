@@ -11,7 +11,10 @@ body {
   align-items: center;
 }
 /* --------------------Dashboard ---------------------------- */
-
+.main-wrapper {
+  /* display: grid;
+  grid-template-columns: 1fr 2fr; */
+}
 .dash-hero {
   background-image: url("../images/greenHero.jpg");
   height: 20vh;
@@ -42,43 +45,122 @@ body {
   display: inline-block;
   padding: 1rem;
   font-size: 1.25rem;
+  color: white;
+  width: 5em;
 }
 .dash-nav ul li:hover {
   background-color: blue;
 }
 
 .dash-nav a {
-  color: white;
   text-decoration: none;
+  color: white;
 }
 .dash-nav a:active {
   text-decoration: none;
   color: white;
 }
 
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+.dropdown-links {
+  position: absolute;
+  display: none;
+  z-index: 200;
+  background-color: #343a40;
+}
+
 .activity-bar {
+  display: inline-block;
   width: 100%;
-  overflow: hidden;
+  overflow-x: scroll;
+  /* the height is set using in-line javascript on the dasbhoard
+  page itself. Probably not the best implimentation but time is
+  of the essence */
 }
-.upcoming-activities {
-  display: inline-block;
-  text-align: center;
-  overflow: hidden;
-  
+
+.second-activity-container {
+  position: relative;
+  width: 100%;
+  background-color: blue;
 }
+
 .activities-card {
-  display: inline-block;
+  position: absolute;
+  top: 0;
   width: 25%;
-  margin: 1rem;
+  display: block;
+  margin: 0 1rem 0 1rem;
   background-color: #171717;
   color: white;
   padding: 1rem;
+  float: left;
 }
+.activities-card:hover {
+  scale: 1.05;
+}
+
 .side-bar p {
   padding: 0;
   margin: 0;
 }
 
+#activity-modal {
+  position: absolute;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 100;
+}
+
+.large-activity-card {
+  width: 50vw;
+  background-color: white;
+  padding: 2rem;
+}
+
+.activity-id {
+  display: none;
+}
+.dash-main-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 75%;
+  margin: 0 auto;
+  gap: 1rem;
+}
+
+.dash-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  background-color: #171717;
+  color: white;
+}
+
+.unstyled-link {
+  text-decoration: none;
+  color: white;
+}
+
+.unstyled-link:active {
+  text-decoration: none;
+  color: white;
+}
+
+.dash-button::after {
+  content: "";
+  display: block;
+  padding-bottom: 50%;
+}
 /* ----------------------create form------------- */
 .main-form-wrapper {
   margin: 0 auto;

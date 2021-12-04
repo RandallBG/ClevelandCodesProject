@@ -4,7 +4,7 @@
 # this file is released under public domain and you can use without limitations
 # -------------------------------------------------------------------------
 import datetime
-
+from gluon.serializers import json
 
 
 # ---- example index page ----
@@ -28,8 +28,17 @@ def scheduled_events():
     return locals()
 
 def dashboard():
-    activities = db(db.activities.activity_date >= datetime.date.today()).select(orderby= db.activities.activity_date)
+    
+    # store upcoming activities, the activity types table, and the contacts table in three seperate variables
+    # not sure if declaring all the variables and just returning locals is bad practice but for now it works.
+    # activities = db(db.activities.activity_date >= datetime.date.today()).select(orderby= db.activities.activity_date)
+    activities = db(db.activities).select()
+    jsonActivities = json(db(db.activities).select())
     activityType= db(db.activity_type).select()
+    jsonActivityType = json(db(db.activity_type).select())
+    contacts = db(db.contacts).select()
+    jsonContacts = json(db(db.contacts).select())
+
     response.view="default/dashboard.html"
     return locals()
 
@@ -145,6 +154,15 @@ def companies_to_locations_create():
     return locals()
 
 @auth.requires_login()
+def orders_create():
+    form = SQLFORM(db.orders)
+    if form.process().accepted:
+        response.flash = 'Order created'
+        redirect(URL('orders'))
+    elif form.errors:
+        response.flash = 'Order not created'
+    return locals()
+    
 def contact_type_create():
     form = SQLFORM(db.contact_type)
     if form.process(session=None, formname="contactTypeCreate").accepted:
@@ -224,6 +242,17 @@ def companies_to_locations_edit():
         redirect(URL('companies_to_locations'))
     elif form.errors:
         response.flash = 'Company to Location not edited'
+    return locals()
+
+@auth.requires_login()
+def orders_edit():
+    order = db.orders(request.args(0)) or redirect(URL('orders'))
+    form = SQLFORM(db.orders, order, deletable=True)
+    if form.process().accepted:
+        response.flash = 'Order Edited'
+        redirect(URL('orders'))
+    elif form.errors:
+        response.flash = 'Order not edited'
     return locals()
 
 
