@@ -86,3 +86,40 @@ db.define_table('orders',
                 Field('order_contact_id', 'reference contacts',
                       requires=IS_IN_DB(db, 'contacts.id', '%(name)s'))
                 )
+
+db.define_table('customer_to_orders',
+                Field('customer_id', 'reference contacts',
+                      requires=IS_IN_DB(db, 'contacts.id', '%(name)s')),
+                Field('order_id', 'reference orders',   requires=IS_IN_DB(db, 'orders.id', '%(order_number)s')
+                      ) )
+
+db.define_table('employees',
+                Field('employee_name', requires=IS_NOT_EMPTY()),
+                Field('employee_title', requires=IS_NOT_EMPTY()),
+                Field('employee_phone', requires=IS_MATCH('[\d\-\(\) ]+')),
+                Field('employee_email', requires=IS_NOT_EMPTY()),
+                Field('employee_address', requires=IS_NOT_EMPTY()),
+                Field('employee_city', requires=IS_NOT_EMPTY()),
+                Field('employee_state', 'reference states',
+                      requires=IS_IN_DB(db, 'states.id', '%(state_name)s')),
+                Field('employee_zip', requires=IS_NOT_EMPTY()),
+                Field('employee_notes', requires=IS_NOT_EMPTY()),
+                Field('employee_type', requires=IS_NOT_EMPTY()),
+                Field('employee_salary', requires=IS_NOT_EMPTY()),
+                Field('employee_hire_date', 'datetime', requires=IS_NOT_EMPTY()))
+
+db.define_table('leads',
+                Field('lead_name', requires=IS_NOT_EMPTY()),
+                Field('account_manager', 'reference employees', requires=IS_IN_DB(db, 'employees.id', '%(employee_name)s')),
+                Field('lead_title'),
+                Field('lead_phone', requires=IS_MATCH('[\d\-\(\) ]+')),
+                Field('lead_email', requires=IS_NOT_EMPTY()),
+                Field('lead_address'),
+                Field('lead_city'),
+                Field('lead_state', 'reference states', requires=IS_IN_DB(
+                    db, 'states.id', '%(state_name)s')),
+                Field('lead_zip'),
+                Field('lead_notes', requires=IS_NOT_EMPTY()),
+                Field('lead_source', requires=IS_NOT_EMPTY()),
+                Field('lead_status', requires=IS_NOT_EMPTY()),
+                )
