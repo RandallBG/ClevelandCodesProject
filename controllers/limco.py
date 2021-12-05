@@ -10,21 +10,22 @@ def importp():
         for line in reader:         # each line is read into a list
             Name = line[0]
             Email = line[1]
-            Office Phone = line[2]
-            Cell Phone= line[3]
-            Home Address = line[4]
-            Home City = line[5]
+            Office_Phone = line[2]
+            Cell_Phone= line[3]
+            Home_Address = line[4]
+            Home_City = line[5]
             State = line[6]
-            Zip Code= line[7]
+            Zip_Code= line[7]
             Company = line[8]
             Title = line[9]
-            contact Type=line[10]
-            db.personal.update_or_insert(nick_name=nick_name, address=address, married=married, zip_code=zip_code, reg_id=reg_id)
+            contact_type=line[10]
+            db.personal.update_or_insert(Name=Name, Email=Email, Office Phone=Office Phone, Cell Phone=Cell Phonee, Home Address=Home Address,
+            Home City=HOme City, State=State, Zip Code=Zip Code, Company=Company, Title=Title, contact type=contact type))
             lines += 1
-        session.lines = lines
-        response.flash = str(lines) + " lines read"
+        session_lines = lines
+        response_flash = str(lines) + " lines read"
     except Exception  as e:
-        response.flash = "ERROR: " + str(e)
+        response_flash = "ERROR: " + str(e)
     #redirect(URL(r=request, f='registrationsb'))
     response.view = "import_results.html"
     return dict()
