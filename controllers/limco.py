@@ -19,8 +19,8 @@ def importp():
             Company = line[8]
             Title = line[9]
             contact_type=line[10]
-            db.personal.update_or_insert(Name=Name, Email=Email, Office Phone=Office Phone, Cell Phone=Cell Phonee, Home Address=Home Address,
-            Home City=HOme City, State=State, Zip Code=Zip Code, Company=Company, Title=Title, contact type=contact type))
+            db.personal.update_or_insert(Name=Name, Email=Email, Office_Phone=Office_Phone, Cell_Phone=Cell_Phone, Home_Address=Home_Address,
+            Home_City=Home_City, State=State, Zip_Code=Zip_Code, Company=Company, Title=Title, contact_type=contact_type)
             lines += 1
         session_lines = lines
         response_flash = str(lines) + " lines read"
