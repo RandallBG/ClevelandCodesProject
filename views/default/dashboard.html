@@ -36,8 +36,11 @@
                     <a href="{{=URL('default', 'company_create')}}">
                         <li>Company</li>
                     </a>
-                    <a href="{{=URL('default', 'create_activity')}}">
+                    <a href="{{=URL('default', 'activity_create')}}">
                         <li>Activity</li>
+                    </a>
+                    <a href="{{=URL('default', 'employee_create')}}">
+                        <li>Employee</li>
                     </a>
                 </div>
             </div>
@@ -50,10 +53,8 @@
             <div id="activity-bar" class="activity-bar">
                 <div class="second-activity-container">
                     <!-- loop through the upcoming activities and create an activity card for each of them -->
-                    {{for activity in activities:}}
-
-
-                    <div class="activities-card" data-index="{{=(activity.id-1)}}">
+                    {{for idx, activity in enumerate(activities):}}
+                    <div class="activities-card" data-index="{{=(idx)}}">
                         <!-- loop through the activity type table to find the correct activity type for this activity -->
                         {{for activityT in activityType:}}
                         {{if activityT.id == activity.activity_type_id:}}
@@ -108,9 +109,9 @@
 </body>
 <script>
 
-    window.onload = function () {
+    window.addEventListener("load", () => {
         activityCarouselSetUp()
-    }
+    });
 
     //store the tables in javascript variables
     let upcomingActivitiesJson = {{=XML(jsonActivities)}};
@@ -122,8 +123,7 @@
     let activityModal = document.getElementById('activity-modal');
 
 
-    console.log(upcomingActivities);
-
+    //set the height of the activity-bar based on the first activity card probably should change this
     document.getElementById('activity-bar').style.height = upcomingActivities[0].offsetHeight + 20 + "px";
 
     //loop through all upcomming activities and set their position in the div

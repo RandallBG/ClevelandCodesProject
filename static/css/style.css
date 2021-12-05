@@ -108,7 +108,7 @@ body {
 }
 
 #activity-modal {
-  position: absolute;
+  position: fixed;
   display: none;
   justify-content: center;
   align-items: center;
@@ -205,7 +205,7 @@ body {
 /* ----------------------employee form and webcam popout------------- */
 
 #webcam-modal {
-  position: absolute;
+  position: fixed;
   display: none;
   justify-content: center;
   align-items: center;

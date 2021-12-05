@@ -63,16 +63,7 @@ db.define_table('contacts',
                 )
 
 
-db.define_table('activities',
-                Field('contact_id', 'reference contacts',
-                      requires=IS_IN_DB(db, 'contacts.id', '%(name)s')),
-                Field('activity_type_id', 'reference activity_type', requires=IS_IN_DB(
-                    db, 'activity_type.id', '%(description)s')),
-                Field('activity_date', 'datetime', requires=IS_NOT_EMPTY()),
-                Field('notes'),
-                Field('in_contact', 'reference contacts',
-                      requires=IS_IN_DB(db, 'contacts.id', '%(name)s'))
-                )
+
 
 db.define_table('employees',
                 Field('employee_name', requires=IS_NOT_EMPTY()),
@@ -91,6 +82,18 @@ db.define_table('employees',
                 Field('employee_hire_date', 'datetime', requires= IS_DATE(format=T('%Y-%m-%d'))),
                   format="%(employee_name)s"
                 )
+
+db.define_table('activities',
+                Field('contact_id', 'reference contacts',
+                      requires=IS_IN_DB(db, 'contacts.id', '%(name)s')),
+                Field('activity_type_id', 'reference activity_type', requires=IS_IN_DB(
+                    db, 'activity_type.id', '%(description)s')),
+                Field('activity_date', 'datetime', requires=IS_NOT_EMPTY()),
+                Field('notes'),
+                Field('account_manager', 'reference employees',
+                      requires=IS_IN_DB(db, 'employees.id', '%(employee_name)s'))
+                )
+
 
 db.define_table('orders',
                 Field('order_date', 'datetime', requires=IS_NOT_EMPTY()),
