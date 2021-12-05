@@ -1,4 +1,3 @@
-
 def importp():
     import csv   #for python to understand you're using csv file
     import sys
@@ -27,12 +26,5 @@ def importp():
     except Exception  as e:
         response_flash = "ERROR: " + str(e)
     #redirect(URL(r=request, f='registrationsb'))
-    response.view = "import_results.html"
+    response.view = ("import_results.html")
     return dict()
-VIEW - import_results.html
-{{extend 'layout.html'}}
-<h1>This is the import_results.html template</h1>
-<h2>
-    LINES: {{=session.lines}}
-</h2>
-{{=BEAUTIFY(response._vars)}}
