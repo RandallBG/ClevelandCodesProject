@@ -5,7 +5,7 @@ def importp():
     import os
     lines = 0
     try:
-        fp_in = open(os.path.join(request.folder, 'static', "LIMCO.CSV"),"r")
+        fp_in = open(os.path.join("ClevelandCodesProject", 'static', "LIMCO.CSV"),"r")
         reader =  csv.reader(fp_in)
         for line in reader:         # each line is read into a list
             Name = line[0]
