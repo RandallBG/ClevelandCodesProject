@@ -41,17 +41,17 @@ def dashboard():
         assoc_emp_id = db(db.employees.employee_account_number == auth.user.id).select().first().id
     except:
         assoc_emp_id = 0
-    
     authAccount = db(db.auth_user.id == auth.user_id).select()
-
     #send the activities and Json activities of the logged in user
-    activities = db(db.activities.account_manager == assoc_emp_id).select() 
-    activities = db(db.activities).select()
+    activities = db(db.activities.account_manager == assoc_emp_id).select()
     jsonActivities = json(db(db.activities).select())
-    activityType = db(db.activity_type).select()
+    #send the activity type variables as python and json
+    activityType= db(db.activity_type).select()
     jsonActivityType = json(db(db.activity_type).select())
+    # send the contact variables as python and json
     contacts = db(db.contacts).select()
     jsonContacts = json(db(db.contacts).select())
+
 
     response.view = "default/dashboard.html"
     return locals()
@@ -138,6 +138,7 @@ def contact_create():
 
 @auth.requires_login()
 def employee_create():
+    authAccounts = db(db.auth_user).select(orderby=db.auth_user.id)
     states = db(db.states).select(orderby=db.states.state_name)
     form = SQLFORM(db.employees)
     if form.process(session=None, formname="employeeCreate").accepted:
