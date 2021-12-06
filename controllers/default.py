@@ -31,7 +31,7 @@ def scheduled_events():
     events = SQLFORM.grid(db.activities.activity_date >= datetime.date.today())
     return locals()
 
-
+@auth.requires_login()
 def dashboard():
 
     # store upcoming activities, the activity types table, and the contacts table in three seperate variables
