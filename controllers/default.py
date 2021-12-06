@@ -27,15 +27,23 @@ def scheduled_events():
     events = SQLFORM.grid(db.activities.activity_date >= datetime.date.today())
     return locals()
 
+@auth.requires_login()
 def dashboard():
-    
     # store upcoming activities, the activity types table, and the contacts table in three seperate variables
     # not sure if declaring all the variables and just returning locals is bad practice but for now it works.
     # activities = db(db.activities.activity_date >= datetime.date.today()).select(orderby= db.activities.activity_date)
-    activities = db(db.activities).select()
+    try:
+        assoc_emp_id = db(db.employees.employee_account_number == auth.user.id).select().first().id
+    except:
+        assoc_emp_id = 0
+    authAccount = db(db.auth_user.id == auth.user_id).select()
+    #send the activities and Json activities of the logged in user
+    activities = db(db.activities.account_manager == assoc_emp_id).select()
     jsonActivities = json(db(db.activities).select())
+    #send the activity type variables as python and json
     activityType= db(db.activity_type).select()
     jsonActivityType = json(db(db.activity_type).select())
+    # send the contact variables as python and json
     contacts = db(db.contacts).select()
     jsonContacts = json(db(db.contacts).select())
 
@@ -44,6 +52,10 @@ def dashboard():
 
 def reports():
     response.view="default/reports.html"
+    return locals()
+
+def leads():
+    leads = SQLFORM.grid(db.leads)
     return locals()
 
 def companies():
@@ -114,6 +126,7 @@ def contact_create():
 @auth.requires_login()
 def employee_create():
     states = db(db.states).select(orderby=db.states.state_name)
+    authAccounts = db(db.auth_user).select(orderby=db.auth_user.first_name)
     form = SQLFORM(db.employees)
     if form.process(session=None, formname="employeeCreate").accepted:
         response.flash = 'Employee created'
@@ -164,7 +177,7 @@ def location_create():
 
 @auth.requires_login()
 def activities_create():
-    form = SQLFORM(db.activity)
+    form = SQLFORM(db.activities)
     if form.process().accepted:
         response.flash = 'Activity created'
         redirect(URL('activities'))

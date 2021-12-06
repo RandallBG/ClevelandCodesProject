@@ -12,43 +12,12 @@
 <body>
     <div class="dash-hero">
         <h1>Limco Dashboard</h1>
+        <h2>{{=authAccount[0]['first_name']}}'s Dashboard</h2>
     </div>
-    <div class="dash-nav">
-        <ul>
-            <a href="{{=URL('default', 'contacts')}}">
-                <li>Contacts</li>
-            </a>
-            <a href="{{=URL('default', 'companies')}}">
-                <li>Companies</li>
-            </a>
-            <a href="{{=URL('default', 'activities')}}">
-                <li>Activities</li>
-            </a>
-            <a href="{{=URL('default', 'orders')}}">
-                <li>Orders</li>
-            </a>
-            <div id="dropdown" class="dropdown">
-                <li>Create &#8711;</li>
-                <div id="dropdown-links" class="dropdown-links">
-                    <a href="{{=URL('default', 'contact_create')}}">
-                        <li>Contact</li>
-                    </a>
-                    <a href="{{=URL('default', 'company_create')}}">
-                        <li>Company</li>
-                    </a>
-                    <a href="{{=URL('default', 'activity_create')}}">
-                        <li>Activity</li>
-                    </a>
-                    <a href="{{=URL('default', 'employee_create')}}">
-                        <li>Employee</li>
-                    </a>
-                </div>
-            </div>
-        </ul>
-    </div>
+    {{extend 'layout.html'}}
     <div class="main-wrapper">
 
-        <div>
+        <div class="activity-side-bar">
             <h2>Upcoming Activities</h2>
             <div id="activity-bar" class="activity-bar">
                 <div class="second-activity-container">
@@ -76,7 +45,6 @@
                 <h1><span id="modal-title">Title</span></h1>
                 <h2><span id="modal-contact">ContactId</span></h2>
                 <h2><span id="modal-date">Date</span></h2>
-                <h2><span id="modal-account-manager">Account Manager</span></h2>
                 <p id="modal-notes">notes: Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo, ullam dolorum
                     molestiae
                     pariatur distinctio voluptatem veritatis reiciendis nulla dignissimos. Molestiae?</p>
@@ -171,12 +139,6 @@
         for (let i = 0; i < contactsJson.length; i++) {
             if (contactsJson[i].id == upcomingActivitiesJson[activityIndex].contact_id) {
                 document.getElementById('modal-contact').innerHTML = contactsJson[i].name;
-                break;
-            }
-        }
-        for (let i = 0; i < contactsJson.length; i++) {
-            if (contactsJson[i].id == upcomingActivitiesJson[activityIndex].in_contact) {
-                document.getElementById('modal-account-manager').innerHTML = contactsJson[i].name;
                 break;
             }
         }

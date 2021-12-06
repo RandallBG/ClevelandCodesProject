@@ -83,6 +83,18 @@
             </tr>
             <tr>
                 <td>
+                    Associated User Account:
+                </td>
+                <td>
+                    <select class="form-control form-control-changes" name="employee_account_number">
+                        {{for row in authAccounts:}}
+                        {{=OPTION((row.first_name + " " + row.last_name), _value=row.id)}}
+                        {{pass}}
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
                     Take Image:
                 </td>
                 <td>
