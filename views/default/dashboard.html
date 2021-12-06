@@ -5,17 +5,17 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="{{=URL('static', 'css/style.css')}}">
+
     <title>Limco Dashboard</title>
 </head>
 
 <body>
     <div class="dash-hero">
-        <h1>Limco Dashboard</h1>
-        <h2>{{=authAccount[0]['first_name']}}'s Dashboard</h2>
+        <h1>{{=authAccount[0]['first_name']}}'s Dashboard</h1>
     </div>
     {{extend 'layout.html'}}
     <div class="main-wrapper">
+
 
         <div class="activity-side-bar">
             <h2>Upcoming Activities</h2>
@@ -51,28 +51,7 @@
             </div>
         </div>
 
-        <div class="dash-main-buttons">
-            <a class="unstyled-link" target="_blank" href="{{=URL('default', 'contacts')}}">
-                <div class="dash-button">
-                    <h2>Contacts</h2>
-                </div>
-            </a>
-            <a class="unstyled-link" href="{{=URL('default', 'companies')}}">
-                <div class="dash-button">
-                    <h2>Companies</h2>
-                </div>
-            </a>
-            <a class="unstyled-link" href="{{=URL('default', 'activities')}}">
-                <div class="dash-button">
-                    <h2>Activities</h2>
-                </div>
-            </a>
-            <a class="unstyled-link" href="{{=URL('default', 'orders')}}">
-                <div class="dash-button">
-                    <h2>Orders</h2>
-                </div>
-            </a>
-        </div>
+
     </div>
 </body>
 <script>

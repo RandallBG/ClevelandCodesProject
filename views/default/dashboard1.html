@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{=URL('static', 'css/dashboard.css')}}">
+    <title>Dashboard</title>
+</head>
+
+<body>
+    <div class="dash-hero">
+        <h1>{{=authAccount[0]['first_name']}}'s Dashboard</h1>
+    </div>
+    {{extend 'layout.html'}}
+    <div class="contentWrapper">
+        <div id="sidebar">
+            <ul>
+                <a href="#">
+                    <li>My Activities</li>
+                </a>
+                <a href="#">
+                    <li>My Leads</li>
+                </a>
+                <a href="#">
+                    <li>Contacts</li>
+                </a>
+                <a href="#">
+                    <li>Reports</li>
+                </a>
+            </ul>
+            <div id="closeSideBar">
+                <h1> X </h1>
+            </div>
+        </div>
+
+        <div id="myActivities">
+            <h1>My Activities</h1>
+
+
+            {{for idx, activity in enumerate(activities):}}
+            <div class="activitiesCard" data-index="{{=(idx)}}">
+                <!-- loop through the activity type table to find the correct activity type for this activity -->
+                {{for activityT in activityType:}}
+                {{if activityT.id == activity.activity_type_id:}}
+                <div>
+                    {{=P(activity.id, _class="activity-id")}}
+                    {{=H1(activityT.description, _class='card-title')}}
+                    {{=H3(activity.activity_date, _class='card-date')}}
+                </div>
+                {{=P(activity.notes, _class='card-notes')}}
+                {{pass}}
+                {{pass}}
+            </div>
+            {{pass}}
+
+
+
+        </div>
+        <div id="myLeads">
+
+        </div>
+    </div>
+
+</body>
+<script>
+    document.getElementById('closeSideBar').addEventListener('click', function () {
+        sidebar = document.getElementById('sidebar');
+        console.log(window.getComputedStyle(sidebar,));
+        if (window.getComputedStyle(sidebar).getPropertyValue('left') == '0px') {
+            console.log("clicked");
+            sidebar.style.left = '-250px';
+        } else {
+            document.getElementById('sidebar').style.left = '0';
+        }
+    });
+</script>
+
+</html>

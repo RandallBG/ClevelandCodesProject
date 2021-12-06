@@ -84,6 +84,7 @@ body {
 .second-activity-container {
   position: relative;
   width: 100%;
+  float: right;
   background-color: blue;
 }
 
@@ -102,9 +103,11 @@ body {
   scale: 1.05;
 }
 
-.side-bar p {
-  padding: 0;
-  margin: 0;
+.left-sidebar {
+  position: fixed;
+  width: 200px;
+  height: 100vh;
+  background-color: blue;
 }
 
 #activity-modal {

@@ -90,6 +90,7 @@
                         {{for row in authAccounts:}}
                         {{=OPTION((row.first_name + " " + row.last_name), _value=row.id)}}
                         {{pass}}
+                        <option class="option-link" onclick='addUser()'>Add User
                     </select>
                 </td>
             </tr>
@@ -220,6 +221,14 @@
             }
             document.getElementById('imageUpload').value = document.getElementById('canvas').toDataURL();
 
+        }
+
+        //set up add links to select statements
+        function addState() {
+            window.location.href = "{{=URL('state_create')}}";
+        }
+        function addUser() {
+            window.location.href = "{{=URL('user/logout')}}";
         }
 
 
