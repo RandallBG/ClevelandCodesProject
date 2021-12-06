@@ -11,108 +11,89 @@ from gluon.serializers import json
 def index():
     return dict(message=T('Welcome to LIMCO Technologies!'))
 
+
 def crm_start():
-    response.view="default/crm_start.html"
+    response.view = "default/crm_start.html"
     return locals()
+
 
 def our_team():
-    response.view="default/our_team.html"
+    response.view = "default/our_team.html"
     return locals()
 
-def about():
-    response.view="default/about.html"
-    return locals()
 
 def products():
-    response.view="default/products.html"
+    response.view = "default/products.html"
     return locals()
 
-def specs1():
-    response.view="default/specs1.html"
-    return locals()    
-
-def specs2():
-    response.view="default/specs2.html"
-    return locals()        
-    
-def specs3():
-    response.view="default/specs3.html"
-    return locals()    
-
-def lists():
-    response.view="default/lists.html"
-    return locals()    
 
 def scheduled_events():
     events = SQLFORM.grid(db.activities.activity_date >= datetime.date.today())
     return locals()
 
-@auth.requires_login()
+
 def dashboard():
+
     # store upcoming activities, the activity types table, and the contacts table in three seperate variables
     # not sure if declaring all the variables and just returning locals is bad practice but for now it works.
     # activities = db(db.activities.activity_date >= datetime.date.today()).select(orderby= db.activities.activity_date)
-    try:
-        assoc_emp_id = db(db.employees.employee_account_number == auth.user.id).select().first().id
-    except:
-        assoc_emp_id = 0
-    authAccount = db(db.auth_user.id == auth.user_id).select()
-    #send the activities and Json activities of the logged in user
-    activities = db(db.activities.account_manager == assoc_emp_id).select()
+    activities = db(db.activities).select()
     jsonActivities = json(db(db.activities).select())
-    #send the activity type variables as python and json
-    activityType= db(db.activity_type).select()
+    activityType = db(db.activity_type).select()
     jsonActivityType = json(db(db.activity_type).select())
-    # send the contact variables as python and json
     contacts = db(db.contacts).select()
     jsonContacts = json(db(db.contacts).select())
 
-    response.view="default/dashboard.html"
+    response.view = "default/dashboard.html"
     return locals()
+
 
 def reports():
-    response.view="default/reports.html"
+    response.view = "default/reports.html"
     return locals()
 
-def leads():
-    leads = SQLFORM.grid(db.leads)
-    return locals()
 
 def companies():
     companies = SQLFORM.grid(db.companies)
     return locals()
 
+
 def contacts():
     contacts = SQLFORM.grid(db.contacts)
     return locals()
 
+
 def employees():
     employees = SQLFORM.grid(db.employees)
     return locals()
-    
+
+
 def sic():
     sics = SQLFORM.grid(db.sic)
     return locals()
+
 
 def locations():
     locations = SQLFORM.grid(db.locations)
     return locals()
 
+
 def activities():
     activities = SQLFORM.grid(db.activities)
     return locals()
 
+
 def companylocations():
     companyLocations = SQLFORM.grid(db.companies_to_locations)
     return locals()
+
 
 def orders():
     orders = SQLFORM.grid(db.orders)
     return locals()
 
 
-
-#-----------------------------------------------------
+# -----------------------------------------------------
 
 @auth.requires_login()
 def company_create():
@@ -122,16 +103,18 @@ def company_create():
         response.flash = 'Company created'
         redirect(URL('companies'))
     elif form.errors:
-        response.flash = form.errors    
+        response.flash = form.errors
     else:
         response.flash = 'Please fill the form'
     return locals()
+
 
 @auth.requires_login()
 def contact_create():
     states = db(db.states).select(orderby=db.states.state_name)
     companies = db(db.companies).select(orderby=db.companies.company_name)
-    contactType = db(db.contact_type).select(orderby=db.contact_type.description)
+    contactType = db(db.contact_type).select(
+        orderby=db.contact_type.description)
     form = SQLFORM(db.contacts)
     if form.process(session=None, formname='test').accepted:
         response.flash = 'form accepted'
@@ -143,19 +126,20 @@ def contact_create():
     # Note: no form instance is passed to the view
     return locals()
 
+
 @auth.requires_login()
 def employee_create():
     states = db(db.states).select(orderby=db.states.state_name)
-    authAccounts = db(db.auth_user).select(orderby=db.auth_user.first_name)
     form = SQLFORM(db.employees)
     if form.process(session=None, formname="employeeCreate").accepted:
         response.flash = 'Employee created'
         redirect(URL('employees'))
     elif form.errors:
-        response.flash = form.errors    
+        response.flash = form.errors
     else:
         response.flash = 'Please fill the form'
     return locals()
+
 
 @auth.requires_login()
 def order_create():
@@ -166,22 +150,24 @@ def order_create():
         response.flash = 'Order created'
         redirect(URL('orders'))
     elif form.errors:
-        response.flash = form.errors    
+        response.flash = form.errors
     else:
         response.flash = 'Please fill the form'
     return locals()
 
+
 @auth.requires_login()
 def sic_create():
     form = SQLFORM(db.sic)
-    if form.process().accepted:
+    if form.process(session=None, formname="sicCreate").accepted:
         response.flash = 'SIC created'
         redirect(URL('sic'))
     elif form.errors:
-        response.flash = 'Form has errors'
+        response.flash = Form.errors
     else:
         response.flash = 'Please fill the form'
     return locals()
+
 
 @auth.requires_login()
 def location_create():
@@ -195,8 +181,11 @@ def location_create():
         response.flash = 'Please fill the form'
     return locals()
 
+
 @auth.requires_login()
 def activities_create():
+    employees = db(db.employees).select(orderby=db.employees.employee_name)
+    contacts = db(db.contacts).select(orderby=db.contacts.name)
     form = SQLFORM(db.activities)
     if form.process().accepted:
         response.flash = 'Activity created'
@@ -206,6 +195,7 @@ def activities_create():
     else:
         response.flash = 'Please fill the form'
     return locals()
+
 
 @auth.requires_login()
 def companies_to_locations_create():
@@ -217,6 +207,7 @@ def companies_to_locations_create():
         response.flash = 'Company to Location not created'
     return locals()
 
+
 @auth.requires_login()
 def orders_create():
     form = SQLFORM(db.orders)
@@ -226,14 +217,15 @@ def orders_create():
     elif form.errors:
         response.flash = 'Order not created'
     return locals()
-    
+
+
 def contact_type_create():
     form = SQLFORM(db.contact_type)
     if form.process(session=None, formname="contactTypeCreate").accepted:
         response.flash = 'Contact Type created'
         redirect(URL('contact_type'))
     elif form.errors:
-        response.flash = form.errors    
+        response.flash = form.errors
     else:
         response.flash = 'Please fill the form'
     return locals()
@@ -242,15 +234,14 @@ def contact_type_create():
 @auth.requires_login()
 def company_edit():
     company = db.company(request.args(0)) or redirect(URL('companies'))
-    form  = SQLFORM(db.company, company, deletable=True, showid=False)
+    form = SQLFORM(db.company, company, deletable=True, showid=False)
     if form.process().accepted:
         response.flash = 'Company Edited'
         redirect(URL('companies'))
     elif form.errors:
         response.flash = 'Company not edited'
-   
-    return locals()
 
+    return locals()
 
 
 @auth.requires_login()
@@ -264,6 +255,7 @@ def contact_edit():
         response.flash = 'Contact not edited'
     return locals()
 
+
 @auth.requires_login()
 def sic_edit():
     sic = db.sic(request.args(0)) or redirect(URL('sic'))
@@ -274,6 +266,7 @@ def sic_edit():
     elif form.errors:
         response.flash = 'SIC not edited'
     return locals()
+
 
 @auth.requires_login()
 def locations_edit():
@@ -286,6 +279,7 @@ def locations_edit():
         response.flash = 'Location not edited'
     return locals()
 
+
 @auth.requires_login()
 def activities_edit():
     activity = db.activity(request.args(0)) or redirect(URL('activities'))
@@ -297,16 +291,20 @@ def activities_edit():
         response.flash = 'Activity not edited'
     return locals()
 
+
 @auth.requires_login()
 def companies_to_locations_edit():
-    company_to_location = db.companies_to_locations(request.args(0)) or redirect(URL('companies_to_locations'))
-    form = SQLFORM(db.companies_to_locations, company_to_location, deletable=True)
+    company_to_location = db.companies_to_locations(
+        request.args(0)) or redirect(URL('companies_to_locations'))
+    form = SQLFORM(db.companies_to_locations,
+                   company_to_location, deletable=True)
     if form.process().accepted:
         response.flash = 'Company to Location Edited'
         redirect(URL('companies_to_locations'))
     elif form.errors:
         response.flash = 'Company to Location not edited'
     return locals()
+
 
 @auth.requires_login()
 def orders_edit():
@@ -320,31 +318,42 @@ def orders_edit():
     return locals()
 
 
-
 def user():
-    return dict(form = auth())
+    return dict(form=auth())
 
 # ---- API (example) -----
+
+
 @auth.requires_login()
 def api_get_user_email():
-    if not request.env.request_method == 'GET': raise HTTP(403)
-    return response.json({'status':'success', 'email':auth.user.email})
+    if not request.env.request_method == 'GET':
+        raise HTTP(403)
+    return response.json({'status': 'success', 'email': auth.user.email})
 
 # ---- Smart Grid (example) -----
-@auth.requires_membership('admin') # can only be accessed by members of admin groupd
+
+
+# can only be accessed by members of admin groupd
+@auth.requires_membership('admin')
 def grid():
-    response.view = 'generic.html' # use a generic view
+    response.view = 'generic.html'  # use a generic view
     tablename = request.args(0)
-    if not tablename in db.tables: raise HTTP(403)
-    grid = SQLFORM.smartgrid(db[tablename], args=[tablename], deletable=False, editable=False)
+    if not tablename in db.tables:
+        raise HTTP(403)
+    grid = SQLFORM.smartgrid(db[tablename], args=[
+                             tablename], deletable=False, editable=False)
     return dict(grid=grid)
 
 # ---- Embedded wiki (example) ----
+
+
 def wiki():
-    auth.wikimenu() # add the wiki to the menu
-    return auth.wiki() 
+    auth.wikimenu()  # add the wiki to the menu
+    return auth.wiki()
 
 # ---- Action for login/register/etc (required for auth) -----
+
+
 def user():
     """
     exposes:
@@ -364,6 +373,8 @@ def user():
     return dict(form=auth())
 
 # ---- action to server uploaded static content (required) ---
+
+
 @cache.action()
 def download():
     """
