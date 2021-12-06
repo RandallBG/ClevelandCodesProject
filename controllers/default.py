@@ -37,6 +37,15 @@ def dashboard():
     # store upcoming activities, the activity types table, and the contacts table in three seperate variables
     # not sure if declaring all the variables and just returning locals is bad practice but for now it works.
     # activities = db(db.activities.activity_date >= datetime.date.today()).select(orderby= db.activities.activity_date)
+    try:
+        assoc_emp_id = db(db.employees.employee_account_number == auth.user.id).select().first().id
+    except:
+        assoc_emp_id = 0
+    
+    authAccount = db(db.auth_user.id == auth.user_id).select()
+
+    #send the activities and Json activities of the logged in user
+    activities = db(db.activities.account_manager == assoc_emp_id).select() 
     activities = db(db.activities).select()
     jsonActivities = json(db(db.activities).select())
     activityType = db(db.activity_type).select()
