@@ -39,6 +39,10 @@ def specs3():
     response.view="default/specs3.html"
     return locals()    
 
+def lists():
+    response.view="default/lists.html"
+    return locals()    
+
 def scheduled_events():
     events = SQLFORM.grid(db.activities.activity_date >= datetime.date.today())
     return locals()
