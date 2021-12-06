@@ -1,0 +1,6 @@
+{{extend 'layout.html'}}
+<h1>This is the import_results.html template</h1>
+<h2>
+    LINES: {{=session.lines}}
+</h2>
+{{=BEAUTIFY(response._vars)}}
