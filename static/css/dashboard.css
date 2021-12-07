@@ -12,20 +12,76 @@ body {
   background-color: #171717;
 }
 #sidebar {
-  display: inline-block;
+  position: static;
   float: left;
-  position: absolute;
   top: 0;
   left: 0;
-  display: inline-block;
-  background-color: #171717;
+  background-color: #343a40;
   width: 250px;
-  height: 100vh;
-  padding: 2rem;
+  min-height: 100vh;
   transition: all 0.3s ease-in-out;
 }
+
+#sidebar ul {
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+#sidebar ul a {
+  display: block;
+  color: white;
+  text-decoration: none;
+}
+#sidebar ul li {
+  display: block;
+  color: white;
+  list-style: none;
+  padding: 1rem;
+  border-bottom: 1px solid #343a40;
+}
+#sidebar ul li:hover {
+  background-color: #171717;
+  cursor: pointer;
+}
+
 #closeSideBar {
   position: absolute;
+  display: none;
   top: 50%;
   right: -25px;
+}
+
+.act-card {
+  background-color: #171717;
+  display: block;
+  color: white;
+  padding: 1rem;
+  margin-top: 1rem;
+}
+.info-card-section {
+  display: flex;
+  justify-content: space-between;
+}
+.act-card:hover {
+  cursor: pointer;
+}
+
+.card-title {
+  display: inline;
+}
+.card-date {
+  display: inline;
+}
+.card-notes {
+  display: inline;
+}
+
+@media screen and (max-width: 768px) {
+  #sidebar {
+    position: absolute;
+  }
+
+  #closeSideBar {
+    display: block;
+  }
 }
