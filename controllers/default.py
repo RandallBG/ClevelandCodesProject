@@ -42,12 +42,15 @@ def dashboard():
     except:
         assoc_emp_id = 0
     authAccount = db(db.auth_user.id == auth.user_id).select()
+
     #send the activities and Json activities of the logged in user
     activities = db(db.activities.account_manager == assoc_emp_id).select()
     jsonActivities = json(db(db.activities).select())
+
     #send the activity type variables as python and json
     activityType= db(db.activity_type).select()
     jsonActivityType = json(db(db.activity_type).select())
+    
     # send the contact variables as python and json
     contacts = db(db.contacts).select()
     jsonContacts = json(db(db.contacts).select())
