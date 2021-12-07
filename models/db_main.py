@@ -109,7 +109,7 @@ db.define_table('orders',
 
 db.define_table('lead_source',
             Field('description', requires=IS_NOT_EMPTY()),
-            )
+            format="%(description)s")
 
 db.define_table('leads',
                 Field('lead_name', requires=IS_NOT_EMPTY()),

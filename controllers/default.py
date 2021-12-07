@@ -31,6 +31,10 @@ def scheduled_events():
     events = SQLFORM.grid(db.activities.activity_date >= datetime.date.today())
     return locals()
 
+def leads():
+    leads = SQLFORM.grid(db.leads)
+    return locals()
+
 @auth.requires_login()
 def dashboard():
 
@@ -41,11 +45,16 @@ def dashboard():
         assoc_emp_id = db(db.employees.employee_account_number == auth.user.id).select().first().id
     except:
         assoc_emp_id = 0
+    
     authAccount = db(db.auth_user.id == auth.user_id).select()
 
     #send the activities and Json activities of the logged in user
     activities = db(db.activities.account_manager == assoc_emp_id).select()
     jsonActivities = json(db(db.activities).select())
+
+    #send the leads associated with the employee account of the logged in user
+    leads = db(db.leads.account_manager == assoc_emp_id).select()
+    leadType = db(db.lead_source).select()
 
     #send the activity type variables as python and json
     activityType= db(db.activity_type).select()
