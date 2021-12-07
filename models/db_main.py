@@ -41,7 +41,7 @@ db.define_table('activity_type',
 
 db.define_table('contact_type',
                 Field('description', requires=IS_NOT_EMPTY()),
-                )
+                format='%(description)s')
 
 db.define_table('contacts',
                 Field('name', requires=IS_NOT_EMPTY()),
@@ -52,13 +52,13 @@ db.define_table('contacts',
                 Field('home_zip', requires=IS_NOT_EMPTY()),
                 Field('company_id', 'reference companies', requires=IS_IN_DB(
                     db, 'companies.id', '%(id)s %(company_name)s')),
-                Field('title', requires=IS_NOT_EMPTY()),
+                Field('title'),
                 Field('office_phone'),
                 Field('cell_phone'),
                 Field('email', requires=IS_NOT_EMPTY()),
                 Field('contact_type_id', 'reference contact_type',
                       requires=IS_IN_DB(db, 'contact_type.id', '%(description)s')),
-                Field('speical_notes', requires=IS_NOT_EMPTY()),
+                Field('special_notes'),
                 format='%(name)s'
                 )
 

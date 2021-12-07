@@ -11,7 +11,7 @@ from gluon.serializers import json
 def index():
     return dict(message=T('Welcome to LIMCO Technologies!'))
 
-
+@auth.requires_login()
 def crm_start():
     response.view = "default/crm_start.html"
     return locals()
