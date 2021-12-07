@@ -173,11 +173,10 @@ body {
   align-items: center;
   justify-content: center;
   background: rgb(10, 67, 125);
-  background: linear-gradient(
-    243deg,
-    rgba(10, 67, 125, 1) 0%,
-    rgba(162, 0, 255, 1) 100%
-  );
+    background-image: url("/ClevelandCodesProject/static/images/dark_blue.jpg");
+    background-repeat: vertical;
+    background-attachment: fixed;
+    background-size: cover;
 }
 
 .main-form-wrapper h2 {
