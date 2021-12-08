@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Limco Dashboard</title>
+    <link rel="stylesheet" href="{{=URL('static', 'css/dashboard.css')}}">
+    <title>Dashboard</title>
 </head>
 
 <body>
@@ -14,130 +14,76 @@
         <h1>{{=authAccount[0]['first_name']}}'s Dashboard</h1>
     </div>
     {{extend 'layout.html'}}
-    <div class="main-wrapper">
+    <div class="contentWrapper">
+        <div id="sidebar">
+            <ul>
+                <li>My Activities</li>
+                <li>My Leads</li>
+                <li>Contacts</li>
+                <li>Reports</li>
+            </ul>
+            <div id="closeSideBar">
+                <h1> X </h1>
+            </div>
+        </div>
+
+        <div id="tabs-container">
+            <div id="activity-tab-wrapper">
+                <h1>My Upcoming Activities</h1>
 
 
-        <div class="activity-side-bar">
-            <h2>Upcoming Activities</h2>
-            <div id="activity-bar" class="activity-bar">
-                <div class="second-activity-container">
-                    <!-- loop through the upcoming activities and create an activity card for each of them -->
-                    {{for idx, activity in enumerate(activities):}}
-                    <div class="activities-card" data-index="{{=(idx)}}">
-                        <!-- loop through the activity type table to find the correct activity type for this activity -->
-                        {{for activityT in activityType:}}
-                        {{if activityT.id == activity.activity_type_id:}}
-                        <div>
-                            {{=P(activity.id, _class="activity-id")}}
-                            {{=H1(activityT.description, _class='card-title')}}
-                            {{=H3(activity.activity_date, _class='card-date')}}
-                        </div>
-                        {{=P(activity.notes, _class='card-notes')}}
-                        {{pass}}
-                        {{pass}}
+                {{for idx, activity in enumerate(activities):}}
+                <div class="act-card" data-index="{{=(idx)}}">
+                    <!-- loop through the activity type table to find the correct activity type for this activity -->
+                    {{for activityT in activityType:}}
+                    {{if activityT.id == activity.activity_type_id:}}
+                    <div class="info-card-section">
+                        {{=P(activity.id, _class="activity-id")}}
+                        {{=H1(activityT.description, _class='card-title')}}
+                        {{=H3(activity.activity_date, _class='card-date')}}
                     </div>
+                    {{=P(activity.notes, _class='card-notes')}}
+                    {{pass}}
                     {{pass}}
                 </div>
+                {{pass}}
+            </div>
+            <div id="leads-tab-wrapper">
+                <h1>My Leads</h1>
+                {{for idx, lead in enumerate(leads):}}
+                <div class="act-card" data-index="{{=(idx)}}">
+                    <!-- loop through the activity type table to find the correct activity type for this activity -->
+                    {{for type in leadType:}}
+                    {{if type.id == lead.lead_source:}}
+                    <div class="info-card-section">
+                        {{=P(lead.id, _class="activity-id")}}
+                        {{=H1(lead.lead_name, _class='card-title')}}
+                        {{=H3(type.description, _class='card-date')}}
+                    </div>
+                    {{=P(lead.lead_notes, _class='card-notes')}}
+                    {{pass}}
+                    {{pass}}
+                </div>
+                {{pass}}
             </div>
         </div>
-        <div id="activity-modal">
-            <div class="large-activity-card">
-                <h1><span id="modal-title">Title</span></h1>
-                <h2><span id="modal-contact">ContactId</span></h2>
-                <h2><span id="modal-date">Date</span></h2>
-                <p id="modal-notes">notes: Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo, ullam dolorum
-                    molestiae
-                    pariatur distinctio voluptatem veritatis reiciendis nulla dignissimos. Molestiae?</p>
-            </div>
+        <div id="myLeads">
+
         </div>
-
-
     </div>
+
 </body>
 <script>
-
-    window.addEventListener("load", () => {
-        activityCarouselSetUp()
+    document.getElementById('closeSideBar').addEventListener('click', function () {
+        sidebar = document.getElementById('sidebar');
+        console.log(window.getComputedStyle(sidebar,));
+        if (window.getComputedStyle(sidebar).getPropertyValue('left') == '0px') {
+            console.log("clicked");
+            sidebar.style.left = '-250px';
+        } else {
+            document.getElementById('sidebar').style.left = '0';
+        }
     });
-
-    //store the tables in javascript variables
-    let upcomingActivitiesJson = {{=XML(jsonActivities)}};
-    let activityTypeJson = {{=XML(jsonActivityType)}};
-    let contactsJson = {{=XML(jsonContacts)}};
-
-    let upcomingActivities = document.getElementsByClassName('activities-card');
-    let clickedActivity; // this will store the activity that was clicked on
-    let activityModal = document.getElementById('activity-modal');
-
-
-    //set the height of the activity-bar based on the first activity card probably should change this
-    document.getElementById('activity-bar').style.height = upcomingActivities[0].offsetHeight + 20 + "px";
-
-    //loop through all upcomming activities and set their position in the div
-    //also set their onclick event to open the activity in a modal
-
-
-    for (i = 0; i < upcomingActivities.length; i++) {
-        upcomingActivities[i].onclick = function (e) {
-            modalSetUp(e.currentTarget.dataset.index);
-            activityModal.style.display = 'flex';
-        }
-    }
-
-    //close the modal
-    activityModal.onclick = function (e) {
-        if (e.target == activityModal) {
-            activityModal.style.display = 'none';
-        }
-    }
-
-    //create dropdown functionality
-    let dropdown = document.getElementById('dropdown');
-    dropdown.onmouseenter = function () {
-        document.getElementById('dropdown-links').style.display = 'block';
-    }
-    dropdown.onmouseleave = function () {
-        document.getElementById('dropdown-links').style.display = 'none';
-    }
-
-
-    // set up the modal with the correct information
-    function modalSetUp(activityIndex) {
-
-        //find the activity type and display it to the page
-        for (let i = 0; i < activityTypeJson.length; i++) {
-            if (activityTypeJson[i].id == upcomingActivitiesJson[activityIndex].activity_type_id) {
-                document.getElementById('modal-title').innerHTML = activityTypeJson[i].description;
-                break;
-            }
-        }
-
-        //find the date and display it to the page
-        document.getElementById('modal-date').innerHTML = upcomingActivitiesJson[activityIndex].activity_date;
-
-        for (let i = 0; i < contactsJson.length; i++) {
-            if (contactsJson[i].id == upcomingActivitiesJson[activityIndex].contact_id) {
-                document.getElementById('modal-contact').innerHTML = contactsJson[i].name;
-                break;
-            }
-        }
-
-        //find the notes and display them
-        document.getElementById('modal-notes').innerHTML = upcomingActivitiesJson[activityIndex].notes;
-    }
-
-    //set up the carousel for the upcoming activities
-    function activityCarouselSetUp() {
-        //offset will be added to for every upcoming activity
-        let activityPosition = 0;
-        if (upcomingActivities.length > 0) {
-            for (let i = 0; i < upcomingActivities.length; i++) {
-                upcomingActivities[i].style.left = activityPosition + 'px';
-                activityPosition += upcomingActivities[i].offsetWidth + 10;
-            }
-        }
-    }
-
 </script>
 
 </html>
