@@ -1,0 +1,95 @@
+{{extend 'layout.html'}}
+
+<div class='main-form-wrapper'>
+    <h2>
+        New Location
+    </h2>
+    <form class="create-form" action="#" enctype="multipart/form-data" method="POST">
+        <table class='contact-table'>
+            <tr>
+                <td>
+                    Company:
+                </td>
+                <td>
+                    <select name="company_id" class="form-control form-control-changes">
+                        <option class="option-link" value="">Select or Add Company
+                        </option>
+                        {{for row in companies:}}
+                        {{=OPTION(row.company_name, _value=row.id)}}
+                        {{pass}}
+                        <option class="option-link" onclick='addCompany()'>Add Company
+                        </option>
+                    </select>
+                </td>
+                
+            </tr>
+
+            <tr>
+                <td>
+                    Home Address:
+                </td>
+                <td>
+                    <input type='text' class='form-control form-control-changes' name='address'>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Home City:
+                </td>
+                <td>
+                    <input type='text' class='form-control form-control-changes' name='city'>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    State:
+
+                </td>
+                <td>
+                    <select name="states" class="form-control form-control-changes">
+                        <option class="option-link" value="">Select State
+                        </option>
+                        {{for row in states:}}
+                        {{=OPTION(row.state_name, _value=row.id)}}
+                        {{pass}}
+
+                        <option class="option-link" onclick='addState()'>Add State
+                        </option>
+                    </select>
+                </td>
+            </tr> 
+            <tr>   
+                <td>
+                    Zip Code:
+                </td>
+                <td>
+                    <input type='text' class='form-control form-control-changes ' name='zip'>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Office Phone:
+                </td>
+                <td>
+                    <input type='text' class='form-control form-control-changes' name='phone'>
+                </td>
+            
+            </tr>
+            
+        </table>
+        <input type="submit" value="Create" class="btn btn-primary" />
+        <input type="hidden" name="_formname" value="test" />
+    </form>
+</div>
+
+<script>
+    function addState() {
+        window.location.href = "{{=URL('state_create')}}";
+    }
+    function addCompany() {
+        window.location.href = "{{=URL('company_create')}}";
+    }
+    function addContactType() {
+        window.location.href = "{{=URL('contact_type_create')}}";
+    }
+</script>

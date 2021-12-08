@@ -218,14 +218,15 @@ def sic_create():
 
 @auth.requires_login()
 def location_create():
+    states = db(db.states).select(orderby=db.states.state_name)
+    companies = db(db.companies).select(orderby=db.companies.company_name)
     form = SQLFORM(db.locations)
     if form.process().accepted:
         response.flash = 'Location created'
         redirect(URL('locations'))
     elif form.errors:
         response.flash = 'Form has errors'
-    else:
-        response.flash = 'Please fill the form'
+    
     return locals()
 
 
