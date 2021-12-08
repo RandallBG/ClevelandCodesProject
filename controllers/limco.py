@@ -4,18 +4,23 @@ def importp():
     import os
     lines = 0
     try:
-        fp_in = open(os.path.join(request.folder, 'static', "limco.csv"),"r")
+        fp_in = open(os.path.join(request.folder, 'static', "contacts.csv"),"r")
         reader =  csv.reader(fp_in)
         for line in reader:         # each line is read into a list
-            customer_id = line[0]
+            id = line[0]
             name = line[1]
-            contact_name = line[2]
-            home_address= line[3]
-            home_city= line[4]
-            postal_code = line[5]
-            country = line[6]
+            home_address = line[2]
+            home_city= line[3]
+            states= line[4]
+            home_zip=line[5]
+            company = line[6]
+            title = line[7]
+            office_phone = line[8]
+            cell_phone = line[9]
+            email=line[10]
+            contact_type=line[11]
             company_id=db.companies.update_or_insert(company_name=name)
-            db.contacts.update_or_insert(company_id=company_id, name=name, home_address=home_address, home_city=home_city,home_zip=postal_code)
+            db.contacts.update_or_insert(company_id=company_id, name=name, home_address=home_address, home_city=home_city,states=states,home_zip=postal_code)
             lines += 1
         session.lines = lines
         response.flash = str(lines) + " lines read"
