@@ -139,7 +139,7 @@ def orders():
     return locals()
 
 def history():
-    history = SQLFORM.grid(db.activities.activity_date <= datetime.date.today())
+    history = SQLFORM.grid(db.activities.activity_date < datetime.date.today())
     return locals()
 
 # -----------------------------------------------------
