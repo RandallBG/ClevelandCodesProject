@@ -150,8 +150,6 @@ def company_create():
         redirect(URL('companies'))
     elif form.errors:
         response.flash = form.errors
-    else:
-        response.flash = 'Please fill the form'
     return locals()
 
 
@@ -167,8 +165,6 @@ def contact_create():
         redirect(URL('contacts'))
     elif form.errors:
         response.flash = form.errors
-    else:
-        response.flash = 'please fill the form'
     # Note: no form instance is passed to the view
     return locals()
 
@@ -183,8 +179,6 @@ def employee_create():
         redirect(URL('employees'))
     elif form.errors:
         response.flash = form.errors
-    else:
-        response.flash = 'Please fill the form'
     return locals()
 
 
@@ -198,8 +192,6 @@ def order_create():
         redirect(URL('orders'))
     elif form.errors:
         response.flash = form.errors
-    else:
-        response.flash = 'Please fill the form'
     return locals()
 
 
@@ -211,8 +203,6 @@ def sic_create():
         redirect(URL('sic'))
     elif form.errors:
         response.flash = Form.errors
-    else:
-        response.flash = 'Please fill the form'
     return locals()
 
 
@@ -224,8 +214,6 @@ def location_create():
         redirect(URL('locations'))
     elif form.errors:
         response.flash = 'Form has errors'
-    else:
-        response.flash = 'Please fill the form'
     return locals()
 
 
@@ -239,8 +227,6 @@ def activities_create():
         redirect(URL('activities'))
     elif form.errors:
         response.flash = 'Form has errors'
-    else:
-        response.flash = 'Please fill the form'
     return locals()
 
 

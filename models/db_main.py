@@ -23,14 +23,9 @@ db.define_table('locations',
                 Field('zip', requires=IS_NOT_EMPTY()),
                 Field('phone', requires=IS_MATCH(
                     '[\d\-\(\) ]+')),
+                Field('company', 'reference companies', requires=IS_IN_DB(db,'companies.id','%(company_name)s')),
                 )
 
-db.define_table('companies_to_locations',
-                Field('company_id', 'references companies', requires=IS_IN_DB(
-                    db, 'companies.id', '%(company_name)s')),
-                Field('location_id', 'references locations',
-                      requires=IS_IN_DB(db, 'locations.id', '%(address)s'))
-                )
 
 
 db.define_table('activity_type',
