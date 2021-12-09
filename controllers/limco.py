@@ -8,20 +8,22 @@ def importp():
         reader =  csv.reader(fp_in)
         for line in reader:         # each line is read into a list
             id = line[0]
-            name = line[1]
-            home_address = line[2]
-            home_city= line[3]
-            states= line[4]
-            home_zip=line[5]
-            company_id = line[6]
-            title = line[7]
-            office_phone = line[8]
-            cell_phone = line[9]
-            email=line[10]
+            first_name = line[1]
+            last_name = line[2]
+            email= line[3]
+            office_phone= line[4]
+            cell_phone=line[5]
+            home_address = line[6]
+            home_city = line[7]
+            states = line[8]
+            zip_code = line[9]
+            company=line[10]
             contact_type_id=line[11]
+            sic_desc=line[12]
             company_id=db.companies.update_or_insert(company_name=name)
-            db.contacts.update_or_insert(company_id=company_id, name=name, home_address=home_address, home_city=home_city,states=state,home_zip=home_zip, title=title,
-            office_phone=office_phone, cell_phone=cell_phone, email=email, contact_type_id=contact_type_id)
+            db.contacts.update_or_insert(company_id=company_id, first_name=first_name, last_name=last_name, email=email, office_phone=office_phone, cell_phone=cell_phone,
+            home_address=home_address, home_city=home_city, states=states, zip_code=zip_code, company=company,
+            contact_type_id=contact_type_id, sic_desc=6)  
             lines += 1
         session.lines = lines
         response.flash = str(lines) + " lines read"
