@@ -57,7 +57,7 @@
                     {{if type.id == lead.lead_source:}}
                     <div class="info-card-section">
                         {{=P(lead.id, _class="activity-id")}}
-                        {{=H1(lead.lead_name, _class='card-title')}}
+                        {{=H1(''.join([lead.first_name, ' ',lead.last_name]), _class='card-title')}}
                         {{=H3(type.description, _class='card-date')}}
                     </div>
                     {{=P(lead.lead_notes, _class='card-notes')}}

@@ -98,6 +98,9 @@ def reports():
     response.view = "default/reports.html"
     return locals()
 
+def rand_thing():
+    thing = SQLFORM.smartgrid(db.contacts ,linked_tables=['companies', 'locations'])
+    return locals()
 
 def companies():
     companies = SQLFORM.grid(db.companies)
@@ -138,6 +141,9 @@ def orders():
     orders = SQLFORM.grid(db.orders)
     return locals()
 
+def history():
+    history = SQLFORM.grid(db.activities.activity_date < datetime.date.today())
+    return locals()
 
 # -----------------------------------------------------
 
@@ -150,13 +156,12 @@ def company_create():
         redirect(URL('companies'))
     elif form.errors:
         response.flash = form.errors
-    else:
-        response.flash = 'Please fill the form'
     return locals()
 
 
 @auth.requires_login()
 def contact_create():
+    locations=db(db.locations).select()
     states = db(db.states).select(orderby=db.states.state_name)
     companies = db(db.companies).select(orderby=db.companies.company_name)
     contactType = db(db.contact_type).select(
@@ -167,8 +172,7 @@ def contact_create():
         redirect(URL('contacts'))
     elif form.errors:
         response.flash = form.errors
-    else:
-        response.flash = 'please fill the form'
+    
     # Note: no form instance is passed to the view
     return locals()
 
@@ -183,8 +187,6 @@ def employee_create():
         redirect(URL('employees'))
     elif form.errors:
         response.flash = form.errors
-    else:
-        response.flash = 'Please fill the form'
     return locals()
 
 
@@ -198,8 +200,6 @@ def order_create():
         redirect(URL('orders'))
     elif form.errors:
         response.flash = form.errors
-    else:
-        response.flash = 'Please fill the form'
     return locals()
 
 
@@ -211,21 +211,20 @@ def sic_create():
         redirect(URL('sic'))
     elif form.errors:
         response.flash = Form.errors
-    else:
-        response.flash = 'Please fill the form'
     return locals()
 
 
 @auth.requires_login()
 def location_create():
+    states = db(db.states).select(orderby=db.states.state_name)
+    companies = db(db.companies).select(orderby=db.companies.company_name)
     form = SQLFORM(db.locations)
     if form.process().accepted:
         response.flash = 'Location created'
         redirect(URL('locations'))
     elif form.errors:
         response.flash = 'Form has errors'
-    else:
-        response.flash = 'Please fill the form'
+    
     return locals()
 
 
@@ -239,8 +238,6 @@ def activities_create():
         redirect(URL('activities'))
     elif form.errors:
         response.flash = 'Form has errors'
-    else:
-        response.flash = 'Please fill the form'
     return locals()
 
 
