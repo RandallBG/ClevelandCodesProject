@@ -39,7 +39,8 @@ db.define_table('contact_type',
                 format='%(description)s')
 
 db.define_table('contacts',
-                Field('name', requires=IS_NOT_EMPTY()),
+                Field('first_name', requires=IS_NOT_EMPTY()),
+                Field('last_name', requires=IS_NOT_EMPTY()),
                 Field('home_address', requires=IS_NOT_EMPTY()),
                 Field('home_city', requires=IS_NOT_EMPTY()),
                 Field('states', 'reference states', requires=IS_IN_DB(
@@ -61,7 +62,8 @@ db.define_table('contacts',
 
 
 db.define_table('employees',
-                Field('employee_name', requires=IS_NOT_EMPTY()),
+                Field('first_name', requires=IS_NOT_EMPTY()),
+                Field('last_name', requires=IS_NOT_EMPTY()),
                 Field('employee_title', requires=IS_NOT_EMPTY()),
                 Field('employee_account_number', requires=IS_IN_DB(db, 'auth_user.id', '%(id)s %(first_name)s %(last_name)s %(email)s')),
                 Field('picture', 'upload', uploadfield='picture_file'),
@@ -76,7 +78,7 @@ db.define_table('employees',
                 Field('employee_notes', requires=IS_NOT_EMPTY()),
                 Field('employee_salary', requires=IS_NOT_EMPTY()),
                 Field('employee_hire_date', 'datetime', requires= IS_DATE(format=T('%Y-%m-%d'))),
-                  format="%(employee_name)s"
+                  format="%(first_name)s %(last_name)s"
                 )
 
 db.define_table('activities',
@@ -107,8 +109,9 @@ db.define_table('lead_source',
             format="%(description)s")
 
 db.define_table('leads',
-                Field('lead_name', requires=IS_NOT_EMPTY()),
-                Field('account_manager', 'reference employees', requires=IS_IN_DB(db, 'employees.id', '%(employee_name)s')),
+                Field('first_name', requires=IS_NOT_EMPTY()),
+                Field('last_name', requires=IS_NOT_EMPTY()),
+                Field('account_manager', 'reference employees', requires=IS_IN_DB(db, 'employees.id', '%(first_name)s %(last_name)s')),
                 Field('lead_phone', requires=IS_MATCH('[\d\-\(\) ]+')),
                 Field('lead_email', requires=IS_NOT_EMPTY()),
                 Field('lead_address'),

@@ -98,6 +98,9 @@ def reports():
     response.view = "default/reports.html"
     return locals()
 
+def rand_thing():
+    thing = SQLFORM.smartgrid(db.contacts ,linked_tables=['companies', 'locations'])
+    return locals()
 
 def companies():
     companies = SQLFORM.grid(db.companies)
