@@ -16,15 +16,15 @@ def importp():
             home_address = line[6]
             home_city = line[7]
             states = line[8]
-            zip_code = line[9]
+            home_zip = line[9]
             company = line[10]
             title = line[11]
             contact_type_id=line[12]
             sic_desc=line[13]
-            company_id = db.companies.update_or_insert(company_name=company)
+            company_id = db.companies.update_or_insert(company_name=company, sic_desc=6)
             db.contacts.update_or_insert(company_id=company_id, first_name=first_name, last_name=last_name, email=email, office_phone=office_phone, cell_phone=cell_phone,
-            home_address=home_address, home_city=home_city, states=states, zip_code=zip_code, company=company,
-            title=title,contact_type_id=contact_type_id, sic_desc=6)  
+            home_address=home_address, home_city=home_city,states=1, home_zip=home_zip,
+            title=title,contact_type_id=contact_type_id)  
             lines += 1
         session.lines = lines
         response.flash = str(lines) + " lines read"
