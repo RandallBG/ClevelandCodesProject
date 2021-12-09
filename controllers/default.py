@@ -141,6 +141,9 @@ def orders():
     orders = SQLFORM.grid(db.orders)
     return locals()
 
+def history():
+    history = SQLFORM.grid(db.activities.activity_date < datetime.date.today())
+    return locals()
 
 # -----------------------------------------------------
 
