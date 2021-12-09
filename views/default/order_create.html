@@ -11,11 +11,12 @@
                     Customer:
                 </td>
                 <td>
-                    <select name="customer" class="form-control form-control-changes">
-                        {{for row in customers:}}
-                        {{=OPTION(row.name, _value=row.id)}}
+                    <select onchange="addFromDropDown(this.value)" name="customer"
+                        class="form-control form-control-changes">
+                        {{for row in contacts:}}
+                        {{=OPTION(''.join([row.last_name, ' ', row.first_name]), _value=row.id)}}
                         {{pass}}
-                        <option class="option-link" onclick='addContact()'>Add Customer
+                        <option value="addContact" class="option-link" onclick='addContact()'>Add Contact
                         </option>
                     </select>
                 </td>
@@ -60,11 +61,12 @@
                     Account Manager:
                 </td>
                 <td>
-                    <select name="account_manager" class="form-control form-control-changes">
+                    <select onchange="addFromDropDown(this.value)" name="account_manager"
+                        class="form-control form-control-changes">
                         {{for row in employees:}}
-                        {{=OPTION(row.employee_name, _value=row.id)}}
+                        {{=OPTION(''.join([row.last_name, ' ', row.first_name]), _value=row.id)}}
                         {{pass}}
-                        <option class="option-link" onclick='addEmployee()'>Add Employee
+                        <option value="addEmployee" class="option-link" onclick='addEmployee()'>Add Employee
                         </option>
                     </select>
                 </td>
@@ -82,6 +84,33 @@
 </div>
 
 <script>
+    function addFromDropDown(value) {
+        switch (value) {
+            case "addContact":
+                window.location.href = "{{=URL('contact_create')}}";
+                break;
+            case "addEmployee":
+                window.location.href = "{{=URL('employee_create')}}";
+                break;
+            case "addSic":
+                window.location.href = "{{=URL('sic_create')}}";
+                break;
+            case "addCompany":
+                window.location.href = "{{=URL('company_create')}}";
+                break;
+            case "addLocation":
+                window.location.href = "{{=URL('location_create')}}";
+                break;
+            case "addContactType":
+                window.location.href = "{{=URL('contact_type_create')}}";
+                break;
+            case "addState":
+                window.location.href = "{{=URL('state_create')}}";
+                break;
+            default:
+            //do nothing
+        }
+    }
     function addContact() {
         window.location.href = "{{=URL('contact_create')}}";
     }
