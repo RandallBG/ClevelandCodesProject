@@ -21,7 +21,7 @@
                 </td>
             </tr>
             <tr>
-                <td>
+                <td
                     Email:
                 </td>
                 <td>
@@ -104,7 +104,7 @@
                     Company Address:
                 </td>
                 <td>
-                    <select onchange="addFromDropDown(this.value)" name="locations_id"
+                    <select onchange="addFromDropDown(this.value)" name="company_location"
                         class="form-control form-control-changes">
                         {{for row in locations:}}
                         {{=OPTION(row.address, _value=row.id)}}
