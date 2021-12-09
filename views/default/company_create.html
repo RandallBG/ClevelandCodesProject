@@ -8,11 +8,11 @@
         <label class="m-2">Company Name:</label>
         <input class="form-control form-control-changes m-2" type='text' name='company_name'>
         <label class="m-2">Company SIC Id:</label>
-        <select class="form-control form-control-changes m-2" name="sic_desc">
+        <select onchange="addFromDropDown(this.value)" class="form-control form-control-changes m-2" name="sic_desc">
             {{for row in sics:}}
             {{=OPTION(row.description, _value=row.id)}}
             {{pass}}
-            <option class="option-link" onclick='addSic()'>Add SIC
+            <option value="addSic" class="option-link" onclick='addSic()'>Add SIC
             </option>
         </select>
         <input type='submit' value="Create" class="btn btn-primary">
@@ -21,7 +21,25 @@
 </div>
 
 <script>
-    function addSic() {
-        window.location.href = '{{=URL("sic_create")}}';
+    function addFromDropDown(value) {
+        switch (value) {
+            case "addSic":
+                window.location.href = "{{=URL('sic_create')}}";
+                break;
+            case "addCompany":
+                window.location.href = "{{=URL('company_create')}}";
+                break;
+            case "addLocation":
+                window.location.href = "{{=URL('location_create')}}";
+                break;
+            case "addContactType":
+                window.location.href = "{{=URL('contact_type_create')}}";
+                break;
+            case "addState":
+                window.location.href = "{{=URL('state_create')}}";
+                break;
+            default:
+            //do nothing
+        }
     }
 </script>

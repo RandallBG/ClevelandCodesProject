@@ -11,17 +11,18 @@
                     Company:
                 </td>
                 <td>
-                    <select name="company_id" class="form-control form-control-changes">
-                        <option class="option-link" value="">Select or Add Company
+                    <select onchange="addFromDropDown(this.value)" name="company_id"
+                        class="form-control form-control-changes">
+                        <option value="">Select or Add Company
                         </option>
                         {{for row in companies:}}
                         {{=OPTION(row.company_name, _value=row.id)}}
                         {{pass}}
-                        <option class="option-link" onclick='addCompany()'>Add Company
+                        <option value="addCompany" class="option-link" onclick='addCompany()'>Add Company
                         </option>
                     </select>
                 </td>
-                
+
             </tr>
 
             <tr>
@@ -47,18 +48,18 @@
                 </td>
                 <td>
                     <select name="states" class="form-control form-control-changes">
-                        <option class="option-link" value="">Select State
+                        <option value="">Select State
                         </option>
                         {{for row in states:}}
                         {{=OPTION(row.state_name, _value=row.id)}}
                         {{pass}}
 
-                        <option class="option-link" onclick='addState()'>Add State
+                        <option class="option-link">Add State
                         </option>
                     </select>
                 </td>
-            </tr> 
-            <tr>   
+            </tr>
+            <tr>
                 <td>
                     Zip Code:
                 </td>
@@ -73,9 +74,9 @@
                 <td>
                     <input type='text' class='form-control form-control-changes' name='phone'>
                 </td>
-            
+
             </tr>
-            
+
         </table>
         <input type="submit" value="Create" class="btn btn-primary" />
         <input type="hidden" name="_formname" value="test" />
@@ -83,13 +84,25 @@
 </div>
 
 <script>
-    function addState() {
-        window.location.href = "{{=URL('state_create')}}";
-    }
-    function addCompany() {
-        window.location.href = "{{=URL('company_create')}}";
-    }
-    function addContactType() {
-        window.location.href = "{{=URL('contact_type_create')}}";
+    function addFromDropDown(value) {
+        switch (value) {
+            case "addSic":
+                window.location.href = "{{=URL('sic_create')}}";
+                break;
+            case "addCompany":
+                window.location.href = "{{=URL('company_create')}}";
+                break;
+            case "addLocation":
+                window.location.href = "{{=URL('location_create')}}";
+                break;
+            case "addContactType":
+                window.location.href = "{{=URL('contact_type_create')}}";
+                break;
+            case "addState":
+                window.location.href = "{{=URL('state_create')}}";
+                break;
+            default:
+            //do nothing
+        }
     }
 </script>
