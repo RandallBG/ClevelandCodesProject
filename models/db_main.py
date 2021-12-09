@@ -52,6 +52,8 @@ db.define_table('contacts',
                 Field('home_zip', requires=IS_NOT_EMPTY()),
                 Field('company_id', 'reference companies', requires=IS_IN_DB(
                     db, 'companies.id', '%(id)s %(company_name)s')),
+                Field('company_location', 'reference locations', requires=IS_IN_DB(
+                    db, 'locations.id', '%(id)s %(address)s')),    
                 Field('title'),
                 Field('office_phone'),
                 Field('cell_phone'),

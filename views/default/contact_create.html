@@ -82,14 +82,28 @@
                         </option>
                     </select>
                 </td>
+               
+                    <td>
+                        Company Address:
+                    </td>
+                    <td>
+                        <select name="locations_id" class="form-control form-control-changes">
+                            {{for row in locations:}}
+                            {{=OPTION(row.address, _value=row.id)}}
+                            {{pass}}
+                            <option class="option-link" onclick='addComadd()'>Add Company Address
+                            </option>
+                        </select>
+                    </td>
+                </tr>
+            <tr>  
                 <td>
                     Title:
                 </td>
                 <td>
                     <input type='text' class='form-control form-control-changes' name='title'>
                 </td>
-            </tr>
-            <tr>
+           
                 <td>
                     Contact Type:
                 </td>
@@ -102,7 +116,7 @@
                         </option>
                     </select>
                 </td>
-                <td>
+                
             </tr>
         </table>
         <input type="submit" value="Create" class="btn btn-primary" />
@@ -119,5 +133,8 @@
     }
     function addContactType() {
         window.location.href = "{{=URL('contact_type_create')}}";
+    }
+    function addComadd() {
+        window.location.href = "{{=URL('location_create')}}";
     }
 </script>

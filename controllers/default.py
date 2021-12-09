@@ -157,6 +157,7 @@ def company_create():
 
 @auth.requires_login()
 def contact_create():
+    locations=db(db.locations).select()
     states = db(db.states).select(orderby=db.states.state_name)
     companies = db(db.companies).select(orderby=db.companies.company_name)
     contactType = db(db.contact_type).select(
@@ -167,8 +168,7 @@ def contact_create():
         redirect(URL('contacts'))
     elif form.errors:
         response.flash = form.errors
-    else:
-        response.flash = 'please fill the form'
+    
     # Note: no form instance is passed to the view
     return locals()
 
