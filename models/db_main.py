@@ -58,7 +58,7 @@ db.define_table('contacts',
                 Field('contact_type_id', 'reference contact_type',
                       requires=IS_IN_DB(db, 'contact_type.id', '%(description)s')),
                 Field('special_notes'),
-                format='%(name)s'
+                format='%(first_name)s %(last_name)s'
                 )
 
 
@@ -86,13 +86,13 @@ db.define_table('employees',
 
 db.define_table('activities',
                 Field('contact_id', 'reference contacts',
-                      requires=IS_IN_DB(db, 'contacts.id', '%(name)s')),
+                      requires=IS_IN_DB(db, 'contacts.id', '%(first_name)s %(last_name)s')),
                 Field('activity_type_id', 'reference activity_type', requires=IS_IN_DB(
                     db, 'activity_type.id', '%(description)s')),
                 Field('activity_date', 'datetime', requires=IS_NOT_EMPTY()),
                 Field('notes'),
                 Field('account_manager', 'reference employees',
-                      requires=IS_IN_DB(db, 'employees.id', '%(employee_name)s'))
+                      requires=IS_IN_DB(db, 'employees.id', '%(first_name)s %(last_name)s')),
                 )
 
 
@@ -102,8 +102,8 @@ db.define_table('orders',
                 Field('order_item', requires=IS_NOT_EMPTY()),
                 Field('order_amount', requires=IS_NOT_EMPTY()),
                 Field('order_notes', requires=IS_NOT_EMPTY()),
-                Field('customer', 'reference contacts',requires=IS_IN_DB(db, 'contacts.id', '%(name)s')),
-                Field('account_manager', 'reference employees', requires=IS_IN_DB(db, 'employees.id', '%(employee_name)s')),
+                Field('customer', 'reference contacts',requires=IS_IN_DB(db, 'contacts.id', '%(first_name)s %(last_name)s')),
+                Field('account_manager', 'reference employees', requires=IS_IN_DB(db, 'employees.id', '%(first_name)s %(last_name)s')),
                   format="%(order_item)s"
                 )
 

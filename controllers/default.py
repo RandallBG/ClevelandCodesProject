@@ -120,7 +120,7 @@ def contacts():
 
 
 def employees():
-    employees = SQLFORM.grid(db.employees)
+    employees = SQLFORM.grid(db.employees, fields=[db.employees.first_name, db.employees.last_name, db.employees.employee_title, db.employees.employee_account_number, db.employees.picture, db.employees.employee_phone, db.employees.employee_email, db.employees.employee_address, db.employees.employee_city, db.employees.employee_state, db.employees.employee_zip,  db.employees.employee_notes, db.employees.employee_hire_date])
     return locals()
 
 
@@ -183,6 +183,14 @@ def contact_create():
     # Note: no form instance is passed to the view
     return locals()
 
+def activity_type_create():
+    form = SQLFORM(db.activity_type)
+    if form.process(session=None, formname="activity_type_create").accepted:
+        response.flash = 'Activity Type created'
+        redirect(URL('activities'))
+    elif form.errors:
+        response.flash = form.errors
+    return locals()
 
 @auth.requires_login()
 def employee_create():
@@ -199,8 +207,8 @@ def employee_create():
 
 @auth.requires_login()
 def order_create():
-    employees = db(db.employees).select(orderby=db.employees.employee_name)
-    customers = db(db.contacts).select(orderby=db.contacts.name)
+    employees = db(db.employees).select(orderby=db.employees.last_name)
+    contacts = db(db.contacts).select(orderby=db.contacts.last_name)
     form = SQLFORM(db.orders)
     if form.process(session=None, formname="createOrder").accepted:
         response.flash = 'Order created'
@@ -234,30 +242,30 @@ def location_create():
     
     return locals()
 
+def lead_create():
+    states = db(db.states).select(orderby=db.states.state_name)
+    employees = db(db.employees).select(orderby=db.employees.last_name)
+    form = SQLFORM(db.leads)
+    if form.process().accepted:
+        response.flash = 'Lead created'
+        redirect(URL('leads'))
+    elif form.errors:
+        response.flash = 'Form has errors'
+    
+    return locals()
 
 @auth.requires_login()
 def activities_create():
-    employees = db(db.employees).select(orderby=db.employees.employee_name)
-    contacts = db(db.contacts).select(orderby=db.contacts.name)
+    employees = db(db.employees).select(orderby=db.employees.last_name)
+    contacts = db(db.contacts).select(orderby=db.contacts.last_name)
+    activityType = db(db.activity_type).select()
     form = SQLFORM(db.activities)
     if form.process().accepted:
         response.flash = 'Activity created'
         redirect(URL('activities'))
     elif form.errors:
-        response.flash = 'Form has errors'
+        response.flash = form.errors
     return locals()
-
-
-@auth.requires_login()
-def companies_to_locations_create():
-    form = SQLFORM(db.companies_to_locations)
-    if form.process().accepted:
-        response.flash = 'Company to Location created'
-        redirect(URL('companies_to_locations'))
-    elif form.errors:
-        response.flash = 'Company to Location not created'
-    return locals()
-
 
 @auth.requires_login()
 def orders_create():
