@@ -5,9 +5,11 @@
   <form class="create-form" action="#" enctype="multipart/form-data" method="POST">
     <table class="contact-table">
       <tr>
-        <td>Contact Id:</td>
+        <td>Contact:</td>
         <td>
           <select onchange="addFromDropDown(this.value)" name="contact_id" class="form-control form-control-changes">
+            <option value="">
+            </option>
             {{for row in contacts:}} {{=OPTION(''.join([row.first_name, ' ', row.last_name]), _value=row.id)}}
             {{pass}}
             <option value="addContact" class="option-link" onclick='addSic()'>Add Contact
@@ -20,6 +22,8 @@
         <td>
           <select onchange="addFromDropDown(this.value)" name="activity_type_id"
             class="form-control form-control-changes">
+            <option value="">
+            </option>
             {{for row in activityType:}} {{=OPTION(row.description, _value=row.id)}}
             {{pass}}
             <option value="addActType" class="option-link" onclick='addSic()'>Add activity type
@@ -45,6 +49,8 @@
         <td>
           <select onchange="addFromDropDown(this.value)" name="account_manager"
             class="form-control form-control-changes">
+            <option value=""> 
+            </option>
             {{for row in employees:}} {{=OPTION(''.join([row.first_name,' ', row.last_name]), _value=row.id)}}
             {{pass}}
             <option value="addEmployee" class="option-link" onclick='addSic()'>Add Employee
@@ -54,7 +60,7 @@
       </tr>
     </table>
     <input type="submit" value="Create" class="btn btn-primary" />
-    <input type="hidden" name="_formname" value="createOrder" />
+    <input type="hidden" name="_formname" value="activityCreate" />
   </form>
 </div>
 

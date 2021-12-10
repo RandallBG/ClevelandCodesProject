@@ -53,6 +53,8 @@
                 </td>
                 <td>
                     <select name="employee_state" class="form-control form-control-changes">
+                        <option value="">
+                        </option>
                         {{for row in states:}}
                         {{=OPTION(row.state_name, _value=row.id)}}
                         {{pass}}
@@ -87,6 +89,8 @@
                 </td>
                 <td>
                     <select class="form-control form-control-changes" name="employee_account_number">
+                        <option value="">
+                        </option>
                         {{for row in authAccounts:}}
                         {{=OPTION((row.first_name + " " + row.last_name), _value=row.id)}}
                         {{pass}}

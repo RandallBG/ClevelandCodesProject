@@ -13,6 +13,8 @@
                 <td>
                     <select onchange="addFromDropDown(this.value)" name="customer"
                         class="form-control form-control-changes">
+                        <option value="">
+                        </option>
                         {{for row in contacts:}}
                         {{=OPTION(''.join([row.last_name, ' ', row.first_name]), _value=row.id)}}
                         {{pass}}
@@ -63,6 +65,8 @@
                 <td>
                     <select onchange="addFromDropDown(this.value)" name="account_manager"
                         class="form-control form-control-changes">
+                        <option value="">
+                        </option>
                         {{for row in employees:}}
                         {{=OPTION(''.join([row.last_name, ' ', row.first_name]), _value=row.id)}}
                         {{pass}}

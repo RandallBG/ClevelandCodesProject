@@ -21,7 +21,7 @@
                 </td>
             </tr>
             <tr>
-                <td
+                <td>
                     Email:
                 </td>
                 <td>
@@ -71,6 +71,8 @@
                 <td>
                     <select onchange="addFromDropDown(this.value)" name="states"
                         class="form-control form-control-changes">
+                        <option value="">
+                        </option>
                         {{for row in states:}}
                         {{=OPTION(row.state_name, _value=row.id)}}
                         {{pass}}
@@ -92,6 +94,8 @@
                 <td>
                     <select onchange="addFromDropDown(this.value)" name="company_id"
                         class="form-control form-control-changes">
+                        <option value="">
+                        </option>
                         {{for row in companies:}}
                         {{=OPTION(row.company_name, _value=row.id)}}
                         {{pass}}
@@ -106,6 +110,8 @@
                 <td>
                     <select onchange="addFromDropDown(this.value)" name="company_location"
                         class="form-control form-control-changes">
+                        <option value="">
+                        </option>
                         {{for row in locations:}}
                         {{=OPTION(row.address, _value=row.id)}}
                         {{pass}}
@@ -121,6 +127,8 @@
                 <td>
                     <select onchange="addFromDropDown(this.value)" name="contact_type_id"
                         class="form-control form-control-changes">
+                        <option value="">
+                        </option>
                         {{for row in contactType:}}
                         {{=OPTION(row.description, _value=row.id)}}
                         {{pass}}

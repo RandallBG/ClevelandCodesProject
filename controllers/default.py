@@ -169,7 +169,7 @@ def contact_create():
     form = SQLFORM(db.contacts)
     if form.process(session=None, formname='test').accepted:
         response.flash = 'form accepted'
-        redirect(URL('contacts'))
+        #redirect(URL('contact_create'))
     elif form.errors:
         response.flash = form.errors
     
@@ -192,7 +192,7 @@ def employee_create():
     form = SQLFORM(db.employees)
     if form.process(session=None, formname="employeeCreate").accepted:
         response.flash = 'Employee created'
-        redirect(URL('employees'))
+        #redirect(URL('employees'))
     elif form.errors:
         response.flash = form.errors
     return locals()
@@ -205,7 +205,7 @@ def order_create():
     form = SQLFORM(db.orders)
     if form.process(session=None, formname="createOrder").accepted:
         response.flash = 'Order created'
-        redirect(URL('orders'))
+        #redirect(URL('orders'))
     elif form.errors:
         response.flash = form.errors
     return locals()
@@ -216,7 +216,7 @@ def sic_create():
     form = SQLFORM(db.sic)
     if form.process(session=None, formname="sicCreate").accepted:
         response.flash = 'SIC created'
-        redirect(URL('sic'))
+        #redirect(URL('sic'))
     elif form.errors:
         response.flash = Form.errors
     return locals()
@@ -229,7 +229,7 @@ def location_create():
     form = SQLFORM(db.locations)
     if form.process().accepted:
         response.flash = 'Location created'
-        redirect(URL('locations'))
+        #redirect(URL('locations'))
     elif form.errors:
         response.flash = 'Form has errors'
     
@@ -241,7 +241,7 @@ def lead_create():
     form = SQLFORM(db.leads)
     if form.process().accepted:
         response.flash = 'Lead created'
-        redirect(URL('leads'))
+        #redirect(URL('leads'))
     elif form.errors:
         response.flash = 'Form has errors'
     
@@ -253,35 +253,26 @@ def activities_create():
     contacts = db(db.contacts).select(orderby=db.contacts.last_name)
     activityType = db(db.activity_type).select()
     form = SQLFORM(db.activities)
-    if form.process().accepted:
+    if form.process(session=None, formname="activityCreate").accepted:
         response.flash = 'Activity created'
-        redirect(URL('activities'))
+        #redirect(URL('activities'))
     elif form.errors:
         response.flash = form.errors
     return locals()
 
-@auth.requires_login()
-def orders_create():
-    form = SQLFORM(db.orders)
-    if form.process().accepted:
-        response.flash = 'Order created'
-        redirect(URL('orders'))
-    elif form.errors:
-        response.flash = 'Order not created'
-    return locals()
 
 
 def contact_type_create():
     form = SQLFORM(db.contact_type)
     if form.process(session=None, formname="contactTypeCreate").accepted:
         response.flash = 'Contact Type created'
-        redirect(URL('contact_type'))
+        #redirect(URL('contact_type'))
     elif form.errors:
         response.flash = form.errors
     else:
         response.flash = 'Please fill the form'
     return locals()
-
+#------------------------------------------------------------------------------------------------------------------
 
 @auth.requires_login()
 def company_edit():
