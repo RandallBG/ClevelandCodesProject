@@ -9,12 +9,51 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <style>
-    body {
-      background-image: url("/ClevelandCodesProject/static/imagesmybackground.jpg");
+       body {
+      background-image: url("/ClevelandCodesProject/static/images/mybackground.jpg");
       background-repeat: vertical;
       background-attachment: fixed;
       background-size: cover;
-<h1>Search</h1>
+    }
+
+    img {
+      width: 15%;
+      margin: 0% 0% 0% 4%;
+    }
+
+    strong {
+      color: white;
+    }
+
+    .strong2 {
+      font-size: 10px;
+      color: white;
+    }
+
+    h1,
+    h2 {
+      color: white;
+      margin: 20px 0px 0px 20px;
+    }
+
+    .center {
+      position: absolute;
+      width: 100%;
+      bottom: 0;
+      margin-bottom: 5rem;
+      text-align: center;
+    }
+
+    .margin2 {
+      margin: 0% 0% 0% 0%;
+    }
+  </style>
+  <title>LIMCO Technologies - Home</title>
+
+</head>
+
+<body>
+<h1>Registration Table</h1>
 {{sterm = "%" + session.sterm + "%"}}
 <table>
     <tr>
