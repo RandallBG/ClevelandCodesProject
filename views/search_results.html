@@ -62,11 +62,11 @@
   <title></title>
 
 </head>
-<table>
+
 <body>
 <h1>Registration Table</h1>
 {{sterm = "%" + session.sterm + "%"}}
-
+<table>
     <tr>
         <th width="10%">FIRST NAME</th><th width="10%">LAST NAME</th><th width="20%">ABOUT</th>
     </tr>
@@ -83,20 +83,54 @@
     {{pass}}
 {{pass}}
 </table>
-<tr>
-    <th width="10%">FIRST NAME</th><th width="10%">LAST NAME</th><th width="20%">ABOUT</th>
-</tr>
-{{rows = db((db.companies.first_name.ilike(sterm)) | (db.companies.last_name.ilike(sterm)) ).select()}}
+<table>
+        <tr>
+            <th width="10%">COMPANY NAME</th><th width="10%"></th><th width="20%"></th>
+        </tr>
+    {{rows = db((db.companies.company_name.ilike(sterm)) | (db.companies.company_name.ilike(sterm)) ).select()}}
+    {{if len(rows)==0:}}
+        <tr>
+         <td colspan="3">No matching records</td>
+     </tr>
+    {{else:}}
+        {{for row in rows:}}
+         <tr>
+             <td>{{=row.first_name}}</td><td>{{=row.last_name}}</td><td>n/a</td>
+         </tr>
+        {{pass}}
+    {{pass}}
+</table>
+<table>
+    <tr>
+        <th width="10%">Employees</th><th width="10%"></th><th width="20%"></th>
+    </tr>
+{{rows = db((db.employees.first_name.ilike(sterm)) | (db.employees.last_name.ilike(sterm)) ).select()}}
 {{if len(rows)==0:}}
-<tr>
- <td colspan="3">No matching records</td>
-</tr>
-{{else:}}
-{{for row in rows:}}
- <tr>
-     <td>{{=row.company_name}}</td><td>{{=row.sic_desc}}</td><td>n/a</td>
+    <tr>
+     <td colspan="3">No matching records</td>
  </tr>
-{{pass}}
+{{else:}}
+    {{for row in rows:}}
+     <tr>
+         <td>{{=row.first_name}}</td><td>{{=row.last_name}}</td><td>n/a</td>
+     </tr>
+    {{pass}}
 {{pass}}
 </table>
-
+<table>
+    <tr>
+        <th width="10%">Leads</th><th width="10%"></th><th width="20%"></th>
+    </tr>
+{{rows = db((db.leads.first_name.ilike(sterm)) | (db.leads.last_name.ilike(sterm)) ).select()}}
+{{if len(rows)==0:}}
+    <tr>
+     <td colspan="3">No matching records</td>
+ </tr>
+{{else:}}
+    {{for row in rows:}}
+     <tr>
+         <td>{{=row.first_name}}</td><td>{{=row.last_name}}</td><td>n/a</td>
+     </tr>
+    {{pass}}
+{{pass}}
+</table>
