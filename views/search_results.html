@@ -10,10 +10,10 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <style>
        body {
-      background-image: url("/ClevelandCodesProject/static/images/hightech.jpg");
+      background-image: url("/ClevelandCodesProject/static/images/mybackground.jpg");
       background-repeat: no-repeat;
       background-attachment: fixed;
-      background-size: auto;
+      background-size: cover;
     }
 
     img {
@@ -47,15 +47,26 @@
     .margin2 {
       margin: 0% 0% 0% 0%;
     }
+    
+    tr
+    {
+        background-color:none;
+        color:white
+        
+            
+    }
+    table{border-spacing: 14px; border-collapse: separate;}
+    
+
   </style>
   <title></title>
 
 </head>
-
+<table>
 <body>
 <h1>Registration Table</h1>
 {{sterm = "%" + session.sterm + "%"}}
-<table>
+
     <tr>
         <th width="10%">FIRST NAME</th><th width="10%">LAST NAME</th><th width="20%">ABOUT</th>
     </tr>
@@ -72,3 +83,20 @@
     {{pass}}
 {{pass}}
 </table>
+<tr>
+    <th width="10%">FIRST NAME</th><th width="10%">LAST NAME</th><th width="20%">ABOUT</th>
+</tr>
+{{rows = db((db.companies.first_name.ilike(sterm)) | (db.companies.last_name.ilike(sterm)) ).select()}}
+{{if len(rows)==0:}}
+<tr>
+ <td colspan="3">No matching records</td>
+</tr>
+{{else:}}
+{{for row in rows:}}
+ <tr>
+     <td>{{=row.company_name}}</td><td>{{=row.sic_desc}}</td><td>n/a</td>
+ </tr>
+{{pass}}
+{{pass}}
+</table>
+
