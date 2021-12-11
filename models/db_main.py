@@ -13,8 +13,7 @@ db.define_table('companies',
                 Field('company_name', requires=IS_NOT_EMPTY()),
                 Field('sic_desc', 'reference sic', requires=IS_IN_DB(
                     db, 'sic.id', '%(description)s')),
-                    db, 'sic.code', '%(description)s')),
-                format='%(company_name)s')
+                    format='%(company_name)s')
 
 db.define_table('locations',
                 Field('address', requires=IS_NOT_EMPTY()),
