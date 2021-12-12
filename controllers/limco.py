@@ -20,11 +20,17 @@ def importp():
             company = line[10]
             title = line[11]
             contact_type_id=line[12]
-            sic_desc=line[13]
-            company_id = db.companies.update_or_insert(company_name=company, sic_desc=6)
-            db.contacts.update_or_insert(company_id=company_id, first_name=first_name, last_name=last_name, email=email, office_phone=office_phone, cell_phone=cell_phone,
-            home_address=home_address, home_city=home_city,states=1, home_zip=home_zip,
-            title=title,contact_type_id=contact_type_id)  
+            sic_code=line[13]
+            sic_desc=line[14]
+            company_id = db.companies.update_or_insert(company_name=company)
+            states = db.states.update_or_insert(state_name=states)
+
+            db.contacts.update_or_insert(company_id=company_id, 
+            first_name=first_name, last_name=last_name, email=email, 
+            office_phone=office_phone, cell_phone=cell_phone,
+            home_address=home_address, home_city=home_city,states=states, 
+            home_zip=home_zip, title=title,contact_type_id=contact_type_id, sic_code=sic_code, 
+            sic_desc=sic_desc)  
             lines += 1
         session.lines = lines
         response.flash = str(lines) + " lines read"
