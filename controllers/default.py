@@ -180,7 +180,6 @@ def activity_type_create():
     form = SQLFORM(db.activity_type)
     if form.process(session=None, formname="activity_type_create").accepted:
         response.flash = 'Activity Type created'
-        redirect(URL('activities'))
     elif form.errors:
         response.flash = form.errors
     return locals()
@@ -247,13 +246,14 @@ def lead_create():
     
     return locals()
 
+
 @auth.requires_login()
 def activities_create():
     employees = db(db.employees).select(orderby=db.employees.last_name)
     contacts = db(db.contacts).select(orderby=db.contacts.last_name)
     activityType = db(db.activity_type).select()
     form = SQLFORM(db.activities)
-    if form.process(session=None, formname="activityCreate").accepted:
+    if form.process(session=None, formname="activitiesCreate").accepted:
         response.flash = 'Activity created'
         #redirect(URL('activities'))
     elif form.errors:
@@ -268,7 +268,7 @@ def contact_type_create():
         response.flash = 'Contact Type created'
         #redirect(URL('contact_type'))
     elif form.errors:
-        response.flash = form.errors
+        response.flash = Form.errors
     else:
         response.flash = 'Please fill the form'
     return locals()
