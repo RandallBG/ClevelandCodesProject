@@ -8,7 +8,7 @@ def importp():
         reader =  csv.reader(fp_in)
         for line in reader:         # each line is read into a list
             id = line[0]
-            sic_id = line[1]
+            sic_id= line[1]
             description = line[2]
             db.sic.update_or_insert(sic_id=sic_id, description=description)
             lines += 1
