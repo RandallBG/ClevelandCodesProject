@@ -92,17 +92,20 @@ if not configuration.get('app.production'):
         # ]),
         (T('Reports'), False, None, [
             (T('Contacts'), False, URL('default', 'contacts')),
-            (T('Employees'), False, URL('default', 'employees')),
+            (T('Locations'), False, URL('default', 'locations')),
+            (T('Activities'), False, URL('default', 'activities')),
+            (T('History'), False, URL('default', 'history')),
+            (T('Scheduled Events'), False, URL('default', 'scheduled_events')),
             (T('Leads'), False, URL('default', 'leads')),
+            (T('Special Notes'), False, URL('default', 'notes')),
             (T('Orders'), False, URL('default', 'orders')),
-
+            (T('Employees'), False, URL('default', 'employees')),
         ]),
         (T('Create'), False, None, [
-            (T('Contact'), False,
-             URL("default", "contact_create")),
+            (T('Contact'), False, URL("default", "contact_create")),
+            (T('Customer Locations'), False, URL("default", "location_create")),
             (T('Employee'), False, URL("default", "employee_create")),
-            (T('Activity'), False,
-             URL("default", "activities_create")),
+            (T('Activity'), False, URL("default", "activities_create")),
              (T('Order'), False, URL("default", "order_create")),
         ]),
 
