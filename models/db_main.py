@@ -79,7 +79,7 @@ db.define_table('employees',
                 Field('employee_zip', requires=IS_NOT_EMPTY()),
                 Field('employee_notes'),
                 Field('employee_salary', requires=IS_NOT_EMPTY()),
-                Field('employee_hire_date', 'datetime', requires= IS_DATE(format=T('%Y-%m-%d'))),
+                Field('employee_hire_date', 'datetime'),
                   format="%(first_name)s %(last_name)s"
                 )
 
@@ -88,7 +88,7 @@ db.define_table('activities',
                       requires=IS_IN_DB(db, 'contacts.id', '%(first_name)s %(last_name)s')),
                 Field('activity_type_id', 'reference activity_type', requires=IS_IN_DB(
                     db, 'activity_type.id', '%(description)s')),
-                Field('activity_date', 'datetime', requires= IS_DATE(format=T('%Y-%m-%d'))),
+                Field('activity_date', 'datetime'),
                 Field('notes'),
                 Field('account_manager', 'reference employees',
                       requires=IS_IN_DB(db, 'employees.id', '%(first_name)s %(last_name)s')),
