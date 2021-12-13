@@ -1,100 +1,100 @@
-﻿100,Agricultural Production-Crops
-200,Agricultural Prod-Livestock & Animal Specialties
-700,Agricultural Services
-800,Forestry
-900,"Fishing, Hunting and Trapping"
-1000,Metal Mining
-1040,Gold and Silver Ores
-1090,Miscellaneous Metal Ores
-1220,Bituminous Coal & Lignite Mining
-1221,Bituminous Coal & Lignite Surface Mining
-1311,Crude Petroleum & Natural Gas
-1381,Drilling Oil & Gas Wells
-1382,Oil & Gas Field Exploration Services
-1389,"Oil & Gas Field Services, NEC"
-1400,Mining & Quarrying of Nonmetallic Minerals (No Fuels)
-1520,General Bldg Contractors - Residential Bldgs
-1531,Operative Builders
-1540,General Bldg Contractors - Nonresidential Bldgs
-1600,Heavy Construction Other Than Bldg Const - Contractors
-1623,"Water, Sewer, Pipeline, Comm & Power Line Construction"
-1629,"Heavy Construction, Not Elsewhere Classified[9]"
-1700,Construction - Special Trade Contractors
-1731,Electrical Work
-2000,Food and Kindred Products
-2011,Meat Packing Plants
-2013,Sausages & Other Prepared Meat Products
-2015,Poultry Slaughtering and Processing
-2020,Dairy Products
-2024,Ice Cream & Frozen Desserts
-2030,"Canned, Frozen & Preserved Fruit, Veg & Food Specialties"
-2033,"Canned, Fruits, Veg, Preserves, Jams & Jellies"
-2040,Grain Mill Products
-2050,Bakery Products
-2052,Cookies & Crackers
-2060,Sugar & Confectionery Products
-2070,Fats & Oils
-2080,Beverages
-2082,Malt Beverages
-2086,Bottled & Canned Soft Drinks & Carbonated Waters
-2090,Miscellaneous Food Preparations & Kindred Products
-2092,Prepared Fresh or Frozen Fish & Seafood
-2100,Tobacco Products
-2111,Cigarettes
-2200,Textile Mill Products
-2211,"Broadwoven Fabric Mills, Cotton"
-2221,"Broadwoven Fabric Mills, Man Made Fiber & Silk"
-2250,Knitting Mills
-2253,Knit Outerwear Mills
-2273,Carpets & Rugs
-2300,Apparel & Other Finished Prods of Fabrics & Similar Matl
-2320,"Men's & Boys' Furnishings, Work Clothing, & Allied Garments"
-2330,"Women's, Misses', and Juniors Outerwear"
-2340,"Women's, Misses', Children's & Infant's Undergarments"
-2390,Miscellaneous Fabricated Textile Products
-2400,Lumber & Wood Products (No Furniture)
-2421,"Sawmills & Planing Mills, General"
-2430,"Millwood, Veneer, Plywood, & Structural Wood Members"
-2451,Mobile Homes
-2452,Prefabricated Wood Bldgs & Components
-2510,Household Furniture
-2511,"Wood Household Furniture, (No Upholstered)"
-2520,Office Furniture
-2522,Office Furniture (No Wood)
-2531,Public Bldg & Related Furniture
-2540,"Partitions, Shelvg, Lockers, & office & Store Fixtures"
-2590,Miscellaneous Furniture & Fixtures
-2600,Papers & Allied Products
-2611,Pulp Mills
-2621,Paper Mills
-2631,Paperboard Mills
-2650,Paperboard Containers & Boxes
-2670,Converted Paper & Paperboard Prods (No Containers/Boxes)
-2673,"Plastics, Foil & Coated Paper Bags"
-2711,Newspapers: Publishing or Publishing & Printing
-2721,Periodicals: Publishing or Publishing & Printing
-2731,Books: Publishing or Publishing & Printing
-2732,Book Printing
-2741,Miscellaneous Publishing
-2750,Commercial Printing
-2761,Manifold Business Forms
-2771,Greeting Cards
-2780,"Blankbooks, Looseleaf Binders & Bookbinding & Related Work"
-2790,Service Industries For The Printing Trade
-2800,Chemicals & Allied Products
-2810,Industrial Inorganic Chemicals
-2820,"Plastic Material, Synth Resin/Rubber, Cellulos (No Glass)"
-2821,"Plastic Materials, Synth Resins & Nonvulcan Elastomers"
-2833,Medicinal Chemicals & Botanical Products
-2834,Pharmaceutical Preparations
-2835,In Vitro & In Vivo Diagnostic Substances
-2836,"Biological Products, (No Diagnostic Substances)"
-2840,"Soap, Detergents, Cleaning Preparations, Perfumes, Cosmetics"
-2842,"Specialty Cleaning, Polishing and Sanitation Preparations"
-2844,"Perfumes, Cosmetics & Other Toilet Preparations"
-2851,"Paints, Varnishes, Lacquers, Enamels & Allied Prods"
-2860,Industrial Organic Chemicals
-2870,Agricultural Chemicals
-2890,Miscellaneous Chemical Products
-2891,Adhesives & Sealants
-2911,Petroleum Refining
+﻿1,Agricultural Production-Crops
+2,Agricultural Prod-Livestock & Animal Specialties
+3,Agricultural Services
+4,Forestry
+5,"Fishing, Hunting and Trapping"
+6,Metal Mining
+7,Gold and Silver Ores
+8,Miscellaneous Metal Ores
+9,Bituminous Coal & Lignite Mining
+10,Bituminous Coal & Lignite Surface Mining
+11,Crude Petroleum & Natural Gas
+12,Drilling Oil & Gas Wells
+13,Oil & Gas Field Exploration Services
+14,"Oil & Gas Field Services, NEC"
+15,Mining & Quarrying of Nonmetallic Minerals (No Fuels)
+16,General Bldg Contractors - Residential Bldgs
+17,Operative Builders
+18,General Bldg Contractors - Nonresidential Bldgs
+19,Heavy Construction Other Than Bldg Const - Contractors
+20,"Water, Sewer, Pipeline, Comm & Power Line Construction"
+21,"Heavy Construction, Not Elsewhere Classified[9]"
+22,Construction - Special Trade Contractors
+23,Electrical Work
+24,Food and Kindred Products
+25,Meat Packing Plants
+26,Sausages & Other Prepared Meat Products
+27,Poultry Slaughtering and Processing
+28,Dairy Products
+29,Ice Cream & Frozen Desserts
+30,"Canned, Frozen & Preserved Fruit, Veg & Food Specialties"
+31,"Canned, Fruits, Veg, Preserves, Jams & Jellies"
+32,Grain Mill Products
+33,Bakery Products
+34,Cookies & Crackers
+35,Sugar & Confectionery Products
+36,Fats & Oils
+37,Beverages
+38,Malt Beverages
+39,Bottled & Canned Soft Drinks & Carbonated Waters
+40,Miscellaneous Food Preparations & Kindred Products
+41,Prepared Fresh or Frozen Fish & Seafood
+42,Tobacco Products
+43,Cigarettes
+44,Textile Mill Products
+45,"Broadwoven Fabric Mills, Cotton"
+46,"Broadwoven Fabric Mills, Man Made Fiber & Silk"
+47,Knitting Mills
+48,Knit Outerwear Mills
+49,Carpets & Rugs
+50,Apparel & Other Finished Prods of Fabrics & Similar Matl
+51,"Men's & Boys' Furnishings, Work Clothing, & Allied Garments"
+52,"Women's, Misses', and Juniors Outerwear"
+53,"Women's, Misses', Children's & Infant's Undergarments"
+54,Miscellaneous Fabricated Textile Products
+55,Lumber & Wood Products (No Furniture)
+56,"Sawmills & Planing Mills, General"
+57,"Millwood, Veneer, Plywood, & Structural Wood Members"
+58,Mobile Homes
+59,Prefabricated Wood Bldgs & Components
+60,Household Furniture
+61,"Wood Household Furniture, (No Upholstered)"
+62,Office Furniture
+63,Office Furniture (No Wood)
+64,Public Bldg & Related Furniture
+65,"Partitions, Shelvg, Lockers, & office & Store Fixtures"
+66,Miscellaneous Furniture & Fixtures
+67,Papers & Allied Products
+68,Pulp Mills
+69,Paper Mills
+70,Paperboard Mills
+71,Paperboard Containers & Boxes
+72,Converted Paper & Paperboard Prods (No Containers/Boxes)
+73,"Plastics, Foil & Coated Paper Bags"
+74,Newspapers: Publishing or Publishing & Printing
+75,Periodicals: Publishing or Publishing & Printing
+76,Books: Publishing or Publishing & Printing
+77,Book Printing
+78,Miscellaneous Publishing
+79,Commercial Printing
+80,Manifold Business Forms
+81,Greeting Cards
+82,"Blankbooks, Looseleaf Binders & Bookbinding & Related Work"
+83,Service Industries For The Printing Trade
+84,Chemicals & Allied Products
+85,Industrial Inorganic Chemicals
+86,"Plastic Material, Synth Resin/Rubber, Cellulos (No Glass)"
+87,"Plastic Materials, Synth Resins & Nonvulcan Elastomers"
+88,Medicinal Chemicals & Botanical Products
+89,Pharmaceutical Preparations
+90,In Vitro & In Vivo Diagnostic Substances
+91,"Biological Products, (No Diagnostic Substances)"
+92,"Soap, Detergents, Cleaning Preparations, Perfumes, Cosmetics"
+93,"Specialty Cleaning, Polishing and Sanitation Preparations"
+94,"Perfumes, Cosmetics & Other Toilet Preparations"
+95,"Paints, Varnishes, Lacquers, Enamels & Allied Prods"
+96,Industrial Organic Chemicals
+97,Agricultural Chemicals
+98,Miscellaneous Chemical Products
+99,Adhesives & Sealants
+100,Petroleum Refining
