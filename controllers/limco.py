@@ -20,8 +20,7 @@ def importp():
             company = line[10]
             title = line[11]
             contact_type_id=line[12]
-            sic_code=line[13]
-            industry=line[14]
+            industry=line[13]
             company_id = db.companies.update_or_insert(company_name=company,sic_desc=industry)
             states = db.states.update_or_insert(state_name=states)
             db.contacts.update_or_insert(company_id=company_id, states=states,
@@ -29,7 +28,8 @@ def importp():
             office_phone=office_phone, cell_phone=cell_phone,
             home_address=home_address, home_city=home_city, 
             home_zip=home_zip, company_name=company, title=title,contact_type_id=contact_type_id,
-            sic_desc=industry)  
+            )  
+          
             lines += 1
         session.lines = lines
         response.flash = str(lines) + " lines read"
