@@ -24,10 +24,9 @@ def importp():
             db.contacts.update_or_insert(company_id=company_id, 
             first_name=first_name, last_name=last_name, email=email, 
             office_phone=office_phone, cell_phone=cell_phone,
-            home_address=home_address, home_city=home_city, 
-            home_zip=home_zip, company_name=company, title=title,contact_type_id=contact_type_id
+            home_address=home_address, home_city=home_city,  
+            home_zip=home_zip, title=title,contact_type_id=contact_type_id
             )  
-          
             lines += 1
         session.lines = lines
         response.flash = str(lines) + " lines read"
