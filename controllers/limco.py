@@ -20,14 +20,12 @@ def importp():
             company = line[10]
             title = line[11]
             contact_type_id=line[12]
-            industry=line[13]
-            company_id = db.companies.update_or_insert(company_name=company,sic_desc=industry)
-            states = db.states.update_or_insert(state_name=states)
-            db.contacts.update_or_insert(company_id=company_id, states=states,
-            description=industry, first_name=first_name, last_name=last_name, email=email, 
+            company_id = db.companies.update_or_insert(company_name=company)
+            db.contacts.update_or_insert(company_id=company_id, 
+            first_name=first_name, last_name=last_name, email=email, 
             office_phone=office_phone, cell_phone=cell_phone,
             home_address=home_address, home_city=home_city, 
-            home_zip=home_zip, company_name=company, title=title,contact_type_id=contact_type_id,
+            home_zip=home_zip, company_name=company, title=title,contact_type_id=contact_type_id
             )  
           
             lines += 1
