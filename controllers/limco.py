@@ -22,7 +22,8 @@ def importp():
             contact_type_id=line[12]
             sic_desc=line[13]
             company_id = db.companies.update_or_insert(company_name=company, sic_desc=6)
-            db.contacts.update_or_insert(company_id=company_id, first_name=first_name, last_name=last_name, email=email, office_phone=office_phone, cell_phone=cell_phone,
+            db.contacts.update_or_insert(company_id=company_id, first_name=first_name, 
+            last_name=last_name, email=email, office_phone=office_phone, cell_phone=cell_phone,
             home_address=home_address, home_city=home_city,states=1, home_zip=home_zip,
             title=title,contact_type_id=contact_type_id)  
             lines += 1
