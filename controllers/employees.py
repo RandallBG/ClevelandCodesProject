@@ -23,7 +23,7 @@ def importp():
             employee_notes=line[13]
             employee_salary=line[14]
             employee_hire_date=line[15]
-            db.contacts.update_or_insert(first_name=first_name, 
+            db.employees.update_or_insert(first_name=first_name, 
             last_name=last_name, employee_title=employee_title, employee_account_number=employee_account_number,
             picture=picture, picture_file=picture_file, employee_phone=employee_phone, employee_email=employee_email,
             employee_address=employee_address, employee_city=employee_city, employee_state=employee_state,
