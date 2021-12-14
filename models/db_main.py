@@ -6,8 +6,7 @@ db.define_table('sic',
                 Field('sic_id', type='integer',
                       unique=True, requires=IS_NOT_EMPTY()),
                 Field('description', requires=IS_NOT_EMPTY()),
-                format='%(description)s'
-                )
+                format='%(sic_id)s - %(description)s')
 
 db.define_table('companies',
                 Field('company_name', requires=IS_NOT_EMPTY()),
@@ -96,7 +95,7 @@ db.define_table('activities',
 
 
 db.define_table('orders',
-                Field('order_date', 'datetime', requires=IS_NOT_EMPTY()),
+                Field('order_date', 'datetime'),
                 Field('order_type'),
                 Field('order_item', requires=IS_NOT_EMPTY()),
                 Field('order_amount', type='double', requires=IS_NOT_EMPTY()),

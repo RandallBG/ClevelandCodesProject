@@ -112,7 +112,7 @@ def rand_thing():
     return locals()
 
 def companies():
-    companies = SQLFORM.grid(db.companies)
+    companies = SQLFORM.smartgrid(db.companies)
     return locals()
 
 
@@ -166,7 +166,6 @@ def company_create():
     form = SQLFORM(db.companies)
     if form.process(session=None, formname="companyCreate").accepted:
         response.flash = 'Company created'
-        redirect(URL('companies'))
     elif form.errors:
         response.flash = form.errors
     return locals()
@@ -240,17 +239,19 @@ def location_create():
     states = db(db.states).select(orderby=db.states.state_name)
     companies = db(db.companies).select(orderby=db.companies.company_name)
     form = SQLFORM(db.locations)
-    if form.process().accepted:
+    if form.process(session=None, formname="locationCreate").accepted:
         response.flash = 'Location created'
         #redirect(URL('locations'))
     elif form.errors:
-        response.flash = 'Form has errors'
+        response.flash = form.errors
     
     return locals()
 
+@auth.requires_login()
 def lead_create():
     states = db(db.states).select(orderby=db.states.state_name)
     employees = db(db.employees).select(orderby=db.employees.last_name)
+    leadSource = db(db.lead_source).select(orderby=db.lead_source.description)
     form = SQLFORM(db.leads)
     if form.process(session=None, formname="leadCreate").accepted:
         response.flash = 'Lead created'

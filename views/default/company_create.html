@@ -10,7 +10,7 @@
         <label class="m-2">Company SIC Id:</label>
         <select onchange="addFromDropDown(this.value)" class="form-control form-control-changes m-2" name="sic_desc">
             {{for row in sics:}}
-            {{=OPTION(row.description, _value=row.id)}}
+            {{=OPTION(''.join([str(row.sic_id), ' - ', row.description]), _value=row.id)}}
             {{pass}}
             <option value="addSic" class="option-link" onclick='addSic()'>Add SIC
             </option>
