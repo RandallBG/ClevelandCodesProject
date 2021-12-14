@@ -60,9 +60,16 @@ def leads():
     leads = SQLFORM.grid(db.leads)
     return locals()
 
+def search_results():
+    if request.vars.search_term:
+        session.sterm = request.vars.search_term
+        response.view = "search_results.html"
+    return dict()
+
 @auth.requires_login()
 def dashboard():
 
+    
     # store upcoming activities, the activity types table, and the contacts table in three seperate variables
     # not sure if declaring all the variables and just returning locals is bad practice but for now it works.
     # activities = db(db.activities.activity_date >= datetime.date.today()).select(orderby= db.activities.activity_date)

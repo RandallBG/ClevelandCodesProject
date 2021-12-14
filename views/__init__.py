@@ -7,7 +7,7 @@ total_pay = 0
 f_out = open("LIMCO1.csv", "a", newline="")
 writer = csv.writer(f_out)
 
-with open("LIMCO1.csv", "r") as f_in:
+with open("LIMCO.csv", "r") as f_in:
     reader = csv.reader(f_in)
     for line in reader:
         if line_count>0:
