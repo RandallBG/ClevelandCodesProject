@@ -12,7 +12,7 @@ db.define_table('sic',
 db.define_table('companies',
                 Field('company_name', requires=IS_NOT_EMPTY()),
                 Field('sic_desc', 'reference sic', requires=IS_IN_DB(
-                    db, 'sic_id', '%(description)s')),
+                    db, 'sic.id', '%(description)s')),
                 format='%(company_name)s')
 
 db.define_table('locations',
@@ -99,7 +99,7 @@ db.define_table('orders',
                 Field('order_date', 'datetime', requires=IS_NOT_EMPTY()),
                 Field('order_type'),
                 Field('order_item', requires=IS_NOT_EMPTY()),
-                Field('order_amount', requires=IS_NOT_EMPTY()),
+                Field('order_amount', type='double', requires=IS_NOT_EMPTY()),
                 Field('order_notes', requires=IS_NOT_EMPTY()),
                 Field('customer', 'reference contacts',requires=IS_IN_DB(db, 'contacts.id', '%(first_name)s %(last_name)s')),
                 Field('account_manager', 'reference employees', requires=IS_IN_DB(db, 'employees.id', '%(first_name)s %(last_name)s')),
