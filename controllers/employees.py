@@ -26,10 +26,9 @@ def importp():
             db.employees.update_or_insert(first_name=first_name, 
             last_name=last_name, employee_title=employee_title, employee_account_number=employee_account_number,
             picture=picture, picture_file=picture_file, employee_phone=employee_phone, employee_email=employee_email,
-            employee_address=employee_address, employee_city=employee_city, employee_state=employee_state,
+            employee_address=employee_address, employee_city=employee_city, 
             employee_zip=employee_zip, employee_notes=employee_notes, employee_salary=employee_salary, 
             employee_hire_date=employee_hire_date) 
-
             lines += 1
         session.lines = lines
         response.flash = str(lines) + " lines read"
