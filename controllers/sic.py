@@ -10,7 +10,6 @@ def importp():
             id = line[0]
             sic_id= line[1]
             description = line[2]
-            sic_id = db.companies.update_or_insert(company_name=company,sic_desc=industry)
             db.sic.update_or_insert(sic_id=sic_id, description=description)
             lines += 1
         session.lines = lines
