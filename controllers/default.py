@@ -145,6 +145,10 @@ def history():
     history = SQLFORM.grid(db.activities.activity_date < datetime.date.today())
     return locals()
 
+def notes():
+    notes = SQLFORM.grid(db.contacts, fields=[db.contacts.special_notes, db.contacts.first_name, db.contacts.last_name, db.contacts.company_id])
+    return locals()
+
 # -----------------------------------------------------
 
 @auth.requires_login()
