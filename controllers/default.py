@@ -238,7 +238,7 @@ def lead_create():
     states = db(db.states).select(orderby=db.states.state_name)
     employees = db(db.employees).select(orderby=db.employees.last_name)
     form = SQLFORM(db.leads)
-    if form.process().accepted:
+    if form.process(session=None, formname="leadCreate").accepted:
         response.flash = 'Lead created'
         #redirect(URL('leads'))
     elif form.errors:

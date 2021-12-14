@@ -1,3 +1,4 @@
+{{extend 'layout.html'}}
 <div class='main-form-wrapper'>
     <h2>
         New Lead
@@ -23,39 +24,33 @@
                     Email:
                 </td>
                 <td>
-                    <input type='text' class='form-control form-control-changes' name='email'>
+                    <input type='text' class='form-control form-control-changes' name='lead_email'>
                 </td>
                 <td>
-                    Title:
+                    Phone Number:
                 </td>
                 <td>
-                    <input type='text' class='form-control form-control-changes' name='title'>
+                    <input type='text' class='form-control form-control-changes' name='lead_phone'>
                 </td>
 
             </tr>
             <tr>
                 <td>
-                    Office Phone:
+                    Address:
                 </td>
                 <td>
-                    <input type='text' class='form-control form-control-changes' name='office_phone'>
+                    <input type='text' class='form-control form-control-changes' name='lead_address'>
                 </td>
                 <td>
-                    Cell Phone:
+                    City:
                 </td>
                 <td>
-                    <input type='text' class='form-control form-control-changes' name='cell_phone'>
+                    <input type='text' class='form-control form-control-changes' name='lead_city'>
                 </td>
             </tr>
             <tr>
                 <td>
-                    Home Address:
-                </td>
-                <td>
-                    <input type='text' class='form-control form-control-changes' name='home_address'>
-                </td>
-                <td>
-                    Home City:
+                    City:
                 </td>
                 <td>
                     <input type='text' class='form-control form-control-changes' name='home_city'>
@@ -67,7 +62,7 @@
 
                 </td>
                 <td>
-                    <select onchange="addFromDropDown(this.value)" name="states"
+                    <select onchange="addFromDropDown(this.value)" name="lead_state"
                         class="form-control form-control-changes">
                         {{for row in states:}}
                         {{=OPTION(row.state_name, _value=row.id)}}
@@ -80,57 +75,30 @@
                     Zip Code:
                 </td>
                 <td>
-                    <input type='text' class='form-control form-control-changes ' name='home_zip'>
+                    <input type='text' class='form-control form-control-changes ' name='lead_zip'>
                 </td>
             </tr>
             <tr>
+                <td>Notes:</td>
                 <td>
-                    Company:
+                    <textarea class="form-control form-control-changes" name="lead_notes">
+                    </textarea>
                 </td>
+                <td>Lead Source</td>
                 <td>
-                    <select onchange="addFromDropDown(this.value)" name="company_id"
+                    <select onchange="addFromDropDown(this.value)" name="lead_state"
                         class="form-control form-control-changes">
-                        {{for row in companies:}}
-                        {{=OPTION(row.company_name, _value=row.id)}}
+                        {{for row in employees:}}
+                        {{=OPTION(''.join([row.first_name,' ', row.last_name]), _value=row.id)}}
                         {{pass}}
-                        <option value="addCompany" class="option-link">Add Company
+                        <option value="addState" class="option-link" onclick='addState()'>Add State
                         </option>
                     </select>
                 </td>
-
-                <td>
-                    Company Address:
-                </td>
-                <td>
-                    <select onchange="addFromDropDown(this.value)" name="locations_id"
-                        class="form-control form-control-changes">
-                        {{for row in locations:}}
-                        {{=OPTION(row.address, _value=row.id)}}
-                        {{pass}}
-                        <option value="addLocation" class="option-link">Add Company Address
-                        </option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Contact Type:
-                </td>
-                <td>
-                    <select onchange="addFromDropDown(this.value)" name="contact_type_id"
-                        class="form-control form-control-changes">
-                        {{for row in contactType:}}
-                        {{=OPTION(row.description, _value=row.id)}}
-                        {{pass}}
-                        <option value="addContactType" class="option-link">Add Contact Type
-                        </option>
-                    </select>
-                </td>
-
             </tr>
         </table>
         <input type="submit" value="Create" class="btn btn-primary" />
-        <input type="hidden" name="_formname" value="test" />
+        <input type="hidden" name="_formname" value="leadCreate" />
     </form>
 </div>
 
