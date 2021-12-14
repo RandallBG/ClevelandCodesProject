@@ -17,10 +17,10 @@
     <div class="contentWrapper">
         <div id="sidebar">
             <ul>
-                <li>My Activities</li>
-                <li>My Leads</li>
-                <li>Contacts</li>
-                <li>Reports</li>
+                <li id="activities-tab" onclick="tabSwitcher('activity-tab-wrapper')">My Activities</li>
+                <li id="leads-tab" onclick="tabSwitcher('leads-tab-wrapper')">My Leads</li>
+                <li id="orders-tab" onclick="tabSwitcher('orders-tab-wrapper')">Contacts</li>
+                <li id="charts-tab" onclick="tabSwitcher('sales-chart-wrapper')">charts</li>
             </ul>
             <div id="closeSideBar">
                 <h1> X </h1>
@@ -28,9 +28,9 @@
         </div>
 
         <div id="tabs-container">
-            <div id="activity-tab-wrapper">
-                <h1>My Upcoming Activities</h1>
 
+            <div id="activity-tab-wrapper" class="tab">
+                <h1>My Upcoming Activities</h1>
 
                 {{for idx, activity in enumerate(activities):}}
                 <div class="act-card" data-index="{{=(idx)}}">
@@ -48,7 +48,7 @@
                 </div>
                 {{pass}}
             </div>
-            <div id="leads-tab-wrapper">
+            <div id="leads-tab-wrapper" class="tab">
                 <h1>My Leads</h1>
                 {{for idx, lead in enumerate(leads):}}
                 <div class="act-card" data-index="{{=(idx)}}">
@@ -66,14 +66,43 @@
                 </div>
                 {{pass}}
             </div>
-        </div>
-        <div id="myLeads">
+            <div id="orders-tab-wrapper" class="tab">
+                <h1>My Sales</h1>
+                {{for idx, order in enumerate(orders):}}
+                <div class="act-card" data-index="{{=(idx)}}">
+                    <!-- loop through the contacts table to find who this order is for -->
+                    {{for contact in contacts:}}
+                    {{if contact.id == order.customer:}}
+                    <div class="info-card-section">
+                        {{=P(order.id, _class="activity-id")}}
+                        {{=H1(''.join([contact.first_name, ' ',contact.last_name]), _class='card-title')}}
+                        {{=H3(order.order_date, _class='card-date')}}
+                    </div>
+                    {{pass}}
+                    {{pass}}
+                    {{=P(order.order_notes, _class='card-notes')}}
+                </div>
+                {{pass}}
+
+            </div>
+            <div id="sales-chart-wrapper" class="tab">
+                <h1>Sales Charts</h1>
+                <div id="sales-chart-container">
+                    <canvas id="sales-chart"></canvas>
+                </div>
+            </div>
 
         </div>
-    </div>
 
 </body>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.6.2/dist/chart.min.js">
+</script>
 <script>
+
+    let activities = {{=XML(jsonActivities)}}
+    console.log(activities)
+
+    //open and close side bar
     document.getElementById('closeSideBar').addEventListener('click', function () {
         sidebar = document.getElementById('sidebar');
         console.log(window.getComputedStyle(sidebar,));
@@ -84,6 +113,37 @@
             document.getElementById('sidebar').style.left = '0';
         }
     });
+
+    var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    var xValues = [50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150];
+    var yValues = [7, 8, 8, 9, 9, 9, 10, 11, 14, 14, 15];
+
+
+    new Chart("sales-chart", {
+        type: "line",
+        data: {
+            labels: months,
+            datasets: [{
+                fill: false,
+                backgroundColor: "rgba(0,0,0,1.0)",
+                borderColor: "rgba(0,0,0,1.0)",
+                data: yValues
+            }]
+        },
+        options: {}
+    });
+
+
+    //Tab functionality
+    function tabSwitcher(tab) {
+        var tabs = document.getElementsByClassName('tab');
+        for (var i = 0; i < tabs.length; i++) {
+            tabs[i].style.display = 'none';
+        }
+        document.getElementById(tab).style.display = 'block';
+    }
 </script>
+
+
 
 </html>

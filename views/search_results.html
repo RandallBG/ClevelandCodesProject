@@ -2,138 +2,155 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  <style>
-       body {
-      background-image: url("/ClevelandCodesProject/static/images/mechanics.jpg");
-      background-repeat: no-repeat;
-      background-attachment: fixed;
-      background-size: cover;
-    }
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style>
+        body {
+            background-image: url("/ClevelandCodesProject/static/images/mechanics.jpg");
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+        }
 
-    img {
-      width: 10%;
-      margin: 0% 0% 0% 2%;
-    }
+        img {
+            width: 10%;
+            margin: 0% 0% 0% 2%;
+        }
 
-    strong {
-      color: white;
-    }
+        strong {
+            color: white;
+        }
 
-    .strong2 {
-      font-size: 10px;
-      color: white;
-    }
+        .strong2 {
+            font-size: 10px;
+            color: white;
+        }
 
-    h1,
-    h2 {
-      color: white;
-      margin: 20px 0px 0px 20px;
-    }
+        h1,
+        h2 {
+            color: white;
+            margin: 20px 0px 0px 20px;
+        }
 
-    .center {
-      position: absolute;
-      width: 100%;
-      bottom: 0;
-      margin-bottom: 5rem;
-      text-align: center;
-    }
+        .center {
+            position: absolute;
+            width: 100%;
+            bottom: 0;
+            margin-bottom: 5rem;
+            text-align: center;
+        }
 
-    .margin2 {
-      margin: 0% 0% 0% 0%;
-    }
-    
-    tr
-    {
-        background-color:none;
-        color:white
-        
-        
-            
-    }
-    table{border-spacing: 16px; border-collapse: separate;
-    font-size: 22px;
-    }
-    
+        .margin2 {
+            margin: 0% 0% 0% 0%;
+        }
 
-  </style>
-  <title></title>
+        tr {
+            background-color: none;
+            color: white
+        }
+
+        table {
+            border-spacing: 16px;
+            border-collapse: separate;
+            font-size: 22px;
+        }
+    </style>
+    <title></title>
 
 </head>
 
 <body>
-<h1><center>Registration Table</h21></center>
-{{sterm = "%" + session.sterm + "%"}}
-<table>
-    <tr>
-        <th width="10%">FIRST NAME</th><th width="10%">LAST NAME</th><th width="20%">ABOUT</th>
-    </tr>
-{{rows = db((db.contacts.first_name.ilike(sterm)) | (db.contacts.last_name.ilike(sterm)) ).select()}}
-{{if len(rows)==0:}}
-    <tr>
-     <td colspan="3">No matching records</td>
- </tr>
-{{else:}}
-    {{for row in rows:}}
-     <tr>
-         <td>{{=row.first_name}}</td><td>{{=row.last_name}}</td><td>n/a</td>
-     </tr>
-    {{pass}}
-{{pass}}
-</table>
-<table>
+    <center>
+        <h1>
+            Registration Table
+        </h1>
+    </center>
+    {{sterm = "%" + session.sterm + "%"}}
+    <table>
         <tr>
-            <th width="10%">COMPANY NAME</th><th width="10%"></th><th width="20%"></th>
+            <th width="10%">FIRST NAME</th>
+            <th width="10%">LAST NAME</th>
+            <th width="20%">ABOUT</th>
         </tr>
-    {{rows = db((db.companies.company_name.ilike(sterm)) | (db.companies.company_name.ilike(sterm)) ).select()}}
-    {{if len(rows)==0:}}
+        {{rows = db((db.contacts.first_name.ilike(sterm)) | (db.contacts.last_name.ilike(sterm)) ).select()}}
+        {{if len(rows)==0:}}
         <tr>
-         <td colspan="3">No matching records</td>
-     </tr>
-    {{else:}}
+            <td colspan="3">No matching records</td>
+        </tr>
+        {{else:}}
         {{for row in rows:}}
-         <tr>
-             <td>{{=row.first_name}}</td><td>{{=row.last_name}}</td><td>n/a</td>
-         </tr>
+        <tr>
+            <td>{{=row.first_name}}</td>
+            <td>{{=row.last_name}}</td>
+            <td>n/a</td>
+        </tr>
         {{pass}}
-    {{pass}}
-</table>
-<table>
-    <tr>
-        <th width="10%">EMPLOYEES</th><th width="10%"></th><th width="20%"></th>
-    </tr>
-{{rows = db((db.employees.first_name.ilike(sterm)) | (db.employees.last_name.ilike(sterm)) ).select()}}
-{{if len(rows)==0:}}
-    <tr>
-     <td colspan="3">No matching records</td>
- </tr>
-{{else:}}
-    {{for row in rows:}}
-     <tr>
-         <td>{{=row.first_name}}</td><td>{{=row.last_name}}</td><td>n/a</td>
-     </tr>
-    {{pass}}
-{{pass}}
-</table>
-<table>
-    <tr>
-        <th width="10%">LEADS</th><th width="10%"></th><th width="20%"></th>
-    </tr>
-{{rows = db((db.leads.first_name.ilike(sterm)) | (db.leads.last_name.ilike(sterm)) ).select()}}
-{{if len(rows)==0:}}
-    <tr>
-     <td colspan="3">No matching records</td>
- </tr>
-{{else:}}
-    {{for row in rows:}}
-     <tr>
-         <td>{{=row.first_name}}</td><td>{{=row.last_name}}</td><td>n/a</td>
-     </tr>
-    {{pass}}
-{{pass}}
-</table>
+        {{pass}}
+    </table>
+    <table>
+        <tr>
+            <th width="10%">COMPANY NAME</th>
+            <th width="10%"></th>
+            <th width="20%"></th>
+        </tr>
+        {{rows = db((db.companies.company_name.ilike(sterm))).select()}}
+        {{if len(rows)==0:}}
+        <tr>
+            <td colspan="3">No matching records</td>
+        </tr>
+        {{else:}}
+        {{for row in rows:}}
+        <tr>
+            <td>{{=row.company_name}}</td>
+            <td>{{=row.company_name}}</td>
+            <td>n/a</td>
+        </tr>
+        {{pass}}
+        {{pass}}
+    </table>
+    <table>
+        <tr>
+            <th width="10%">EMPLOYEES</th>
+            <th width="10%"></th>
+            <th width="20%"></th>
+        </tr>
+        {{rows = db((db.employees.first_name.ilike(sterm)) | (db.employees.last_name.ilike(sterm)) ).select()}}
+        {{if len(rows)==0:}}
+        <tr>
+            <td colspan="3">No matching records</td>
+        </tr>
+        {{else:}}
+        {{for row in rows:}}
+        <tr>
+            <td>{{=row.first_name}}</td>
+            <td>{{=row.last_name}}</td>
+            <td>n/a</td>
+        </tr>
+        {{pass}}
+        {{pass}}
+    </table>
+    <table>
+        <tr>
+            <th width="10%">LEADS</th>
+            <th width="10%"></th>
+            <th width="20%"></th>
+        </tr>
+        {{rows = db((db.leads.first_name.ilike(sterm)) | (db.leads.last_name.ilike(sterm)) ).select()}}
+        {{if len(rows)==0:}}
+        <tr>
+            <td colspan="3">No matching records</td>
+        </tr>
+        {{else:}}
+        {{for row in rows:}}
+        <tr>
+            <td>{{=row.first_name}}</td>
+            <td>{{=row.last_name}}</td>
+            <td>n/a</td>
+        </tr>
+        {{pass}}
+        {{pass}}
+    </table>

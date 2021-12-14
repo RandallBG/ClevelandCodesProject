@@ -68,8 +68,6 @@ def search_results():
 
 @auth.requires_login()
 def dashboard():
-
-    
     # store upcoming activities, the activity types table, and the contacts table in three seperate variables
     # not sure if declaring all the variables and just returning locals is bad practice but for now it works.
     # activities = db(db.activities.activity_date >= datetime.date.today()).select(orderby= db.activities.activity_date)
@@ -81,8 +79,12 @@ def dashboard():
     authAccount = db(db.auth_user.id == auth.user_id).select()
 
     #send the activities and Json activities of the logged in user
-    activities = db(db.activities.account_manager == assoc_emp_id).select()
-    jsonActivities = json(db(db.activities).select())
+    activities = db((db.activities.account_manager == assoc_emp_id) & (db.activities.activity_date >= datetime.date.today())).select( orderby=db.activities.activity_date)
+    jsonActivities = json(activities)
+
+    #send the orders and json orders of the logged in user
+    orders = db(db.orders.account_manager == assoc_emp_id).select()
+    jsonOrders = json(db(db.orders).select())
 
     #send the leads associated with the employee account of the logged in user
     leads = db(db.leads.account_manager == assoc_emp_id).select()
