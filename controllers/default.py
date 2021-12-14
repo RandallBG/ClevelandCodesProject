@@ -187,6 +187,7 @@ def contact_create():
     # Note: no form instance is passed to the view
     return locals()
 
+@auth.requires_login()
 def activity_type_create():
     form = SQLFORM(db.activity_type)
     if form.process(session=None, formname="activity_type_create").accepted:
