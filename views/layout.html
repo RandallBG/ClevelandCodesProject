@@ -66,9 +66,9 @@
           {{pass}}
           {{pass}}
       </ul>
-      <form class="form-inline my-2 my-lg-0" action="{{=URL('search_results')}}"> 
-        <input class= "form-control mr-sm-2" type="text" placeholder="Search" name="search_term" />
-        <input type="submit"/>
+      <form class=" flex-search-form form-inline my-2 my-lg-0" action="{{=URL('search_results')}}">
+        <input class=" form-control mr-sm-2" type="text" placeholder="Search" name="search_term" />
+        <input class="btn btn-primary" type="submit" />
       </form>
       {{if 'auth' in globals():}}
       <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
