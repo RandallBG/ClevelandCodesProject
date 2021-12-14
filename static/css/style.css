@@ -10,6 +10,25 @@ body {
   justify-content: center;
   align-items: center;
 }
+
+/* ------------------layout.html changes--------------------- */
+
+.flex-search-form {
+  width: auto;
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+}
+
+.flex-search-form input {
+  display: inline;
+}
+
+@media (max-width: 575px) {
+  .flex-search-form {
+    width: auto;
+  }
+}
 /* --------------------Dashboard ---------------------------- */
 .main-wrapper {
   /* display: grid;
@@ -173,10 +192,10 @@ body {
   align-items: center;
   justify-content: center;
   background: rgb(10, 67, 125);
-    background-image: url("/ClevelandCodesProject/static/images/dark_blue.jpg");
-    background-repeat: vertical;
-    background-attachment: fixed;
-    background-size: cover;
+  background-image: url("/ClevelandCodesProject/static/images/dark_blue.jpg");
+  background-repeat: vertical;
+  background-attachment: fixed;
+  background-size: cover;
 }
 
 .main-form-wrapper h2 {

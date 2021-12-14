@@ -64,6 +64,8 @@
                 <td>
                     <select onchange="addFromDropDown(this.value)" name="lead_state"
                         class="form-control form-control-changes">
+                        <option value="">
+                        </option>
                         {{for row in states:}}
                         {{=OPTION(row.state_name, _value=row.id)}}
                         {{pass}}
@@ -88,6 +90,8 @@
                 <td>
                     <select onchange="addFromDropDown(this.value)" name="lead_state"
                         class="form-control form-control-changes">
+                        <option value="">
+                        </option>
                         {{for row in employees:}}
                         {{=OPTION(''.join([row.first_name,' ', row.last_name]), _value=row.id)}}
                         {{pass}}

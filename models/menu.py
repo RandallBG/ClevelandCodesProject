@@ -104,9 +104,12 @@ if not configuration.get('app.production'):
         (T('Create'), False, None, [
             (T('Contact'), False, URL("default", "contact_create")),
             (T('Customer Locations'), False, URL("default", "location_create")),
-            (T('Employee'), False, URL("default", "employee_create")),
             (T('Activity'), False, URL("default", "activities_create")),
              (T('Order'), False, URL("default", "order_create")),
+             (T('Leads'), False, URL("default", "lead_create")),
+            (T('Employee'), False, URL("default", "employee_create")),
+            
+            
         ]),
 
     ]
