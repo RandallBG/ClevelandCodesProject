@@ -4,14 +4,14 @@ def importp():
     import os
     lines = 0
     try:
-        fp_in = open(os.path.join(request.folder, 'static', "employees.csv"),"r")
+        fp_in = open(os.path.join(request.folder, 'static', "mock_employees.csv"),"r", encoding="utf-8")
         reader =  csv.reader(fp_in)
         for line in reader:         # each line is read into a list
             id = line[0]
             first_name = line[1]
             last_name = line[2]
             employee_title = line[3]
-            employee_account_number = line[4]
+            employee_account_number = 2
             picture =line[5]
             picture_file = line[6]
             employee_phone = line[7]

@@ -68,8 +68,6 @@ def search_results():
 
 @auth.requires_login()
 def dashboard():
-
-    
     # store upcoming activities, the activity types table, and the contacts table in three seperate variables
     # not sure if declaring all the variables and just returning locals is bad practice but for now it works.
     # activities = db(db.activities.activity_date >= datetime.date.today()).select(orderby= db.activities.activity_date)
@@ -81,8 +79,12 @@ def dashboard():
     authAccount = db(db.auth_user.id == auth.user_id).select()
 
     #send the activities and Json activities of the logged in user
-    activities = db(db.activities.account_manager == assoc_emp_id).select()
-    jsonActivities = json(db(db.activities).select())
+    activities = db((db.activities.account_manager == assoc_emp_id) & (db.activities.activity_date >= datetime.date.today())).select( orderby=db.activities.activity_date)
+    jsonActivities = json(activities)
+
+    #send the orders and json orders of the logged in user
+    orders = db(db.orders.account_manager == assoc_emp_id).select()
+    jsonOrders = json(db(db.orders).select())
 
     #send the leads associated with the employee account of the logged in user
     leads = db(db.leads.account_manager == assoc_emp_id).select()
@@ -110,7 +112,7 @@ def rand_thing():
     return locals()
 
 def companies():
-    companies = SQLFORM.grid(db.companies)
+    companies = SQLFORM.smartgrid(db.companies)
     return locals()
 
 
@@ -164,7 +166,6 @@ def company_create():
     form = SQLFORM(db.companies)
     if form.process(session=None, formname="companyCreate").accepted:
         response.flash = 'Company created'
-        redirect(URL('companies'))
     elif form.errors:
         response.flash = form.errors
     return locals()
@@ -187,6 +188,7 @@ def contact_create():
     # Note: no form instance is passed to the view
     return locals()
 
+@auth.requires_login()
 def activity_type_create():
     form = SQLFORM(db.activity_type)
     if form.process(session=None, formname="activity_type_create").accepted:
@@ -237,17 +239,19 @@ def location_create():
     states = db(db.states).select(orderby=db.states.state_name)
     companies = db(db.companies).select(orderby=db.companies.company_name)
     form = SQLFORM(db.locations)
-    if form.process().accepted:
+    if form.process(session=None, formname="locationCreate").accepted:
         response.flash = 'Location created'
         #redirect(URL('locations'))
     elif form.errors:
-        response.flash = 'Form has errors'
+        response.flash = form.errors
     
     return locals()
 
+@auth.requires_login()
 def lead_create():
     states = db(db.states).select(orderby=db.states.state_name)
     employees = db(db.employees).select(orderby=db.employees.last_name)
+    leadSource = db(db.lead_source).select(orderby=db.lead_source.description)
     form = SQLFORM(db.leads)
     if form.process(session=None, formname="leadCreate").accepted:
         response.flash = 'Lead created'

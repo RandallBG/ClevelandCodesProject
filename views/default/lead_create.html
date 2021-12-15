@@ -50,14 +50,6 @@
             </tr>
             <tr>
                 <td>
-                    City:
-                </td>
-                <td>
-                    <input type='text' class='form-control form-control-changes' name='home_city'>
-                </td>
-            </tr>
-            <tr>
-                <td>
                     State:
 
                 </td>
@@ -88,7 +80,24 @@
                 </td>
                 <td>Lead Source</td>
                 <td>
-                    <select onchange="addFromDropDown(this.value)" name="lead_state"
+                    <select onchange="addFromDropDown(this.value)" name="lead_source"
+                        class="form-control form-control-changes">
+                        <option value="">
+                        </option>
+                        {{for row in leadSource:}}
+                        {{=OPTION(row.description, _value=row.id)}}
+                        {{pass}}
+                        <option value="addState" class="option-link" onclick='addState()'>Add State
+                        </option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Account Manager:
+                </td>
+                <td>
+                    <select onchange="addFromDropDown(this.value)" name="account_manager"
                         class="form-control form-control-changes">
                         <option value="">
                         </option>
