@@ -8,17 +8,17 @@
         <table class='contact-table'>
             <tr>
                 <td>
-                    Company:
+                    Company Name:
                 </td>
                 <td>
                     <select onchange="addFromDropDown(this.value)" name="company"
                         class="form-control form-control-changes">
-                        <option value="">Select or Add Company
+                        <option value="">
                         </option>
                         {{for row in companies:}}
                         {{=OPTION(row.company_name, _value=row.id)}}
                         {{pass}}
-                        <option value="addCompany" class="option-link" onclick='addCompany()'>Add Company
+                        <option value="addCompany" class="option-link" onclick='addCompany()'>
                         </option>
                     </select>
                 </td>
@@ -48,13 +48,13 @@
                 </td>
                 <td>
                     <select name="states" class="form-control form-control-changes">
-                        <option value="">Select State
+                        <option value="">
                         </option>
                         {{for row in states:}}
                         {{=OPTION(row.state_name, _value=row.id)}}
                         {{pass}}
 
-                        <option class="option-link">Add State
+                        <option class="option-link">
                         </option>
                     </select>
                 </td>

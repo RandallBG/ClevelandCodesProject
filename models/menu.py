@@ -89,13 +89,12 @@ if not configuration.get('app.production'):
         #      'http://webchat.freenode.net/?channels=web2py'),
         # ]),
 
-        (T('Lists'), False, None, [
+        (T('Dropdown Lists'), False, None, [
             (T('SIC Codes'), False, URL('default', 'sic_create')),
             (T('Contact Type'), False, URL('default', 'contact_type_create')),
             (T('Companies'), False, URL('default', 'company_create')),
             (T('Activity Type'), False, URL('default', 'activity_type_create')),
-            (T('Lead Type'), False, URL('default', 'lead_source_create')),
-            
+            (T('Lead Type'), False, URL('default', 'lead_source_create')),   
         ]),
 
         
@@ -111,16 +110,15 @@ if not configuration.get('app.production'):
             (T('Employees'), False, URL('default', 'employees')),
             (T('Companies'), False, URL('default', 'companies')),
         ]),
+
         (T('Data Entry'), False, None, [
             (T('Contact'), False, URL("default", "contact_create")),
-            (T('Customer Locations'), False, URL("default", "location_create")),
+            (T('Company Locations'), False, URL("default", "location_create")),
             (T('Activity'), False, URL("default", "activities_create")),
              (T('Order'), False, URL("default", "order_create")),
              (T('Leads'), False, URL("default", "lead_create")),
             (T('Employee'), False, URL("default", "employee_create")),
-            (T('Company'), False, URL("default", "company_create")),
-            
-            
+                       
         ]),
 
     ]

@@ -298,8 +298,7 @@ def contact_type_create():
         #redirect(URL('contact_type'))
     elif form.errors:
         response.flash = Form.errors
-    else:
-        response.flash = 'Please fill the form'
+    
     return locals()
 #------------------------------------------------------------------------------------------------------------------
 
