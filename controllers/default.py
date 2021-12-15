@@ -100,6 +100,9 @@ def dashboard():
     contacts = db(db.contacts).select()
     jsonContacts = json(db(db.contacts).select())
 
+    # send the company variables as python and json
+    companies = db(db.companies).select()
+    jsonCompanies = json(db(db.companies).select())
 
     response.view = "default/dashboard.html"
     return locals()
