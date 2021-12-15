@@ -58,8 +58,6 @@
                         {{for row in states:}}
                         {{=OPTION(row.state_name, _value=row.id)}}
                         {{pass}}
-                        <option class="option-link" onclick='addState()'>Add State
-                        </option>
                     </select>
                 </td>
                 <td>
@@ -94,7 +92,6 @@
                         {{for row in authAccounts:}}
                         {{=OPTION((row.first_name + " " + row.last_name), _value=row.id)}}
                         {{pass}}
-                        <option class="option-link" onclick='addUser()'></option>
                     </select>
                 </td>
                 <td>

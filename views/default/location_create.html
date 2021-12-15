@@ -18,7 +18,7 @@
                         {{for row in companies:}}
                         {{=OPTION(row.company_name, _value=row.id)}}
                         {{pass}}
-                        <option value="addCompany" class="option-link" onclick='addCompany()'>
+                        <option value="addCompany" class="option-link" onclick='addCompany()'>Add Company
                         </option>
                     </select>
                 </td>
@@ -53,9 +53,6 @@
                         {{for row in states:}}
                         {{=OPTION(row.state_name, _value=row.id)}}
                         {{pass}}
-
-                        <option class="option-link">
-                        </option>
                     </select>
                 </td>
             </tr>
