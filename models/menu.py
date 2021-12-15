@@ -88,6 +88,17 @@ if not configuration.get('app.production'):
         #     (T('Live Chat'), False,
         #      'http://webchat.freenode.net/?channels=web2py'),
         # ]),
+
+        (T('Lists'), False, None, [
+            (T('SIC Codes'), False, URL('default', 'sic_create')),
+            (T('Contact Type'), False, URL('default', 'contact_type_create')),
+            (T('Companies'), False, URL('default', 'company_create')),
+            (T('Activity Type'), False, URL('default', 'activity_type_create')),
+            (T('Lead Type'), False, URL('default', 'lead_source_create')),
+            
+        ]),
+
+        
         (T('Reports'), False, None, [
             (T('Contacts'), False, URL('default', 'contacts')),
             (T('Locations'), False, URL('default', 'locations')),

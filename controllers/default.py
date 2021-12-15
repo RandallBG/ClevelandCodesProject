@@ -203,6 +203,15 @@ def activity_type_create():
     return locals()
 
 @auth.requires_login()
+def lead_source_create():
+    form = SQLFORM(db.lead_source)
+    if form.process(session=None, formname="lead_source_create").accepted:
+        response.flash = 'Lead Type created'
+    elif form.errors:
+        response.flash = form.errors
+    return locals()    
+
+@auth.requires_login()
 def employee_create():
     authAccounts = db(db.auth_user).select(orderby=db.auth_user.id)
     states = db(db.states).select(orderby=db.states.state_name)
