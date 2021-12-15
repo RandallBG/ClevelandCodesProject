@@ -88,7 +88,9 @@ def dashboard():
 
     #send the leads associated with the employee account of the logged in user
     leads = db(db.leads.account_manager == assoc_emp_id).select()
+    jsonLeads = json(leads)
     leadType = db(db.lead_source).select()
+    jsonLeadType = json(leadType)
 
     #send the activity type variables as python and json
     activityType= db(db.activity_type).select()

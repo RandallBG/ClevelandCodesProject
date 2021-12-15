@@ -119,6 +119,46 @@ body {
   top: 0;
   left: 0;
 }
+
+#modal-background {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+#modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  border-radius: 10px;
+  padding-top: 1rem;
+}
+
+#modal-close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 1rem;
+  cursor: pointer;
+}
+.personal-modal-table {
+  display: table;
+  width: 100%;
+}
+.personal-modal-table td {
+  padding: 1rem;
+}
+.personal-modal-table tbody tr:nth-child(even) {
+  background-color: #171717;
+  color: white;
+}
+
 @media screen and (max-width: 768px) {
   #sidebar {
     position: absolute;

@@ -68,7 +68,7 @@
                         <option value="">
                         </option>
                         {{for row in employees:}}
-                        {{=OPTION(''.join([row.last_name, ' ', row.first_name]), _value=row.id)}}
+                        {{=OPTION(''.join([row.first_name, ' ', row.last_name]), _value=row.id)}}
                         {{pass}}
                         <option value="addEmployee" class="option-link" onclick='addEmployee()'>Add Employee
                         </option>

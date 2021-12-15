@@ -17,7 +17,7 @@ def importp():
             employee_phone = line[7]
             employee_email = line[8]
             employee_address= line[9]
-            employee_city=[10]
+            employee_city= line[10]
             employee_state = line[11]
             employee_zip=line[12]
             employee_notes=line[13]
@@ -26,7 +26,7 @@ def importp():
             db.employees.update_or_insert(first_name=first_name, 
             last_name=last_name, employee_title=employee_title, employee_account_number=employee_account_number,
             picture=picture, picture_file=picture_file, employee_phone=employee_phone, employee_email=employee_email,
-            employee_address=employee_address, employee_city=employee_city, 
+            employee_address=employee_address, employee_city=employee_city, employee_state=employee_state,
             employee_zip=employee_zip, employee_notes=employee_notes, employee_salary=employee_salary, 
             employee_hire_date=employee_hire_date) 
             lines += 1

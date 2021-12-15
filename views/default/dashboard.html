@@ -19,7 +19,7 @@
             <ul>
                 <li id="activities-tab" onclick="tabSwitcher('activity-tab-wrapper')">My Activities</li>
                 <li id="leads-tab" onclick="tabSwitcher('leads-tab-wrapper')">My Leads</li>
-                <li id="orders-tab" onclick="tabSwitcher('orders-tab-wrapper')">Contacts</li>
+                <li id="orders-tab" onclick="tabSwitcher('orders-tab-wrapper')">My Sales</li>
                 <li id="charts-tab" onclick="tabSwitcher('sales-chart-wrapper')">charts</li>
             </ul>
             <div id="closeSideBar">
@@ -33,7 +33,7 @@
                 <h1>My Upcoming Activities</h1>
 
                 {{for idx, activity in enumerate(activities):}}
-                <div class="act-card" data-index="{{=(idx)}}">
+                <div class="act-card act-cards" data-index="{{=(idx)}}">
                     <!-- loop through the activity type table to find the correct activity type for this activity -->
                     {{for activityT in activityType:}}
                     {{if activityT.id == activity.activity_type_id:}}
@@ -51,7 +51,7 @@
             <div id="leads-tab-wrapper" class="tab">
                 <h1>My Leads</h1>
                 {{for idx, lead in enumerate(leads):}}
-                <div class="act-card" data-index="{{=(idx)}}">
+                <div class="act-card lead-cards" data-index="{{=(idx)}}">
                     <!-- loop through the activity type table to find the correct activity type for this activity -->
                     {{for type in leadType:}}
                     {{if type.id == lead.lead_source:}}
@@ -69,7 +69,7 @@
             <div id="orders-tab-wrapper" class="tab">
                 <h1>My Sales</h1>
                 {{for idx, order in enumerate(orders):}}
-                <div class="act-card" data-index="{{=(idx)}}">
+                <div class="act-card order-cards" data-index="{{=(idx)}}">
                     <!-- loop through the contacts table to find who this order is for -->
                     {{for contact in contacts:}}
                     {{if contact.id == order.customer:}}
@@ -91,15 +91,74 @@
                     <canvas id="sales-chart"></canvas>
                 </div>
             </div>
-
         </div>
+        <div id="modal-background">
+            <div id="modal">
+                <div id="modal-close">
+                    <h1>X</h1>
+                </div>
+                <div id="modal-content">
+                    <div id="main-content">
+                        <h1 id="main-title">Modal Content</h1>
+                        <h2 id="date">date</h2>
+                        <p id="notes">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam euismod, nisi
+                            vel tincidunt porttitor, nisi nisl tincidunt nisi, eget porttitor nisl nisi vel nisl. Nulla
+                            facilisi.
+                            Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;
+                            Nulla facilisi. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere
+                            cubilia Curae; Nulla facilisi. Vestibulum ante ipsum primis in faucibus orci luctus et
+                            ultrices posuere cubilia Curae; Nulla facilisi. Vestibulum ante ipsum primis in faucibus
+                            orci luctus et ultrices posuere cubilia Curae; Nulla facilisi. Vestibulum ante ipsum
+                            primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla facilisi.
+                            Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;
+                            Nulla facilisi. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere
+                            cubilia Curae; Nulla facilisi. Vestibulum ante ipsum primis in faucibus orci luctus et
+                            ultrices posuere cubilia Curae; Nulla facilisi. Vestibulum ante ipsum primis in faucibus
+                            orci luctus et ultrices posuere cubilia Curae; Nulla facilisi. Vestibulum ante ipsum
+                            primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla facilisi
+                        </p>
+                    </div>
+                    <div id="personal-content">
+                        <h1 id="name"> First name Last name</h1>
+                        <h2 id="company">Company</h2>
+                        <table class="personal-modal-table">
+                            <tr>
+                                <td>
+                                    <h5>Phone number:</h5>
+                                </td>
+                                <td>
+                                    <h5 id="phone-number">333-333-3333</h5>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h5>Email:</h5>
+                                </td>
+                                <td>
+                                    <h5 id="email">blah@blah.com</h5>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
 
 </body>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@3.6.2/dist/chart.min.js">
 </script>
 <script>
 
-    let activities = {{=XML(jsonActivities)}}
+    // get the content from the controller
+
+    //json upcoming activities
+    let activities = {{=XML(jsonActivities)}};
+    //json upcoming leads
+    let leads = {{=XML(jsonLeads)}};
+    //json lead type
+    let leadType = {{=XML(jsonLeadType)}};
+    //json orders
+    let orders = {{=XML(jsonOrders)}};
+    //json contacts
+    let contacts = {{=XML(jsonContacts)}};
 
 
     //open and close side bar
@@ -114,25 +173,6 @@
         }
     });
 
-    var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-    var xValues = [50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150];
-    var yValues = [7, 8, 8, 9, 9, 9, 10, 11, 14, 14, 15];
-
-
-    new Chart("sales-chart", {
-        type: "line",
-        data: {
-            labels: months,
-            datasets: [{
-                fill: false,
-                backgroundColor: "rgba(0,0,0,1.0)",
-                borderColor: "rgba(0,0,0,1.0)",
-                data: yValues
-            }]
-        },
-        options: {}
-    });
-
 
     //Tab functionality
     function tabSwitcher(tab) {
@@ -141,6 +181,33 @@
             tabs[i].style.display = 'none';
         }
         document.getElementById(tab).style.display = 'block';
+    }
+
+    //Modal functionality
+    let activitiesElements = document.getElementsByClassName('act-cards');
+    for (let i = 0; i < activitiesElements.length; i++) {
+        activitiesElements[i].addEventListener('click', function (e) {
+            document.getElementById('modal-background').style.display = 'block';
+            console.log(e.target.getAttribute('data-index'));
+            modalContent(activities[e.target.getAttribute('data-index')]);
+        });
+    }
+    //close modal button functionality
+    document.getElementById('modal-close').addEventListener('click', function () {
+        document.getElementById('modal-background').style.display = 'none';
+    });
+
+    //close modal background functionality
+    document.getElementById('modal-background').addEventListener('click', function (e) {
+        if (e.target.id == 'modal-background') {
+            document.getElementById('modal-background').style.display = 'none';
+        }
+    });
+
+
+    //modal content functionality
+    function modalContent(info) {
+        console.log(info);
     }
 </script>
 
