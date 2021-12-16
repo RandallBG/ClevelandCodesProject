@@ -61,8 +61,6 @@
                         {{for row in states:}}
                         {{=OPTION(row.state_name, _value=row.id)}}
                         {{pass}}
-                        <option value="addState" class="option-link" onclick='addState()'>Add State
-                        </option>
                     </select>
                 </td>
                 <td>
@@ -80,14 +78,14 @@
                 </td>
                 <td>Lead Type</td>
                 <td>
-                    <select onchange="addFromDropDown(this.value)" name="lead_source_"
+                    <select onchange="addFromDropDown(this.value)" name="lead_source"
                         class="form-control form-control-changes">
                         <option value="">
                         </option>
                         {{for row in leadSource:}}
                         {{=OPTION(row.description, _value=row.id)}}
                         {{pass}}
-                        <option value="addState" class="option-link" onclick='addState()'>Add Lead Type
+                        <option value="addLeadType" class="option-link"'>Add Lead Type
                         </option>
                     </select>
                 </td>
@@ -104,7 +102,7 @@
                         {{for row in employees:}}
                         {{=OPTION(''.join([row.first_name,' ', row.last_name]), _value=row.id)}}
                         {{pass}}
-                        <option value="addState" class="option-link" onclick='addState()'>Add Acount Manager
+                        <option value="addState" class="option-link" onclick=' addState()'>Add Acount Manager
                         </option>
                     </select>
                 </td>
@@ -130,6 +128,9 @@
                 break;
             case "addState":
                 window.location.href = "{{=URL('state_create')}}";
+                break;
+            case "addLeadType":
+                window.location.href = "{{=URL('lead_source_create')}}";
                 break;
             default:
             //do nothing

@@ -277,6 +277,7 @@
         document.getElementById('main-title').innerHTML = info.order_item;
         document.getElementById('date').innerHTML = '$' + info.order_amount;
         document.getElementById('notes').innerHTML = info.order_notes;
+        document.getElementById('company').innerHTML = info.order_notes;
 
         for (let i = 0; i < contacts.length; i++) {
             if (contacts[i].id == info.customer) {
